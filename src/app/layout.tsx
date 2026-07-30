@@ -1,5 +1,16 @@
 import type { Metadata } from "next";
 import "./globals.css";
+import { Geist_Mono, Instrument_Sans } from "next/font/google";
+import { cn } from "@/lib/utils";
+import { Toaster } from "sonner";
+import { Navbar } from "@/components/ui/navbar";
+
+const instrumentSansHeading = Instrument_Sans({
+  subsets: ["latin"],
+  variable: "--font-heading",
+});
+
+const geistMono = Geist_Mono({ subsets: ["latin"], variable: "--font-mono" });
 
 export const metadata: Metadata = {
   title: "Create Next App",
@@ -12,9 +23,19 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className={`h-full antialiased`}>
+    <html
+      lang="en"
+      className={cn(
+        "h-full",
+        "antialiased",
+        "font-mono",
+        geistMono.variable,
+        instrumentSansHeading.variable,
+      )}
+    >
       <body className="min-h-full flex flex-col">
-        navbar
+        <Toaster position="top-right" richColors />
+        <Navbar isLoggedIn={true} />
         {children}
       </body>
     </html>
