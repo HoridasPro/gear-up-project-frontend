@@ -1,7 +1,11 @@
 import React from "react";
 
 const GlobalLoading = () => {
-  return <div></div>;
+  return (
+    <div>
+      <h2>this is global loading</h2>
+    </div>
+  );
 };
 
 export default GlobalLoading;

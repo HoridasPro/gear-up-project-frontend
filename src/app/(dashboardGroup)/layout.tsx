@@ -1,11 +1,11 @@
-import React from 'react';
+import { cn } from "@/lib/utils";
 
-const  DashboardLayout = () => {
+export default function DashboardLayout({
+  children,
+}: {
+  children: React.ReactNode;
+}) {
   return (
-    <div>
-      <h2>This is dashboard layout</h2>
-    </div>
+    <div className={cn("h-full", "antialiased", "font-mono")}>{children}</div>
   );
-};
-
-export default  DashboardLayout;
+}

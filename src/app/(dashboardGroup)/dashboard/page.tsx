@@ -1,11 +1,7 @@
 import React from "react";
 
-const UserProfile = () => {
-  return (
-    <div>
-      <h2>this user profile</h2>
-    </div>
-  );
+const CustomerDashboardPage = () => {
+  return <div>This is customer dashboard page</div>;
 };
 
-export default UserProfile;
+export default CustomerDashboardPage;

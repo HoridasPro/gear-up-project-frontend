@@ -1,211 +1,244 @@
 "use client";
-
-import { useState, useEffect, useRef } from "react";
 import Link from "next/link";
-import { Menu, X, Mountain, User, LogOut, UserCircle } from "lucide-react";
-import { Button } from "@/components/ui/button";
+import {
+  Menu,
+  User,
+  Settings,
+  CreditCard,
+  LifeBuoy,
+  LogOut,
+} from "lucide-react";
 
-const navLinks = [
-  { label: "Home", href: "/" },
-  { label: "Browse Gear", href: "/browse" },
-  { label: "Categories", href: "/categories" },
-  { label: "About", href: "/about" },
-  { label: "Contact", href: "/contact" },
+import { Button } from "@/components/ui/button";
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuGroup,
+  DropdownMenuItem,
+  DropdownMenuLabel,
+  DropdownMenuSeparator,
+  DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu";
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
+import {
+  Sheet,
+  SheetContent,
+  SheetTrigger,
+  SheetClose,
+} from "@/components/ui/sheet";
+import { useRouter } from "next/navigation";
+import { toast } from "sonner";
+import { logout } from "@/server/logout";
+
+interface NavItem {
+  label: string;
+  to: string;
+}
+
+const navItems: NavItem[] = [
+  { label: "Home", to: "/" },
+  { label: "Features", to: "/features" },
+  { label: "Pricing", to: "/pricing" },
+  { label: "About", to: "/about" },
 ];
 
+type IUser = {
+  success: boolean;
+  statusCode: number;
+  message: string;
+  data: {
+    id: string;
+    name: string;
+    email: string;
+    role: string;
+    status: string;
+    address: string;
+    profilePhoto: string;
+    createdAt: string;
+    updatedAt: string;
+  };
+};
 type NavbarProps = {
-  isLoggedIn?: boolean;
-  userName?: string;
-  onLogout?: () => void;
+  user?: IUser | null;
 };
 
-export function Navbar({
-  isLoggedIn = false,
-  userName = "Account",
-  onLogout,
-}: NavbarProps) {
-  const [open, setOpen] = useState(false);
-  const [menuOpen, setMenuOpen] = useState(false);
-  const menuRef = useRef<HTMLDivElement>(null);
+export function Navbar({ user }: NavbarProps) {
+  const router = useRouter();
 
-  // Close the user dropdown when clicking outside of it
-  useEffect(() => {
-    function handleClickOutside(event: MouseEvent) {
-      if (menuRef.current && !menuRef.current.contains(event.target as Node)) {
-        setMenuOpen(false);
-      }
+  const handleLogout = async (action: string) => {
+    if (action === "logout") {
+      await logout();
+      toast.success("User logged out successfully");
+      router.push("/login");
     }
-    document.addEventListener("mousedown", handleClickOutside);
-    return () => document.removeEventListener("mousedown", handleClickOutside);
-  }, []);
+  };
 
   return (
-    <header className="sticky top-0 z-50 w-full border-b border-border bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
-      <nav
-        aria-label="Main navigation"
-        className="mx-auto flex h-16 max-w-7xl items-center justify-between gap-4 px-4 sm:px-6 lg:px-8"
-      >
-        {/* Left: Logo */}
-        <Link href="/" className="flex items-center gap-2 font-semibold">
-          <span className="flex size-9 items-center justify-center rounded-md bg-primary text-primary-foreground">
-            <Mountain className="size-5" aria-hidden="true" />
+    <header className="sticky top-0 z-50 w-full border-b border-border/40 bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
+      <div className="container mx-auto flex h-16 items-center justify-between px-4">
+        {/* Logo */}
+        <Link
+          href="/"
+          className="flex items-center gap-2 text-xl font-bold tracking-tight text-foreground"
+        >
+          <span className="flex h-8 w-8 items-center justify-center rounded-lg bg-primary text-primary-foreground">
+            N
           </span>
-          <span className="text-lg tracking-tight">GearHub</span>
+          <span>NavUI</span>
         </Link>
 
-        {/* Center: Nav links */}
-        <ul className="hidden items-center gap-1 md:flex">
-          {navLinks.map((link) => (
-            <li key={link.label}>
-              <Link
-                href={link.href}
-                className="rounded-md px-3 py-2 text-sm font-medium text-muted-foreground transition-colors hover:bg-accent hover:text-accent-foreground"
-              >
-                {link.label}
-              </Link>
-            </li>
+        {/* Desktop Navigation */}
+        <nav className="hidden items-center gap-1 md:flex">
+          {navItems.map((item) => (
+            <Button key={item.to} variant="ghost" size="sm" asChild>
+              <Link href={item.to}>{item.label}</Link>
+            </Button>
           ))}
-        </ul>
+        </nav>
 
-        {/* Right: Auth actions */}
-        <div className="hidden items-center gap-2 md:flex">
-          {isLoggedIn ? (
-            <div className="relative" ref={menuRef}>
-              <Button
-                variant="ghost"
-                size="icon"
-                className="rounded-full"
-                aria-label="Open user menu"
-                aria-expanded={menuOpen}
-                aria-haspopup="menu"
-                onClick={() => setMenuOpen((prev) => !prev)}
-              >
-                <span className="flex size-9 items-center justify-center rounded-full bg-accent text-accent-foreground">
-                  <User className="size-5" aria-hidden="true" />
-                </span>
-              </Button>
-
-              {menuOpen && (
-                <div
-                  role="menu"
-                  className="absolute right-0 mt-2 w-48 overflow-hidden rounded-md border border-border bg-popover p-1 text-popover-foreground shadow-md"
-                >
-                  <div className="border-b border-border px-3 py-2">
-                    <p className="text-sm font-medium">{userName}</p>
-                    <p className="text-xs text-muted-foreground">Signed in</p>
-                  </div>
-                  <Link
-                    href="/profile"
-                    role="customer"
-                    onClick={() => setMenuOpen(false)}
-                    className="flex items-center gap-2 rounded-sm px-3 py-2 text-sm transition-colors hover:bg-accent hover:text-accent-foreground"
-                  >
-                    <UserCircle className="size-4" aria-hidden="true" />
-                    Profile
-                  </Link>
-                  <button
-                    type="button"
-                    role="customer"
-                    onClick={() => {
-                      setMenuOpen(false);
-                      onLogout?.();
-                    }}
-                    className="flex w-full items-center gap-2 rounded-sm px-3 py-2 text-sm transition-colors hover:bg-accent hover:text-accent-foreground"
-                  >
-                    <LogOut className="size-4" aria-hidden="true" />
-                    Logout
-                  </button>
-                </div>
-              )}
-            </div>
-          ) : (
+        {/* Right side: user dropdown + mobile menu */}
+        <div className="flex items-center gap-2">
+          {/* <div className="flex items-center gap-2"> */}
+          {user?.data ? (
             <>
-              <Button variant="ghost" asChild>
+              <DropdownMenu>
+                <DropdownMenuTrigger asChild>
+                  <Button
+                    variant="ghost"
+                    size="sm"
+                    className="gap-2 rounded-full px-2 md:px-3"
+                  >
+                    <Avatar className="h-8 w-8">
+                      <AvatarImage
+                        src={user?.data?.profilePhoto}
+                        alt={user?.data?.name || "User avatar"}
+                      />
+                      <AvatarFallback className="text-xs">
+                        {user?.data?.name?.charAt(0).toUpperCase()}
+                      </AvatarFallback>
+                    </Avatar>
+
+                    <span className="hidden max-w-[8rem] truncate md:inline">
+                      {user?.data?.name || "Account"}
+                    </span>
+                  </Button>
+                </DropdownMenuTrigger>
+
+                <DropdownMenuContent align="end" className="w-56">
+                  <DropdownMenuLabel className="font-normal">
+                    <div className="flex flex-col space-y-1">
+                      <p className="text-sm font-medium leading-none">
+                        {user?.data?.name || "Horidas Sarker"}
+                      </p>
+                      <p className="text-xs leading-none text-muted-foreground">
+                        {user?.data?.email || "horidas123@gmail.com"}
+                      </p>
+                    </div>
+                  </DropdownMenuLabel>
+
+                  <DropdownMenuSeparator />
+
+                  <DropdownMenuGroup>
+                    <DropdownMenuItem>
+                      <User className="mr-2 h-4 w-4" />
+                      <span>Profile</span>
+                    </DropdownMenuItem>
+
+                    <DropdownMenuItem>
+                      <Settings className="mr-2 h-4 w-4" />
+                      <span>Settings</span>
+                    </DropdownMenuItem>
+
+                    <DropdownMenuItem>
+                      <CreditCard className="mr-2 h-4 w-4" />
+                      <span>Billing</span>
+                    </DropdownMenuItem>
+                  </DropdownMenuGroup>
+
+                  <DropdownMenuSeparator />
+
+                  <DropdownMenuItem>
+                    <LifeBuoy className="mr-2 h-4 w-4" />
+                    <span>Support</span>
+                  </DropdownMenuItem>
+
+                  <DropdownMenuSeparator />
+
+                  <DropdownMenuItem
+                    onClick={async () => {
+                      await handleLogout("logout");
+                    }}
+                  >
+                    <LogOut className="mr-2 h-4 w-4" />
+                    <span>Log out</span>
+                  </DropdownMenuItem>
+                </DropdownMenuContent>
+              </DropdownMenu>
+            </>
+          ) : (
+            <div className="hidden md:flex items-center gap-2">
+              <Button asChild>
                 <Link href="/login">Login</Link>
               </Button>
-              <Button asChild>
+
+              {/* <Button asChild>
                 <Link href="/register">Register</Link>
-              </Button>
-            </>
+              </Button> */}
+            </div>
           )}
-        </div>
 
-        {/* Mobile menu toggle */}
-        <Button
-          variant="ghost"
-          size="icon"
-          className="md:hidden"
-          aria-label={open ? "Close menu" : "Open menu"}
-          aria-expanded={open}
-          onClick={() => setOpen((prev) => !prev)}
-        >
-          {open ? <X className="size-5" /> : <Menu className="size-5" />}
-        </Button>
-      </nav>
+          {/* Mobile menu */}
+          <Sheet>
+            <SheetTrigger asChild>
+              <Button variant="ghost" size="icon" className="md:hidden">
+                <Menu className="h-5 w-5" />
+                <span className="sr-only">Open menu</span>
+              </Button>
+            </SheetTrigger>
 
-      {/* Mobile menu */}
-      {open && (
-        <div className="border-t border-border md:hidden">
-          <ul className="space-y-1 px-4 py-3">
-            {navLinks.map((link) => (
-              <li key={link.label}>
+            <SheetContent side="right" className="w-72">
+              <div className="flex flex-col gap-6 pt-4">
                 <Link
-                  href={link.href}
-                  onClick={() => setOpen(false)}
-                  className="block rounded-md px-3 py-2 text-sm font-medium text-muted-foreground transition-colors hover:bg-accent hover:text-accent-foreground"
+                  href="/"
+                  className="flex items-center gap-2 text-xl font-bold tracking-tight"
                 >
-                  {link.label}
-                </Link>
-              </li>
-            ))}
-          </ul>
-          <div className="flex flex-col gap-2 border-t border-border px-4 py-3">
-            {isLoggedIn ? (
-              <>
-                <div className="flex items-center gap-2 px-3 py-2">
-                  <span className="flex size-9 items-center justify-center rounded-full bg-accent text-accent-foreground">
-                    <User className="size-5" aria-hidden="true" />
+                  <span className="flex h-8 w-8 items-center justify-center rounded-lg bg-primary text-primary-foreground">
+                    N
                   </span>
-                  <div>
-                    <p className="text-sm font-medium">{userName}</p>
-                    <p className="text-xs text-muted-foreground">Signed in</p>
+                  <span>NavUI</span>
+                </Link>
+
+                <nav className="flex flex-col gap-1">
+                  {navItems.map((item) => (
+                    <SheetClose key={item.to} asChild>
+                      <Button variant="ghost" className="justify-start" asChild>
+                        <Link href={item.to}>{item.label}</Link>
+                      </Button>
+                    </SheetClose>
+                  ))}
+                </nav>
+
+                {!user && (
+                  <div className="mt-4 flex flex-col gap-2">
+                    <SheetClose asChild>
+                      <Button variant="outline" asChild>
+                        <Link href="/login">Login</Link>
+                      </Button>
+                    </SheetClose>
+
+                    <SheetClose asChild>
+                      <Button asChild>
+                        <Link href="/register">Register</Link>
+                      </Button>
+                    </SheetClose>
                   </div>
-                </div>
-                <Button variant="ghost" asChild className="justify-start">
-                  <Link href="/profile" onClick={() => setOpen(false)}>
-                    <UserCircle className="size-4" aria-hidden="true" />
-                    Profile
-                  </Link>
-                </Button>
-                <Button
-                  variant="ghost"
-                  className="justify-start"
-                  onClick={() => {
-                    setOpen(false);
-                    onLogout?.();
-                  }}
-                >
-                  <LogOut className="size-4" aria-hidden="true" />
-                  Logout
-                </Button>
-              </>
-            ) : (
-              <>
-                <Button variant="ghost" asChild className="justify-start">
-                  <Link href="/login" onClick={() => setOpen(false)}>
-                    Login
-                  </Link>
-                </Button>
-                <Button asChild>
-                  <Link href="/register" onClick={() => setOpen(false)}>
-                    Register
-                  </Link>
-                </Button>
-              </>
-            )}
-          </div>
+                )}
+              </div>
+            </SheetContent>
+          </Sheet>
+          {/* </div> */}
         </div>
-      )}
+      </div>
     </header>
   );
 }
