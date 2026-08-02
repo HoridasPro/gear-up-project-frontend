@@ -37,6 +37,7 @@ interface NavItem {
 
 const navItems: NavItem[] = [
   { label: "Home", to: "/" },
+  { label: "Gears", to: "/gears" },
   { label: "Features", to: "/features" },
   { label: "Pricing", to: "/pricing" },
   { label: "About", to: "/about" },

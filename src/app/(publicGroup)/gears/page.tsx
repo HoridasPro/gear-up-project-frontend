@@ -1,11 +1,12 @@
-import React from 'react';
+import React from "react";
+import GearGrid from "../_components/gearGrid";
 
-const page = () => {
+const GearPage = () => {
   return (
     <div>
-      
+      <GearGrid />
     </div>
   );
 };
 
-export default page;
+export default GearPage;
