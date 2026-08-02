@@ -27,6 +27,10 @@ export default function GearCard({ gear }: Props) {
             {gear.category}
           </span>
         </p>
+         <p className="text-gray-500">
+          Brand:
+          <span className="ml-2 font-medium">{gear.brand}</span>
+        </p>
 
         <p className="text-2xl font-bold text-green-600">
           ${gear.price}
@@ -53,3 +57,4 @@ export default function GearCard({ gear }: Props) {
     </div>
   );
 }
+ 
