@@ -2,6 +2,7 @@
 
 import { useMemo, useState } from "react";
 import { Gear } from "@/type/type-gear";
+import { toast } from "sonner";
 
 type Props = {
   gear: Gear;
@@ -26,7 +27,7 @@ export default function RentalCheckout({ gear }: Props) {
   const totalPrice = days * quantity * gear.price;
 
   const handleConfirm = async () => {
-    alert("Rental Confirmed");
+    toast.success("Rental Confirmed");
 
     // এখানেই POST /api/rentals করবে
   };
