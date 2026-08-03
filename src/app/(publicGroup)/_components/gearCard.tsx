@@ -48,7 +48,7 @@ export default function GearCard({ gear }: Props) {
         )}
 
         <Link
-          href={`/gear/${gear.id}`}
+          href={`/gears/${gear.id}`}
           className="mt-4 block rounded-lg bg-black py-3 text-center text-white"
         >
           View Details

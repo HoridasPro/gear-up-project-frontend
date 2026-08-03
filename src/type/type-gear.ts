@@ -1,3 +1,16 @@
+export type RentalGear = {
+  id: string;
+  quantity: number;
+  totalPrice: number;
+  startDate: string;
+  endDate: string;
+  rentalDate: string;
+  status: string;
+  gearItemId: string;
+  customerId: string;
+  createdAt: string;
+  updatedAt: string;
+};
 export type Gear = {
   id: string;
   title: string;
@@ -17,4 +30,10 @@ export type GearResponse = {
   statusCode: number;
   message: string;
   data: Gear[];
+};
+export type RentalResponse = {
+  success: boolean;
+  statusCode: number;
+  message: string;
+  data: RentalGear[];
 };

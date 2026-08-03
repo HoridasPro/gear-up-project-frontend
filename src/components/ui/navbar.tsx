@@ -60,7 +60,7 @@ type IUser = {
   };
 };
 type NavbarProps = {
-  user?: IUser | null;
+  user?: IUser;
 };
 
 export function Navbar({ user }: NavbarProps) {
