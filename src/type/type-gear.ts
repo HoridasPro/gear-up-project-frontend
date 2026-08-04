@@ -37,3 +37,20 @@ export type RentalResponse = {
   message: string;
   data: RentalGear[];
 };
+
+export type Payments = {
+  id: string;
+  currentPeriodEnd: string;
+  amount: number;
+  status: string;
+  customerId: number;
+  rentalOrderId: number;
+  createdAt: string;
+  updatedAt: string;
+};
+export type PaymentsGear = {
+  success: boolean;
+  statusCode: number;
+  message: string;
+  data: Payments[];
+};

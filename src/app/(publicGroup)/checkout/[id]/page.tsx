@@ -579,8 +579,7 @@ export default function CheckoutPage({ params }: Props) {
               <Loader2 className="mr-2 h-5 w-5 animate-spin" />
             ) : (
               <>
-                Pay {totalPrice > 0 ? `$${totalPrice}` : ""} with Stripe{" "}
-                <ArrowRight className="ml-2 h-4 w-4" />
+                Pay with Stripe <ArrowRight className="ml-2 h-4 w-4" />
               </>
             )}
           </button>
