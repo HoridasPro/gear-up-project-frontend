@@ -1,66 +1,105 @@
-// import { GearResponse } from "@/type/type-gear";
-// import { getProviderGears } from "../../_actions/get-provider-gear";
-// // import { getProviderGear } from "../_actions/get-provider-gears";
+/* eslint-disable @typescript-eslint/no-explicit-any */
+import { Gear, GearResponse } from "@/type/type-gear";
+import { getProviderGears } from "../../_actions/get-provider-gear";
+import Image from "next/image";
 
-// export default async function ProviderDashboard() {
-//   const result: GearResponse = await getProviderGears();
+export default async function ProviderDashboard() {
+  // Safe fetching with proper TypeScript annotations
+  let gears: Gear[] = [];
 
-//   const gears = result?.data || [];
+  try {
+    const result: GearResponse = await getProviderGears();
+    gears = result?.data || [];
+  } catch (error) {
+    console.error("Failed to fetch provider gears:", error);
+  }
 
-//   return (
-//     <div className="space-y-6">
-//       <div>
-//         <h1 className="text-3xl font-bold">Provider Dashboard</h1>
-//         <p className="text-gray-500">Overview of your inventory</p>
-//       </div>
+  // Backend URL (Environment variable or static fallback)
+  const BACKEND_URL =
+    process.env.NEXT_PUBLIC_API_URL || "http://localhost:5000";
 
-//       {/* Stats */}
-//       {/* <div className="grid grid-cols-3 gap-5">
-//         <div className="rounded-lg border bg-white p-6">
-//           <h2 className="text-3xl font-bold">{gears.length}</h2>
-//           <p className="text-gray-500">Total Gear</p>
-//         </div>
-//       </div> */}
+  return (
+    <div className="space-y-6">
+      <div>
+        <h1 className="text-3xl font-bold">Provider Dashboard</h1>
+        <p className="text-gray-500">Overview of your inventory</p>
+      </div>
 
-//       {/* Inventory */}
-//       <div className="rounded-lg border bg-white">
-//         <table className="w-full">
-//           <thead className="bg-gray-100">
-//             <tr>
-//               <th className="p-3 text-left">Image</th>
-//               <th className="p-3 text-left">Title</th>
-//               <th className="p-3 text-left">Category</th>
-//               <th className="p-3 text-center">Price</th>
-//               <th className="p-3 text-center">Quantity</th>
-//               <th className="p-3 text-left">Brand</th>
-//             </tr>
-//           </thead>
+      <div className="rounded-lg border bg-white overflow-x-auto">
+        <table className="w-full text-left">
+          <thead className="bg-gray-100 border-b">
+            <tr>
+              <th className="p-3">Image</th>
+              <th className="p-3">Title</th>
+              <th className="p-3">Category</th>
+              <th className="p-3 text-center">Price</th>
+              <th className="p-3 text-center">Quantity</th>
+              <th className="p-3">Brand</th>
+              <th className="p-3">CreatedAt</th>
+            </tr>
+          </thead>
 
-//           <tbody>
-//             {gears.map((gear) => (
-//               <tr key={gear.id} className="border-t">
-//                 <td className="p-3">
-//                   <img
-//                     src={gear.gearItemImage}
-//                     alt={gear.title}
-//                     className="h-12 w-12 rounded object-cover"
-//                   />
-//                 </td>
+          <tbody>
+            {gears.length > 0 ? (
+              gears.map((gear) => {
+                // Check if image URL is relative or absolute
+                const rawImg = gear.gearItemImage;
+                const imageUrl = rawImg
+                  ? rawImg.startsWith("http")
+                    ? rawImg
+                    : `${BACKEND_URL}/${rawImg.replace(/^\//, "")}`
+                  : null;
 
-//                 <td className="p-3">{gear.title}</td>
+                // Handle MongoDB _id or standard id safely
+                const itemKey = gear.id || (gear as Record<string, any>)._id;
 
-//                 <td className="p-3">{gear.category}</td>
+                return (
+                  <tr
+                    key={itemKey}
+                    className="border-t hover:bg-gray-50"
+                  >
+                    <td className="p-3">
+                      <div className="relative h-12 w-12 rounded bg-gray-100 overflow-hidden border">
+                        {imageUrl ? (
+                          <Image
+                            src={imageUrl}
+                            alt={gear.title || "Gear image"}
+                            fill
+                            unoptimized
+                            className="object-cover"
+                          />
+                        ) : (
+                          <span className="text-[10px] text-gray-400 flex h-full items-center justify-center text-center p-1">
+                            No Img
+                          </span>
+                        )}
+                      </div>
+                    </td>
 
-//                 <td className="p-3 text-center">৳ {gear.price}</td>
-
-//                 <td className="p-3 text-center">{gear.quantity}</td>
-
-//                 <td className="p-3">{gear.brand}</td>
-//               </tr>
-//             ))}
-//           </tbody>
-//         </table>
-//       </div>
-//     </div>
-//   );
-// }
+                    <td className="p-3 font-medium">{gear.title || "N/A"}</td>
+                    <td className="p-3">{gear.category || "N/A"}</td>
+                    <td className="p-3 text-center">৳ {gear.price ?? 0}</td>
+                    <td className="p-3 text-center">{gear.quantity ?? 0}</td>
+                    <td className="p-3">{gear.brand || "N/A"}</td>
+                    <td className="p-3">
+                      {gear.createdAt
+                        ? new Date(gear.createdAt).toLocaleDateString()
+                        : "N/A"}
+                    </td>
+                  </tr>
+                );
+              })
+            ) : (
+              <tr>
+                <td colSpan={7} className="p-6 text-center text-gray-500">
+                  No gear items found. Please check your backend connection or
+                  authentication.
+                </td>
+              </tr>
+            )}
+          </tbody>
+        </table>
+      </div>
+    </div>
+  );
+}

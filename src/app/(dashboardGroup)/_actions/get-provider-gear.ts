@@ -53,7 +53,7 @@ export async function createGear(data: Gear) {
       }
     );
 
-    revalidatePath("/provider-dashboard/my-gears");
+    // revalidatePath("/provider-dashboard/my-gears");
 
     return await res.json();
   } catch (error) {
@@ -83,7 +83,7 @@ export async function updateGear(id: string, data: Gear) {
       }
     );
 
-    revalidatePath("/provider-dashboard/my-gears");
+    // revalidatePath("/provider-dashboard/my-gears");
 
     return await res.json();
   } catch (error) {
@@ -111,7 +111,7 @@ export async function deleteGear(id: string) {
       }
     );
 
-    revalidatePath("/provider-dashboard/my-gears");
+    // revalidatePath("/provider-dashboard/my-gears");
 
     return await res.json();
   } catch (error) {

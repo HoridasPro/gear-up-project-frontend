@@ -50,7 +50,7 @@ export default function ProviderSidebar() {
 
             <SidebarMenuItem>
               <SidebarMenuButton asChild>
-                <Link href="/provider-dashboard/add-gear">
+                <Link href="/provider-dashboard/gear/new">
                   <PlusCircle className="h-5 w-5" />
                   <span>Add Gear</span>
                 </Link>
