@@ -1,3 +1,4 @@
+// dfgsdgs
 export type RentalGear = {
   id: string;
   quantity: number;
@@ -11,6 +12,14 @@ export type RentalGear = {
   createdAt: string;
   updatedAt: string;
 };
+export type RentalResponse = {
+  success: boolean;
+  statusCode: number;
+  message: string;
+  data: RentalGear[];
+};
+
+// xfgsdfgsdfgsdfg
 export type Gear = {
   id: string;
   title: string;
@@ -25,19 +34,15 @@ export type Gear = {
   providerId: string;
 };
 
+
 export type GearResponse = {
   success: boolean;
   statusCode: number;
   message: string;
   data: Gear[];
 };
-export type RentalResponse = {
-  success: boolean;
-  statusCode: number;
-  message: string;
-  data: RentalGear[];
-};
 
+// sdfgsdfg
 export type Payments = {
   id: string;
   currentPeriodEnd: string;
@@ -54,3 +59,31 @@ export type PaymentsGear = {
   message: string;
   data: Payments[];
 };
+
+// fgsdfgs
+export type IUser = {
+  success: boolean;
+  statusCode: number;
+  message: string;
+  data: {
+    id: string;
+    name: string;
+    email: string;
+    role: string;
+    status: string;
+    address: string;
+    profilePhoto: string;
+    createdAt: string;
+    updatedAt: string;
+  };
+};
+
+
+ 
+       
+    
+       
+       
+      
+    
+

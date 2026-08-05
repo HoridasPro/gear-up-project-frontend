@@ -29,6 +29,7 @@ import {
 import { useRouter } from "next/navigation";
 import { toast } from "sonner";
 import { logout } from "@/server/logout";
+import { IUser } from "@/type/type-gear";
 
 interface NavItem {
   label: string;
@@ -43,22 +44,7 @@ const navItems: NavItem[] = [
   { label: "About", to: "/about" },
 ];
 
-type IUser = {
-  success: boolean;
-  statusCode: number;
-  message: string;
-  data: {
-    id: string;
-    name: string;
-    email: string;
-    role: string;
-    status: string;
-    address: string;
-    profilePhoto: string;
-    createdAt: string;
-    updatedAt: string;
-  };
-};
+ 
 type NavbarProps = {
   user?: IUser;
 };

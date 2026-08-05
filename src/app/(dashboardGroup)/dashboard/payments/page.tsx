@@ -1,4 +1,4 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
+ /* eslint-disable @typescript-eslint/no-explicit-any */
 import { PaymentsGear } from "@/type/type-gear";
 import { paymentsHistory } from "../../_actions/paymnetsHitory";
 
