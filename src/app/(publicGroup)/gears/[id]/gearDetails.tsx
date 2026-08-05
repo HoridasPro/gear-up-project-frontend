@@ -1,5 +1,5 @@
 import Image from "next/image";
- 
+
 import { Gear } from "@/type/type-gear";
 import { RentSection } from "./rentSection";
 
@@ -8,6 +8,7 @@ type Props = {
 };
 
 export const GearDetailsPage = ({ gear }: Props) => {
+  console.log("gear get", gear);
   return (
     <div className="grid gap-10 lg:grid-cols-2">
       {/* Image Gallery */}
@@ -18,6 +19,7 @@ export const GearDetailsPage = ({ gear }: Props) => {
             src={gear.gearItemImage}
             alt={gear.title}
             fill
+            unoptimized
             className="rounded-xl object-cover"
           />
         </div>
@@ -29,6 +31,7 @@ export const GearDetailsPage = ({ gear }: Props) => {
             src={gear.gearItemImage}
             width={150}
             height={100}
+            unoptimized
             alt="image"
             className="rounded-lg"
           />
@@ -37,6 +40,7 @@ export const GearDetailsPage = ({ gear }: Props) => {
             src={gear.gearItemImage}
             width={150}
             height={100}
+            unoptimized
             alt="image"
             className="rounded-lg"
           />
@@ -45,6 +49,7 @@ export const GearDetailsPage = ({ gear }: Props) => {
             src={gear.gearItemImage}
             width={150}
             height={100}
+            unoptimized
             alt="image"
             className="rounded-lg"
           />

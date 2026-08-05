@@ -21,7 +21,7 @@ export async function getProviderGears() {
           Authorization: `Bearer ${token}`,
         },
         cache: "no-store",
-      }
+      },
     );
 
     return await res.json();
@@ -50,7 +50,7 @@ export async function createGear(data: Gear) {
           Authorization: `Bearer ${token}`,
         },
         body: JSON.stringify(data),
-      }
+      },
     );
 
     // revalidatePath("/provider-dashboard/my-gears");
@@ -74,13 +74,13 @@ export async function updateGear(id: string, data: Gear) {
     const res = await fetch(
       `${process.env.BACKEND_API_URL}/api/provider/gear/${id}`,
       {
-        method: "PATCH",
+        method: "PUT",
         headers: {
           "Content-Type": "application/json",
           Authorization: `Bearer ${token}`,
         },
         body: JSON.stringify(data),
-      }
+      },
     );
 
     // revalidatePath("/provider-dashboard/my-gears");
@@ -108,7 +108,7 @@ export async function deleteGear(id: string) {
         headers: {
           Authorization: `Bearer ${token}`,
         },
-      }
+      },
     );
 
     // revalidatePath("/provider-dashboard/my-gears");

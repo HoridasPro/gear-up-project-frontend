@@ -37,8 +37,8 @@ export default function AddGearPage() {
       throw new Error(result.message || "Failed to add gear");
     }
 
-    // revalidatePath("/provider-dashboard/my-gears");
-    // redirect("/provider-dashboard/my-gears");
+    revalidatePath("/provider-dashboard/my-gears");
+    redirect("/provider-dashboard/my-gears");
   }
 
   return (

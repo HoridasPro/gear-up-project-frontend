@@ -12,7 +12,6 @@ export const getProviderOrders = async () => {
       headers: {
         Authorization: `Bearer ${token}`,
       },
-      cache: "no-store",
     }
   );
 

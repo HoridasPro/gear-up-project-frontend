@@ -8,7 +8,9 @@ export type RentalGear = {
   rentalDate: string;
   status: string;
   gearItemId: string;
+  gearItem: Gear;
   customerId: string;
+  customer: CustomerIfo;
   createdAt: string;
   updatedAt: string;
 };
@@ -33,7 +35,6 @@ export type Gear = {
   updatedAt: string;
   providerId: string;
 };
-
 
 export type GearResponse = {
   success: boolean;
@@ -77,13 +78,14 @@ export type IUser = {
     updatedAt: string;
   };
 };
-
-
- 
-       
-    
-       
-       
-      
-    
-
+type CustomerIfo = {
+  id: string;
+  name: string;
+  email: string;
+  role: string;
+  status: string;
+  address: string;
+  profilePhoto: string;
+  createdAt: string;
+  updatedAt: string;
+};
