@@ -4,7 +4,6 @@ import {
   Package,
   ShoppingCart,
   PlusCircle,
-  User,
   LogOut,
 } from "lucide-react";
 

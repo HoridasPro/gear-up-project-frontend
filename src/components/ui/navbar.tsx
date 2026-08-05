@@ -44,12 +44,12 @@ const navItems: NavItem[] = [
   { label: "About", to: "/about" },
 ];
 
- 
 type NavbarProps = {
   user?: IUser;
 };
 
 export function Navbar({ user }: NavbarProps) {
+  console.log("get user role", user?.data?.role);
   const router = useRouter();
 
   const handleLogout = async (action: string) => {

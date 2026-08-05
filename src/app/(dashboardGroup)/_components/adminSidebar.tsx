@@ -30,10 +30,9 @@ export default function AdminSidebar() {
       <SidebarContent className="px-3 py-4">
         <SidebarGroup>
           <SidebarMenu>
-
             <SidebarMenuItem>
               <SidebarMenuButton asChild>
-                <Link href="/dashboard">
+                <Link href="/admin-dashboard">
                   <LayoutDashboard className="h-5 w-5" />
                   <span>Dashboard</span>
                 </Link>
@@ -42,9 +41,9 @@ export default function AdminSidebar() {
 
             <SidebarMenuItem>
               <SidebarMenuButton asChild>
-                <Link href="/dashboard/users">
+                <Link href="/admin-dashboard/users">
                   <Users className="h-5 w-5" />
-                  <span>Users</span>
+                  <span>All Users</span>
                 </Link>
               </SidebarMenuButton>
             </SidebarMenuItem>
@@ -67,15 +66,14 @@ export default function AdminSidebar() {
               </SidebarMenuButton>
             </SidebarMenuItem>
 
-            <SidebarMenuItem>
+            {/* <SidebarMenuItem>
               <SidebarMenuButton asChild>
                 <Link href="/dashboard/payments">
                   <CreditCard className="h-5 w-5" />
                   <span>Payments</span>
                 </Link>
               </SidebarMenuButton>
-            </SidebarMenuItem>
-
+            </SidebarMenuItem> */}
           </SidebarMenu>
         </SidebarGroup>
       </SidebarContent>

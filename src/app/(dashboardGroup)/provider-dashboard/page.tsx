@@ -181,8 +181,8 @@ const ProviderDashboard = async () => {
     (item: any) => item.status === "PENDING",
   ).length;
 
-  const approvedOrders = orders.filter(
-    (item: any) => item.status === "APPROVED",
+  const pickedupOrders = orders.filter(
+    (item: any) => item.status === "PICKEDUP",
   ).length;
 
   const returnedOrders = orders.filter(
@@ -225,8 +225,8 @@ const ProviderDashboard = async () => {
 
         <StatCard
           icon={<CheckCircle2 className="h-8 w-8 text-green-600" />}
-          title="Approved Orders"
-          value={approvedOrders}
+          title="Picked up Orders"
+          value={pickedupOrders}
         />
 
         <StatCard
@@ -245,7 +245,7 @@ const ProviderDashboard = async () => {
       {/* Chart */}
       <ProviderPieChart
         pending={pendingOrders}
-        approved={approvedOrders}
+        pickedup={pickedupOrders}
         returned={returnedOrders}
       />
 
@@ -260,7 +260,7 @@ const ProviderDashboard = async () => {
 
             <SummaryRow label="Pending Orders" value={pendingOrders} />
 
-            <SummaryRow label="Approved Orders" value={approvedOrders} />
+            <SummaryRow label="Approved Orders" value={pickedupOrders} />
 
             <SummaryRow label="Returned Orders" value={returnedOrders} />
 
