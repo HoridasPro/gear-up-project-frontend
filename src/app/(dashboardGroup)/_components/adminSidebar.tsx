@@ -50,30 +50,30 @@ export default function AdminSidebar() {
 
             <SidebarMenuItem>
               <SidebarMenuButton asChild>
-                <Link href="/dashboard/gear">
+                <Link href="/admin-dashboard/user-management">
                   <Package className="h-5 w-5" />
-                  <span>Manage Gears</span>
+                  <span>User Management</span>
                 </Link>
               </SidebarMenuButton>
             </SidebarMenuItem>
 
             <SidebarMenuItem>
               <SidebarMenuButton asChild>
-                <Link href="/dashboard/rentals">
+                <Link href="/admin-dashboard/rental-orders">
                   <ShoppingCart className="h-5 w-5" />
                   <span>Rental Orders</span>
                 </Link>
               </SidebarMenuButton>
             </SidebarMenuItem>
 
-            {/* <SidebarMenuItem>
+            <SidebarMenuItem>
               <SidebarMenuButton asChild>
-                <Link href="/dashboard/payments">
+                <Link href="/admin-dashboard/all-gears">
                   <CreditCard className="h-5 w-5" />
-                  <span>Payments</span>
+                  <span>All Gears</span>
                 </Link>
               </SidebarMenuButton>
-            </SidebarMenuItem> */}
+            </SidebarMenuItem>
           </SidebarMenu>
         </SidebarGroup>
       </SidebarContent>

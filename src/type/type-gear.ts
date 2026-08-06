@@ -78,7 +78,7 @@ export type IUser = {
     updatedAt: string;
   };
 };
-type CustomerIfo = {
+export type CustomerIfo = {
   id: string;
   name: string;
   email: string;
@@ -88,4 +88,10 @@ type CustomerIfo = {
   profilePhoto: string;
   createdAt: string;
   updatedAt: string;
+};
+export type IUserInfo = {
+  success: boolean;
+  statusCode: number;
+  message: string;
+  data: CustomerIfo[];
 };

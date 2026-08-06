@@ -16,7 +16,7 @@ export const getAdminUsers = async () => {
       };
     }
 
-    const res = await fetch(`${process.env.BACKEND_API_URL}/admin/users`, {
+    const res = await fetch(`${process.env.BACKEND_API_URL}/api/admin/users`, {
       method: "GET",
       headers: {
         Authorization: token,
