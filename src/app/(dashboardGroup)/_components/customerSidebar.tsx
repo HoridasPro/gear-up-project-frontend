@@ -56,19 +56,11 @@ export default function CustomerSidebar() {
               </SidebarMenuButton>
             </SidebarMenuItem>
 
-            <SidebarMenuItem>
-              <SidebarMenuButton asChild>
-                <Link href="/dashboard/customer-profile">
-                  <User className="h-5 w-5" />
-                  <span>Profile</span>
-                </Link>
-              </SidebarMenuButton>
-            </SidebarMenuItem>
           </SidebarMenu>
         </SidebarGroup>
       </SidebarContent>
 
-      <SidebarFooter className="border-t p-4">
+      {/* <SidebarFooter className="border-t p-4">
         <SidebarMenu>
           <SidebarMenuItem>
             <SidebarMenuButton>
@@ -77,7 +69,7 @@ export default function CustomerSidebar() {
             </SidebarMenuButton>
           </SidebarMenuItem>
         </SidebarMenu>
-      </SidebarFooter>
+      </SidebarFooter> */}
     </Sidebar>
   );
 }
