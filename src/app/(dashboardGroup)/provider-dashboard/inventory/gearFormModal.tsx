@@ -18,7 +18,6 @@ export default function GearFormModal({
 }: GearFormModalProps) {
   const [loading, setLoading] = useState<boolean>(false);
 
-  // useEffect এর বদলে সরাসরি initialData দিয়ে state শুরু করুন
   const [title, setTitle] = useState<string>(initialData?.title || "");
   const [description, setDescription] = useState<string>(initialData?.description || "");
   const [category, setCategory] = useState<string>(initialData?.category || "");

@@ -1,5 +1,4 @@
 import React from "react";
-// import { getRentals } from "../../_actions/get-rentals";
 import { RentalResponse } from "@/type/type-gear";
 import { getCustomerDashboard } from "../../_actions/get-rentals";
 

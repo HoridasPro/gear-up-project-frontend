@@ -11,8 +11,6 @@ export const GearDetailsPage = ({ gear }: Props) => {
   console.log("gear get", gear);
   return (
     <div className="grid gap-10 lg:grid-cols-2">
-      {/* Image Gallery */}
-
       <div>
         <div className="relative h-[450px]">
           <Image
@@ -23,8 +21,6 @@ export const GearDetailsPage = ({ gear }: Props) => {
             className="rounded-xl object-cover"
           />
         </div>
-
-        {/* Gallery */}
 
         <div className="mt-5 grid grid-cols-3 gap-3">
           <Image
@@ -56,8 +52,6 @@ export const GearDetailsPage = ({ gear }: Props) => {
         </div>
       </div>
 
-      {/* Information */}
-
       <div className="space-y-5">
         <h1 className="text-4xl font-bold">{gear.title}</h1>
 
@@ -82,8 +76,6 @@ export const GearDetailsPage = ({ gear }: Props) => {
           <p className="text-3xl font-bold text-green-600">${gear.price}/day</p>
         </div>
 
-        {/* Provider Info */}
-
         <div className="rounded-xl border p-5">
           <h2 className="text-xl font-bold">Provider Information</h2>
 
@@ -92,8 +84,6 @@ export const GearDetailsPage = ({ gear }: Props) => {
             {gear.providerId}
           </p>
         </div>
-
-        {/* Rent */}
 
         <RentSection gear={gear} />
       </div>

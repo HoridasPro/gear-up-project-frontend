@@ -1,12 +1,11 @@
- /* eslint-disable @typescript-eslint/no-explicit-any */
-import { PaymentsGear } from "@/type/type-gear";
+/* eslint-disable @typescript-eslint/no-explicit-any */
+ import { PaymentsGear } from "@/type/type-gear";
 import { paymentsHistory } from "../../_actions/paymnetsHitory";
 
 const PaymentsPage = async () => {
   let paymentsList: any[] = [];
   let isError = false;
 
-  // ১. শুধুমাত্র API call টুকু try/catch-এর মধ্যে থাকবে
   try {
     const result: PaymentsGear = await paymentsHistory();
     paymentsList = result?.data || [];
@@ -15,7 +14,6 @@ const PaymentsPage = async () => {
     isError = true;
   }
 
-  // ২. কোনো সমস্যা বা এরর হলে এই মেসেজ দেখাবে (try/catch-এর বাইরে)
   if (isError) {
     return (
       <div className="flex h-64 items-center justify-center">
@@ -26,7 +24,6 @@ const PaymentsPage = async () => {
     );
   }
 
-  // ৩. মূল টেবিল ও ডিজাইন রেন্ডার হবে (try/catch-এর বাইরে)
   return (
     <div className="p-6">
       {/* Header */}

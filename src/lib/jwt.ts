@@ -1,7 +1,6 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import jwt, { JwtPayload } from "jsonwebtoken";
 
-// verify token
 const verifyToken = (token: string, secret: string) => {
   try {
     const verifyedToken = jwt.verify(token, secret) as JwtPayload;

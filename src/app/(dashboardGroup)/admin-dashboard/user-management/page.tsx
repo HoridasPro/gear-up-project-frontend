@@ -1,5 +1,3 @@
- 
-
 import { getAdminUsersSearch } from "../../_actions/get-admin-status";
 import UserTables from "./userTable";
 

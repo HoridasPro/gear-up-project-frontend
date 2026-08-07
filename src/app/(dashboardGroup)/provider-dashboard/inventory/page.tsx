@@ -2,7 +2,6 @@
 
 import { useEffect, useState } from "react";
 import { Edit, Trash2 } from "lucide-react";
-// import GearFormModal from "./GearFormModal";
 
 import { Gear, GearResponse } from "@/type/type-gear";
 import {
@@ -13,7 +12,6 @@ import {
 } from "../../_actions/get-provider-gear";
 import GearFormModal from "./gearFormModal";
 import Image from "next/image";
-// import Image from "next/image";
 
 export default function InventoryPage() {
   const [gears, setGears] = useState<Gear[]>([]);
@@ -40,12 +38,6 @@ export default function InventoryPage() {
   useEffect(() => {
     fetchGears();
   }, []);
-
-  // const handleAdd = () => {
-  //   setSelectedGear(null);
-  //   setIsModalOpen(true);
-  // };
-
   const handleEdit = (gear: Gear) => {
     setSelectedGear(gear);
     setIsModalOpen(true);
@@ -79,14 +71,6 @@ export default function InventoryPage() {
 
           <p className="text-muted-foreground">Manage all your rental gears.</p>
         </div>
-
-        {/* <button
-          onClick={handleAdd}
-          className="flex items-center gap-2 rounded-md bg-blue-600 px-4 py-2 text-white"
-        >
-          <Plus className="h-4 w-4" />
-          Add Gear
-        </button> */}
       </div>
 
       <div className="overflow-x-auto rounded-xl border bg-white shadow">

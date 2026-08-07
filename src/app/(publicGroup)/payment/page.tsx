@@ -23,17 +23,14 @@ function PaymentContent() {
 
   useEffect(() => {
     const handleConfirmation = async () => {
-      // ১. ক্যানসেল হলে
       if (isCanceled) {
         setLoading(false);
         return;
       }
 
-      // ২. সাকসেস হলে এবং sessionId থাকলে ডাটাবেজে PAID করার রিকোয়েস্ট যাবে
       if (isSuccess) {
         try {
           if (sessionId) {
-            // 🚀 ব্যাকএন্ডে sessionId পাঠিয়ে Status 'PAID' করা হচ্ছে
             const res = await confirmPayment(sessionId);
 
             if (res?.success || res?.status === "success") {
@@ -58,7 +55,6 @@ function PaymentContent() {
     handleConfirmation();
   }, [isSuccess, isCanceled, sessionId]);
 
-  // 🔄 ১. লোডিং (ভেরিফাই হচ্ছে)
   if (loading) {
     return (
       <div className="flex min-h-[60vh] flex-col items-center justify-center text-center">
@@ -70,7 +66,6 @@ function PaymentContent() {
     );
   }
 
-  // 💛 ২. ক্যানসেল পেজ
   if (isCanceled) {
     return (
       <div className="mx-auto my-16 max-w-md rounded-2xl border bg-white p-8 text-center shadow-sm">
@@ -92,7 +87,6 @@ function PaymentContent() {
     );
   }
 
-  // 💚 ৩. সফলভাবে PAID হলে
   if (isSuccess && confirmed) {
     return (
       <div className="mx-auto my-16 max-w-md rounded-2xl border bg-white p-8 text-center shadow-sm">
@@ -113,7 +107,6 @@ function PaymentContent() {
     );
   }
 
-  // ❤️ ৪. ফেল করলে
   return (
     <div className="mx-auto my-16 max-w-md rounded-2xl border bg-white p-8 text-center shadow-sm">
       <XCircle className="mx-auto h-16 w-16 text-red-500" />

@@ -3,6 +3,7 @@
 import { useMemo, useState } from "react";
 import { Gear } from "@/type/type-gear";
 import { toast } from "sonner";
+import Image from "next/image";
 
 type Props = {
   gear: Gear;
@@ -29,7 +30,6 @@ export default function RentalCheckout({ gear }: Props) {
   const handleConfirm = async () => {
     toast.success("Rental Confirmed");
 
-    // এখানেই POST /api/rentals করবে
   };
 
   return (
@@ -39,7 +39,7 @@ export default function RentalCheckout({ gear }: Props) {
       <div className="grid gap-8 lg:grid-cols-2">
         {/* Left */}
         <div className="rounded-xl border p-6">
-          <img
+          <Image
             src={gear.gearItemImage}
             alt={gear.title}
             className="h-72 w-full rounded-lg object-cover"

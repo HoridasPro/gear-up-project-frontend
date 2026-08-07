@@ -4,7 +4,6 @@ import { getProviderGears } from "../../_actions/get-provider-gear";
 import Image from "next/image";
 
 export default async function ProviderDashboard() {
-  // Safe fetching with proper TypeScript annotations
   let gears: Gear[] = [];
 
   try {
@@ -14,7 +13,6 @@ export default async function ProviderDashboard() {
     console.error("Failed to fetch provider gears:", error);
   }
 
-  // Backend URL (Environment variable or static fallback)
   const BACKEND_URL =
     process.env.NEXT_PUBLIC_API_URL || "http://localhost:5000";
 
@@ -42,15 +40,12 @@ export default async function ProviderDashboard() {
           <tbody>
             {gears.length > 0 ? (
               gears.map((gear) => {
-                // Check if image URL is relative or absolute
                 const rawImg = gear.gearItemImage;
                 const imageUrl = rawImg
                   ? rawImg.startsWith("http")
                     ? rawImg
                     : `${BACKEND_URL}/${rawImg.replace(/^\//, "")}`
                   : null;
-
-                // Handle MongoDB _id or standard id safely
                 const itemKey = gear.id || (gear as Record<string, any>)._id;
 
                 return (

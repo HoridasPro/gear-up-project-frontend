@@ -74,7 +74,6 @@ export function Navbar({ user }: NavbarProps) {
           <span>NavUI</span>
         </Link>
 
-        {/* Desktop Navigation */}
         <nav className="hidden items-center gap-1 md:flex">
           {navItems.map((item) => (
             <Button key={item.to} variant="ghost" size="sm" asChild>
@@ -82,10 +81,7 @@ export function Navbar({ user }: NavbarProps) {
             </Button>
           ))}
         </nav>
-
-        {/* Right side: user dropdown + mobile menu */}
         <div className="flex items-center gap-2">
-          {/* <div className="flex items-center gap-2"> */}
           {user?.data ? (
             <>
               <DropdownMenu>
@@ -167,14 +163,8 @@ export function Navbar({ user }: NavbarProps) {
               <Button asChild>
                 <Link href="/login">Login</Link>
               </Button>
-
-              {/* <Button asChild>
-                <Link href="/register">Register</Link>
-              </Button> */}
             </div>
           )}
-
-          {/* Mobile menu */}
           <Sheet>
             <SheetTrigger asChild>
               <Button variant="ghost" size="icon" className="md:hidden">
@@ -223,7 +213,6 @@ export function Navbar({ user }: NavbarProps) {
               </div>
             </SheetContent>
           </Sheet>
-          {/* </div> */}
         </div>
       </div>
     </header>

@@ -59,7 +59,7 @@ export const getAdminUsersSearch = async (
   }
 };
 
-// 2. Update Status Action (Suspend / Activate)
+ 
 export const updateAdminStatus = async (userId: string, newStatus: string) => {
   try {
     const cookieStore = await cookies();
@@ -92,8 +92,7 @@ export const updateAdminStatus = async (userId: string, newStatus: string) => {
       };
     }
 
-    // Revalidate table cache to show updated state
-    // revalidatePath("/admin-dashboard/user-management");
+   
 
     return {
       success: true,

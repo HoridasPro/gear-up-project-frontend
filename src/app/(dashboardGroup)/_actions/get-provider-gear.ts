@@ -1,6 +1,4 @@
 "use server";
-
-import { revalidatePath } from "next/cache";
 import { cookies } from "next/headers";
 import { Gear } from "@/type/type-gear";
 
@@ -53,7 +51,7 @@ export async function createGear(data: Gear) {
       },
     );
 
-    // revalidatePath("/provider-dashboard/my-gears");
+ 
 
     return await res.json();
   } catch (error) {
@@ -83,7 +81,7 @@ export async function updateGear(id: string, data: Gear) {
       },
     );
 
-    // revalidatePath("/provider-dashboard/my-gears");
+    
 
     return await res.json();
   } catch (error) {
@@ -111,7 +109,7 @@ export async function deleteGear(id: string) {
       },
     );
 
-    // revalidatePath("/provider-dashboard/my-gears");
+   
 
     return await res.json();
   } catch (error) {
