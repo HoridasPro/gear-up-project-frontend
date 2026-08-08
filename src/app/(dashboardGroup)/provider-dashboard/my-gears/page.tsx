@@ -19,8 +19,8 @@ export default async function ProviderDashboard() {
   return (
     <div className="space-y-6">
       <div>
-        <h1 className="text-3xl font-bold">Provider Dashboard</h1>
-        <p className="text-gray-500">Overview of your inventory</p>
+        <h1 className="text-3xl font-bold">My Gears</h1>
+        <p className="text-gray-500">Overview of my inventory</p>
       </div>
 
       <div className="rounded-lg border bg-white overflow-x-auto">
@@ -34,6 +34,7 @@ export default async function ProviderDashboard() {
               <th className="p-3 text-center">Quantity</th>
               <th className="p-3">Brand</th>
               <th className="p-3">CreatedAt</th>
+              <th className="p-3">UpdatedAt</th>
             </tr>
           </thead>
 
@@ -79,6 +80,11 @@ export default async function ProviderDashboard() {
                     <td className="p-3">
                       {gear.createdAt
                         ? new Date(gear.createdAt).toLocaleDateString()
+                        : "N/A"}
+                    </td>
+                    <td className="p-3">
+                      {gear.createdAt
+                        ? new Date(gear.updatedAt).toLocaleDateString()
                         : "N/A"}
                     </td>
                   </tr>

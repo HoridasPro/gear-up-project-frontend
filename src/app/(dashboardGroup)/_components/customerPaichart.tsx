@@ -11,7 +11,7 @@ import {
 
 type Props = {
   pending: number;
-  approved: number;
+  pickedup: number;
   returned: number;
 };
 
@@ -19,12 +19,12 @@ const COLORS = ["#FACC15", "#22C55E", "#8B5CF6"];
 
 export default function CustomerPieChart({
   pending,
-  approved,
+  pickedup,
   returned,
 }: Props) {
   const data = [
     { name: "Pending", value: pending },
-    { name: "Approved", value: approved },
+    { name: "Pickedup", value: pickedup },
     { name: "Returned", value: returned },
   ];
 
@@ -35,12 +35,7 @@ export default function CustomerPieChart({
       <div className="h-80">
         <ResponsiveContainer width="100%" height="100%">
           <PieChart>
-            <Pie
-              data={data}
-              dataKey="value"
-              outerRadius={100}
-              label
-            >
+            <Pie data={data} dataKey="value" outerRadius={100} label>
               {data.map((_, index) => (
                 <Cell key={index} fill={COLORS[index]} />
               ))}

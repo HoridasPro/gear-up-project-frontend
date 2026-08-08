@@ -1,4 +1,5 @@
 import React from "react";
+import Image from "next/image";
 import { RentalResponse } from "@/type/type-gear";
 import { getCustomerDashboard } from "../../_actions/get-rentals";
 
@@ -7,14 +8,14 @@ const MyRentalsPage = async () => {
   const rentals = result?.data || [];
 
   return (
-    <div className="p-6">
+    <div>
       {/* Header */}
-      <div className="mb-8">
-        <h1 className="text-3xl font-bold">My Rentals</h1>
-        <p className="mt-2 text-muted-foreground">
-          View and manage all of your rental orders.
-        </p>
-      </div>
+
+      <h1 className="text-3xl font-bold">My Rentals</h1>
+
+      <p className="mt-2 text-muted-foreground">
+        View and manage all of my rental orders.
+      </p>
 
       {rentals.length === 0 ? (
         <div className="flex h-64 items-center justify-center rounded-xl border border-dashed">
@@ -31,12 +32,15 @@ const MyRentalsPage = async () => {
             <thead className="bg-muted">
               <tr>
                 <th className="px-4 py-3 text-left">SI</th>
+
+                {/* Image added */}
+                <th className="px-4 py-3 text-center">Image</th>
+
                 <th className="px-4 py-3 text-left">Gear ID</th>
                 <th className="px-4 py-3 text-center">Quantity</th>
                 <th className="px-4 py-3 text-center">Total Price</th>
                 <th className="px-4 py-3 text-center">Start Date</th>
                 <th className="px-4 py-3 text-center">End Date</th>
-                <th className="px-4 py-3 text-center">Order Date</th>
                 <th className="px-4 py-3 text-center">Updated</th>
                 <th className="px-4 py-3 text-center">Status</th>
               </tr>
@@ -50,8 +54,27 @@ const MyRentalsPage = async () => {
                 >
                   <td className="px-4 py-4">{index + 1}</td>
 
+                  {/* Gear Image */}
+                  <td className="px-4 py-4">
+                    <div className="flex justify-center">
+                      {rental.gearItem?.gearItemImage ? (
+                        <Image
+                          src={rental.gearItem.gearItemImage}
+                          alt={rental.gearItem.title || "Gear"}
+                          width={60}
+                          height={60}
+                          className="h-14 w-14 rounded-lg object-cover"
+                        />
+                      ) : (
+                        <div className="flex h-14 w-14 items-center justify-center rounded-lg bg-gray-100 text-xs text-gray-500">
+                          No Image
+                        </div>
+                      )}
+                    </div>
+                  </td>
+
                   <td className="px-4 py-4 font-mono text-xs">
-                    {rental.gearItemId.slice(0, 10)}...
+                    {rental.gearItemId}
                   </td>
 
                   <td className="px-4 py-4 text-center">{rental.quantity}</td>
@@ -69,10 +92,6 @@ const MyRentalsPage = async () => {
                   </td>
 
                   <td className="px-4 py-4 text-center">
-                    {new Date(rental.createdAt).toLocaleDateString()}
-                  </td>
-
-                  <td className="px-4 py-4 text-center">
                     {new Date(rental.updatedAt).toLocaleDateString()}
                   </td>
 
@@ -81,7 +100,7 @@ const MyRentalsPage = async () => {
                       className={`rounded-full px-3 py-1 text-xs font-semibold ${
                         rental.status === "PENDING"
                           ? "bg-yellow-100 text-yellow-700"
-                          : rental.status === "APPROVED"
+                          : rental.status === "PICKEDUP"
                             ? "bg-green-100 text-green-700"
                             : rental.status === "RETURNED"
                               ? "bg-blue-100 text-blue-700"

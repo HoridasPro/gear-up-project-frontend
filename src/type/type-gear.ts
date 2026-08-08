@@ -44,16 +44,47 @@ export type GearResponse = {
 };
 
 // sdfgsdfg
+// export type Payments = {
+//   id: string;
+//   currentPeriodEnd: string;
+//   amount: number;
+//   status: string;
+//   customerId: number;
+//   rentalOrderId: number;
+//   createdAt: string;
+//   updatedAt: string;
+// };
+// export type PaymentsGear = {
+//   success: boolean;
+//   statusCode: number;
+//   message: string;
+//   data: Payments[];
+// };
 export type Payments = {
   id: string;
   currentPeriodEnd: string;
   amount: number;
   status: string;
-  customerId: number;
-  rentalOrderId: number;
+  customerId: string;
+  rentalOrderId: string;
   createdAt: string;
   updatedAt: string;
+  customer: customerInformation;
+  geraItem: gearItems;
 };
+type customerInformation = {
+  id: string;
+  name: string;
+  email: string;
+  profilePhoto: string | null;
+};
+
+type gearItems = {
+  id: string;
+  title: string;
+  gearItemImage: string | null;
+};
+
 export type PaymentsGear = {
   success: boolean;
   statusCode: number;

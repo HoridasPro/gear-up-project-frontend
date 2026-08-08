@@ -83,6 +83,8 @@ export default function InventoryPage() {
               <th className="px-4 py-3 text-left">Brand</th>
               <th className="px-4 py-3 text-center">Price</th>
               <th className="px-4 py-3 text-center">Quantity</th>
+              <th className="px-4 py-3 text-center">CreatedAt</th>
+              <th className="px-4 py-3 text-center">UpdatedAt</th>
               <th className="px-4 py-3 text-center">Actions</th>
             </tr>
           </thead>
@@ -122,6 +124,16 @@ export default function InventoryPage() {
                   <td className="px-4 py-3 text-center">৳ {gear.price}</td>
 
                   <td className="px-4 py-3 text-center">{gear.quantity}</td>
+                  <td className="p-3">
+                    {gear.createdAt
+                      ? new Date(gear.createdAt).toLocaleDateString()
+                      : "N/A"}
+                  </td>
+                  <td className="p-3">
+                    {gear.createdAt
+                      ? new Date(gear.updatedAt).toLocaleDateString()
+                      : "N/A"}
+                  </td>
 
                   <td className="space-x-2 px-4 py-3 text-center">
                     <button

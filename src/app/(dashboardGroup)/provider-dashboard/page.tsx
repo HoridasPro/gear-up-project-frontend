@@ -43,7 +43,7 @@ const ProviderDashboard = async () => {
       <div>
         <h1 className="text-3xl font-bold">Provider Dashboard</h1>
         <p className="mt-2 text-muted-foreground">
-          Manage your gears and track rental performance.
+          Manage my gears and track rental performance.
         </p>
       </div>
 
@@ -104,7 +104,7 @@ const ProviderDashboard = async () => {
 
             <SummaryRow label="Pending Orders" value={pendingOrders} />
 
-            <SummaryRow label="Approved Orders" value={pickedupOrders} />
+            <SummaryRow label="Pickedup Orders" value={pickedupOrders} />
 
             <SummaryRow label="Returned Orders" value={returnedOrders} />
 
