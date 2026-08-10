@@ -17,16 +17,16 @@ export default async function ProviderDashboard() {
     process.env.NEXT_PUBLIC_API_URL || "http://localhost:5000";
 
   return (
-    <div className="space-y-6">
-      <div>
-        <h1 className="text-3xl font-bold">My Gears</h1>
-        <p className="text-gray-500">Overview of my inventory</p>
-      </div>
+    <div>
+      <h1 className="text-2xl font-bold">My Gears</h1>
 
-      <div className="rounded-lg border bg-white overflow-x-auto">
+      <p className="mt-2 text-muted-foreground">Overview of my inventory</p>
+
+      <div className="mt-6 overflow-x-auto rounded-lg border bg-white">
         <table className="w-full text-left">
-          <thead className="bg-gray-100 border-b">
+          <thead className="border-b bg-gray-100">
             <tr>
+              <th className="p-3">SI</th>
               <th className="p-3">Image</th>
               <th className="p-3">Title</th>
               <th className="p-3">Category</th>
@@ -40,22 +40,25 @@ export default async function ProviderDashboard() {
 
           <tbody>
             {gears.length > 0 ? (
-              gears.map((gear) => {
+              gears.map((gear, index) => {
                 const rawImg = gear.gearItemImage;
+
                 const imageUrl = rawImg
                   ? rawImg.startsWith("http")
                     ? rawImg
                     : `${BACKEND_URL}/${rawImg.replace(/^\//, "")}`
                   : null;
+
                 const itemKey = gear.id || (gear as Record<string, any>)._id;
 
                 return (
-                  <tr
-                    key={itemKey}
-                    className="border-t hover:bg-gray-50"
-                  >
+                  <tr key={itemKey} className="border-t hover:bg-gray-50">
+                    {/* SI */}
+                    <td className="p-3">{index + 1}</td>
+
+                    {/* Image */}
                     <td className="p-3">
-                      <div className="relative h-12 w-12 rounded bg-gray-100 overflow-hidden border">
+                      <div className="relative h-12 w-12 overflow-hidden rounded border bg-gray-100">
                         {imageUrl ? (
                           <Image
                             src={imageUrl}
@@ -65,7 +68,7 @@ export default async function ProviderDashboard() {
                             className="object-cover"
                           />
                         ) : (
-                          <span className="text-[10px] text-gray-400 flex h-full items-center justify-center text-center p-1">
+                          <span className="flex h-full items-center justify-center p-1 text-center text-[10px] text-gray-400">
                             No Img
                           </span>
                         )}
@@ -73,15 +76,21 @@ export default async function ProviderDashboard() {
                     </td>
 
                     <td className="p-3 font-medium">{gear.title || "N/A"}</td>
+
                     <td className="p-3">{gear.category || "N/A"}</td>
+
                     <td className="p-3 text-center">৳ {gear.price ?? 0}</td>
+
                     <td className="p-3 text-center">{gear.quantity ?? 0}</td>
+
                     <td className="p-3">{gear.brand || "N/A"}</td>
+
                     <td className="p-3">
                       {gear.createdAt
                         ? new Date(gear.createdAt).toLocaleDateString()
                         : "N/A"}
                     </td>
+
                     <td className="p-3">
                       {gear.createdAt
                         ? new Date(gear.updatedAt).toLocaleDateString()
@@ -92,7 +101,7 @@ export default async function ProviderDashboard() {
               })
             ) : (
               <tr>
-                <td colSpan={7} className="p-6 text-center text-gray-500">
+                <td colSpan={9} className="p-6 text-center text-gray-500">
                   No gear items found. Please check your backend connection or
                   authentication.
                 </td>

@@ -148,7 +148,7 @@ const PaymentsPage = async () => {
                         : "N/A"}
                     </td>
 
-                    <td className="px-4 py-4 text-center">
+                    {/* <td className="px-4 py-4 text-center">
                       <span
                         className={`rounded-full px-3 py-1 text-xs font-semibold ${
                           payment.status === "PAID"
@@ -158,6 +158,23 @@ const PaymentsPage = async () => {
                               : payment.status === "FAILED"
                                 ? "bg-red-100 text-red-700"
                                 : "bg-gray-100 text-gray-700"
+                        }`}
+                      >
+                        {payment.status}
+                      </span>
+                    </td> */}
+                    <td className="px-4 py-4 text-center">
+                      <span
+                        className={`rounded-full px-3 py-1 text-xs font-semibold ${
+                          payment.status === "PAID"
+                            ? "bg-green-100 text-green-700"
+                            : payment.status === "PENDING"
+                              ? "bg-yellow-100 text-yellow-700"
+                              : payment.status === "CANCELLED"
+                                ? "bg-red-100 text-red-700"
+                                : payment.status === "FAILED"
+                                  ? "bg-red-100 text-red-700"
+                                  : "bg-gray-100 text-gray-700"
                         }`}
                       >
                         {payment.status}

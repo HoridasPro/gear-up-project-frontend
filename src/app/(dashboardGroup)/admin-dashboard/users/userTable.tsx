@@ -16,22 +16,23 @@ export default function UserTable({ users }: UserTableProps) {
       <table className="w-full min-w-[1100px]">
         <thead>
           <tr className="border-b bg-gray-50">
+            <th className="p-3 text-left">SI</th>
             <th className="p-3 text-left">Profile</th>
-            <th className="p-3 text-left">Name</th>
+            <th className="p-3 text-left">Users Name</th>
             <th className="p-3 text-left">Email</th>
+            <th className="p-3 text-left">Address</th>
+            <th className="p-3 text-left">CreatedAt</th>
+            <th className="p-3 text-left">UpdatedAt</th>
             <th className="p-3 text-left">Role</th>
             <th className="p-3 text-left">Status</th>
-            <th className="p-3 text-left">Address</th>
-            <th className="p-3 text-left">CreatedAd</th>
-            <th className="p-3 text-left">UpdatedAd</th>
-            
           </tr>
         </thead>
 
         <tbody>
           {users && users.length > 0 ? (
-            users.map((user) => (
+            users.map((user, index) => (
               <tr key={user.id} className="border-t hover:bg-gray-50">
+                <td className="px-4 py-4">{index + 1}</td>
                 {/* Photo */}
                 <td className="p-3">
                   {user.profilePhoto ? (
@@ -55,36 +56,6 @@ export default function UserTable({ users }: UserTableProps) {
                 {/* Email */}
                 <td className="p-3 text-sm text-gray-600">{user.email}</td>
 
-                {/* Role */}
-                <td className="p-3">
-                  <span
-                    className={`rounded-full px-3 py-1 text-xs font-semibold ${
-                      user.role === "ADMIN"
-                        ? "bg-purple-100 text-purple-700"
-                        : user.role === "PROVIDER"
-                          ? "bg-blue-100 text-blue-700"
-                          : "bg-gray-100 text-gray-700"
-                    }`}
-                  >
-                    {user.role}
-                  </span>
-                </td>
-
-                {/* Status */}
-                <td className="p-3">
-                  <span
-                    className={`rounded-full px-3 py-1 text-xs font-semibold ${
-                      user.status === "ACTIVE"
-                        ? "bg-green-100 text-green-700"
-                        : user.status === "SUSPEND"
-                          ? "bg-yellow-100 text-yellow-700"
-                          : "bg-red-100 text-red-700"
-                    }`}
-                  >
-                    {user.status}
-                  </span>
-                </td>
-
                 {/* Address */}
                 <td className="max-w-[180px] truncate p-3 text-sm">
                   {user.address || "Not provided"}
@@ -103,8 +74,32 @@ export default function UserTable({ users }: UserTableProps) {
                     ? new Date(user.updatedAt).toLocaleDateString("en-GB")
                     : "N/A"}
                 </td>
-
-                
+                <td className="p-3">
+                  <span
+                    className={`rounded-full px-3 py-1 text-xs font-semibold ${
+                      user.role === "ADMIN"
+                        ? "bg-purple-100 text-purple-700"
+                        : user.role === "PROVIDER"
+                          ? "bg-blue-100 text-blue-700"
+                          : "bg-gray-100 text-gray-700"
+                    }`}
+                  >
+                    {user.role}
+                  </span>
+                </td>
+                <td className="p-3">
+                  <span
+                    className={`rounded-full px-3 py-1 text-xs font-semibold ${
+                      user.status === "ACTIVE"
+                        ? "bg-green-100 text-green-700"
+                        : user.status === "SUSPEND"
+                          ? "bg-yellow-100 text-yellow-700"
+                          : "bg-red-100 text-red-700"
+                    }`}
+                  >
+                    {user.status}
+                  </span>
+                </td>
               </tr>
             ))
           ) : (

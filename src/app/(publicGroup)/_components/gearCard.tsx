@@ -8,14 +8,13 @@ type Props = {
 };
 
 export default function GearCard({ gear }: Props) {
-  const BACKEND_URL =
-    process.env.NEXT_PUBLIC_API_URL || "http://localhost:5000";
+  const BACKEND_URL = process.env.NEXT_PUBLIC_BACKEND_API_URL;
   const rawImg = gear?.gearItemImage;
   const imageUrl = rawImg
     ? rawImg.startsWith("http")
       ? rawImg
       : `${BACKEND_URL}/${rawImg.replace(/^\//, "")}`
-    : "/placeholder.png"; 
+    : "/placeholder.png";
 
   const gearId = gear?.id || (gear as Record<string, any>)?._id;
 

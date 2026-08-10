@@ -1,6 +1,6 @@
- 
 "use client";
 
+import Image from "next/image";
 import { RentalGear } from "@/type/type-gear";
 import { toast } from "sonner";
 import { updateOrderStatus } from "../../_actions/update-status";
@@ -22,45 +22,80 @@ export default function OrdersTable({ orders }: Props) {
   };
 
   return (
-    <div className="overflow-x-auto rounded-lg border bg-white">
+    <div className="overflow-x-auto">
       <table className="w-full">
-        <thead className="bg-gray-100">
+        <thead>
           <tr>
-            <th className="p-3">Order ID</th>
-            <th className="p-3">Customer Name</th>
-            <th className="p-3">Customer Email</th>
-            <th className="p-3">Gears Name</th>
-            <th className="p-3">Quantity</th>
-            <th className="p-3">Start Date</th>
-            <th className="p-3">End Date</th>
-            <th className="p-3">Total Price</th>
-            <th className="p-3">Action</th>
+            <th className="p-3 text-left">SI</th>
+            <th className="p-3 text-left">Image</th>
+            <th className="p-3 text-left">Customer Name</th>
+            <th className="p-3 text-left">Order Name</th>
+            <th className="p-3 text-left">Order ID</th>
+            <th className="p-3 text-center">Quantity</th>
+            <th className="p-3 text-center">Start Date</th>
+            <th className="p-3 text-center">End Date</th>
+            <th className="p-3 text-center">Total Price</th>
+            <th className="p-3 text-center">Action</th>
           </tr>
         </thead>
 
         <tbody>
-          {orders.map((order) => (
+          {orders.map((order, index) => (
             <tr key={order.id} className="border-t">
-              <td className="p-3">{order.id}</td>
+              {/* SI */}
+              <td className="p-3">{index + 1}</td>
 
-              <td className="p-3 text-center">{order.customer.name}</td>
+              {/* Image */}
+              <td className="p-3 h-12 w-12">
+                {order.gearItem?.gearItemImage ? (
+                  <Image
+                    src={order.gearItem.gearItemImage}
+                    alt={order.gearItem.title || "Gear"}
+                    width={50}
+                    height={50}
+                    className="h-12 w-12 rounded-lg object-cover"
+                  />
+                ) : (
+                  <div className="flex h-12 w-12 items-center justify-center rounded-lg bg-gray-100 text-xs text-gray-500">
+                    No Image
+                  </div>
+                )}
+              </td>
+              <td className="p-3">
+                <div>
+                  <p className="font-medium">{order.customer.name}</p>
 
-              <td className="p-3 text-center">{order.customer.email}</td>
+                  <p className="text-xs text-muted-foreground">
+                    {order.customer.email}
+                  </p>
+                </div>
+              </td>
 
               <td className="p-3 text-center">{order.gearItem.title}</td>
+              {/* Order ID */}
+              <td className="p-3">{order.id}</td>
 
+              {/* Customer Name + Email */}
+
+              {/* Gear Name */}
+
+              {/* Quantity */}
               <td className="p-3 text-center">{order.quantity}</td>
 
+              {/* Start Date */}
               <td className="p-3 text-center">
                 {new Date(order.startDate).toLocaleDateString()}
               </td>
 
+              {/* End Date */}
               <td className="p-3 text-center">
                 {new Date(order.endDate).toLocaleDateString()}
               </td>
 
+              {/* Total Price */}
               <td className="p-3 text-center">৳ {order.totalPrice}</td>
 
+              {/* Action */}
               <td className="p-3">
                 <select
                   defaultValue={order.status}

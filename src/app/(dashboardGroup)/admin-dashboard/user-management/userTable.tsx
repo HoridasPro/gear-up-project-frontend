@@ -4,6 +4,7 @@ import { useState, useTransition } from "react";
 import { useRouter, usePathname, useSearchParams } from "next/navigation";
 import { updateAdminStatus } from "../../_actions/get-admin-status";
 import { CustomerIfo } from "@/type/type-gear";
+import Image from "next/image";
 
 interface UserTableProps {
   users: CustomerIfo[];
@@ -23,6 +24,7 @@ export default function UserTables({
   const router = useRouter();
   const pathname = usePathname();
   const searchParams = useSearchParams();
+
   console.log("just limit", limit);
 
   const [isPending, startTransition] = useTransition();
@@ -37,7 +39,6 @@ export default function UserTables({
     setSearchTerm(currentSearch || "");
   }
 
-   
   const handleSearchChange = (value: string) => {
     setSearchTerm(value);
 
@@ -53,29 +54,29 @@ export default function UserTables({
     params.set("limit", limit.toString());
 
     startTransition(() => {
-   
       router.push(`${pathname}?${params.toString()}`);
       router.refresh();
     });
   };
 
-
   const handlePageChange = (page: number) => {
     const params = new URLSearchParams(searchParams?.toString());
+
     params.set("page", page.toString());
     params.set("limit", limit.toString());
 
     startTransition(() => {
       router.push(`${pathname}?${params.toString()}`);
-      router.refresh(); 
+      router.refresh();
     });
   };
-   
+
   const handleToggleStatus = async (
     id: string | number,
     currentStatus: string,
   ) => {
     const nextStatus = currentStatus === "ACTIVE" ? "SUSPEND" : "ACTIVE";
+
     setLoadingId(id);
 
     try {
@@ -99,33 +100,30 @@ export default function UserTables({
   return (
     <div className="space-y-4">
       {/* Search Input */}
-      <div className="flex items-center gap-4 justify-between">
-        <div className="relative w-full max-w-sm">
-          <input
-            type="text"
-            placeholder="Search by name or email..."
-            value={searchTerm}
-            onChange={(e) => handleSearchChange(e.target.value)}
-            className="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
-          />
-        </div>
-        {isPending && (
-          <span className="text-sm text-blue-600 font-medium animate-pulse">
-            Loading...
-          </span>
-        )}
-      </div>
+      <input
+        type="text"
+        placeholder="Search by name or email..."
+        value={searchTerm}
+        onChange={(e) => handleSearchChange(e.target.value)}
+        className="w-full rounded-lg border px-4 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
+      />
+
+      {isPending && <p className="text-sm text-blue-500">Loading...</p>}
 
       {/* Table */}
       <div className="overflow-x-auto rounded-lg border bg-white shadow-sm">
-        <table className="w-full text-left border-collapse">
-          <thead className="bg-gray-100 text-gray-700 font-semibold text-sm">
+        <table className="w-full border-collapse text-left">
+          <thead className="bg-gray-100 text-sm font-semibold text-gray-700">
             <tr>
-              <th className="p-3 border-b">Name</th>
-              <th className="p-3 border-b">Email</th>
-              <th className="p-3 border-b">Role</th>
-              <th className="p-3 border-b">Status</th>
-              <th className="p-3 border-b text-center">Action</th>
+              <th className="border-b p-3">SI</th>
+              <th className="border-b p-3">Profile</th>
+              <th className="border-b p-3">Name</th>
+              <th className="border-b p-3">Email</th>
+              <th className="border-b p-3">Role</th>
+              <th className="border-b p-3">Status</th>
+              <th className="border-b p-3">Created At</th>
+              <th className="border-b p-3">Updated At</th>
+              <th className="border-b p-3 text-center">Action</th>
             </tr>
           </thead>
 
@@ -135,11 +133,54 @@ export default function UserTables({
                 const userId = user.id || index;
                 const isUserActive = user.status === "ACTIVE";
 
+                // Role Color
+                const roleColor =
+                  user.role === "ADMIN"
+                    ? "bg-purple-100 text-purple-800"
+                    : user.role === "PROVIDER"
+                      ? "bg-blue-100 text-blue-800"
+                      : user.role === "CUSTOMER"
+                        ? "bg-green-100 text-green-800"
+                        : "bg-gray-100 text-gray-800";
+
                 return (
                   <tr key={userId} className="hover:bg-gray-50">
+                    {/* SI */}
+                    <td className="p-3">{index + 1}</td>
+
+                    {/* Profile */}
+                    <td className="p-3">
+                      {user.profilePhoto ? (
+                        <Image
+                          src={user.profilePhoto}
+                          alt={user.name || "User"}
+                          width={45}
+                          height={45}
+                          className="h-11 w-11 rounded-full object-cover"
+                        />
+                      ) : (
+                        <div className="flex h-11 w-11 items-center justify-center rounded-full bg-gray-200 text-sm font-semibold text-gray-600">
+                          {user.name?.charAt(0).toUpperCase() || "U"}
+                        </div>
+                      )}
+                    </td>
+
+                    {/* Name */}
                     <td className="p-3 font-medium">{user.name || "N/A"}</td>
+
+                    {/* Email */}
                     <td className="p-3 text-gray-600">{user.email || "N/A"}</td>
-                    <td className="p-3 text-gray-600">{user.role || "N/A"}</td>
+
+                    {/* Role */}
+                    <td className="p-3">
+                      <span
+                        className={`inline-flex items-center rounded-full px-2.5 py-0.5 text-xs font-semibold ${roleColor}`}
+                      >
+                        {user.role || "N/A"}
+                      </span>
+                    </td>
+
+                    {/* Status */}
                     <td className="p-3">
                       <span
                         className={`inline-flex items-center rounded-full px-2.5 py-0.5 text-xs font-medium ${
@@ -151,13 +192,29 @@ export default function UserTables({
                         {user.status || "SUSPEND"}
                       </span>
                     </td>
+
+                    {/* Created At */}
+                    <td className="p-3 text-gray-600">
+                      {user.createdAt
+                        ? new Date(user.createdAt).toLocaleDateString()
+                        : "N/A"}
+                    </td>
+
+                    {/* Updated At */}
+                    <td className="p-3 text-gray-600">
+                      {user.updatedAt
+                        ? new Date(user.updatedAt).toLocaleDateString()
+                        : "N/A"}
+                    </td>
+
+                    {/* Action */}
                     <td className="p-3 text-center">
                       <button
                         onClick={() =>
                           handleToggleStatus(userId, user.status || "SUSPEND")
                         }
                         disabled={loadingId === userId}
-                        className={`px-3 py-1 rounded text-xs font-semibold transition disabled:opacity-50 ${
+                        className={`rounded px-3 py-1 text-xs font-semibold transition disabled:opacity-50 ${
                           isUserActive
                             ? "bg-red-500 text-white hover:bg-red-600"
                             : "bg-green-500 text-white hover:bg-green-600"
@@ -175,7 +232,7 @@ export default function UserTables({
               })
             ) : (
               <tr>
-                <td colSpan={5} className="p-6 text-center text-gray-500">
+                <td colSpan={9} className="p-6 text-center text-gray-500">
                   No users found.
                 </td>
               </tr>
@@ -195,14 +252,15 @@ export default function UserTables({
           <button
             onClick={() => handlePageChange(currentPage - 1)}
             disabled={currentPage <= 1 || isPending}
-            className="px-3 py-1 border rounded text-sm font-medium hover:bg-gray-50 disabled:opacity-50"
+            className="rounded border px-3 py-1 text-sm font-medium hover:bg-gray-50 disabled:opacity-50"
           >
             Previous
           </button>
+
           <button
             onClick={() => handlePageChange(currentPage + 1)}
             disabled={currentPage >= effectiveTotalPages || isPending}
-            className="px-3 py-1 border rounded text-sm font-medium hover:bg-gray-50 disabled:opacity-50"
+            className="rounded border px-3 py-1 text-sm font-medium hover:bg-gray-50 disabled:opacity-50"
           >
             Next
           </button>
@@ -211,5 +269,3 @@ export default function UserTables({
     </div>
   );
 }
-
- 

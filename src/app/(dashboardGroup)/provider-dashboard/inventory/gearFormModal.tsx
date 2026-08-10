@@ -19,12 +19,16 @@ export default function GearFormModal({
   const [loading, setLoading] = useState<boolean>(false);
 
   const [title, setTitle] = useState<string>(initialData?.title || "");
-  const [description, setDescription] = useState<string>(initialData?.description || "");
+  const [description, setDescription] = useState<string>(
+    initialData?.description || "",
+  );
   const [category, setCategory] = useState<string>(initialData?.category || "");
   const [brand, setBrand] = useState<string>(initialData?.brand || "");
   const [price, setPrice] = useState<number>(initialData?.price ?? 0);
   const [quantity, setQuantity] = useState<number>(initialData?.quantity ?? 1);
-  const [gearItemImage, setGearItemImage] = useState<string>(initialData?.gearItemImage || "");
+  const [gearItemImage, setGearItemImage] = useState<string>(
+    initialData?.gearItemImage || "",
+  );
 
   if (!isOpen) return null;
 
@@ -157,11 +161,7 @@ export default function GearFormModal({
               disabled={loading}
               className="rounded-lg bg-blue-600 px-5 py-2 text-white hover:bg-blue-700 disabled:opacity-50"
             >
-              {loading
-                ? "Saving..."
-                : initialData
-                ? "Update Gear"
-                : "Add Gear"}
+              {loading ? "Saving..." : initialData ? "Update Gear" : "Add Gear"}
             </button>
           </div>
         </form>

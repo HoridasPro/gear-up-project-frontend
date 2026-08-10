@@ -1,16 +1,9 @@
 import Link from "next/link";
-import {
-  LayoutDashboard,
-  Package,
-  CreditCard,
-  User,
-  LogOut,
-} from "lucide-react";
+import { LayoutDashboard, Package, CreditCard } from "lucide-react";
 
 import {
   Sidebar,
   SidebarContent,
-  SidebarFooter,
   SidebarGroup,
   SidebarHeader,
   SidebarMenu,
@@ -55,7 +48,6 @@ export default function CustomerSidebar() {
                 </Link>
               </SidebarMenuButton>
             </SidebarMenuItem>
-
           </SidebarMenu>
         </SidebarGroup>
       </SidebarContent>

@@ -69,7 +69,7 @@ export default function InventoryPage() {
         <div>
           <h1 className="text-3xl font-bold">Inventory</h1>
 
-          <p className="text-muted-foreground">Manage all your rental gears.</p>
+          <p className="text-muted-foreground">Manage all my gears.</p>
         </div>
       </div>
 
