@@ -9,6 +9,7 @@ export type RentalGear = {
   status: string;
   gearItemId: string;
   gearItem: Gear;
+  hasReview: boolean;
   customerId: string;
   customer: CustomerIfo;
   createdAt: string;
@@ -110,3 +111,34 @@ export type IUserInfo = {
   message: string;
   data: CustomerIfo[];
 };
+
+export interface ReviewCustomer {
+  id: string;
+  name: string;
+  email: string;
+  profilePhoto?: string | null;
+}
+
+export interface ReviewGearItem {
+  id: string;
+  title: string;
+  gearItemImage?: string | null;
+}
+
+export interface Review {
+  id: string;
+  rating: number;
+  comment: string;
+  customerId: string;
+  gearItemId: string;
+  createdAt: string;
+  updatedAt: string;
+  customer?: ReviewCustomer;
+  gearItem?: ReviewGearItem;
+}
+
+export interface ReviewResponse {
+  success: boolean;
+  message: string;
+  data: Review[];
+}

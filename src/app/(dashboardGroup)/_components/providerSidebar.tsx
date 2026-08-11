@@ -72,6 +72,14 @@ export default function ProviderSidebar() {
                 </Link>
               </SidebarMenuButton>
             </SidebarMenuItem>
+            <SidebarMenuItem>
+              <SidebarMenuButton asChild>
+                <Link href="/provider-dashboard/reviews">
+                  <ShoppingCart className="h-5 w-5" />
+                  <span>Reviews</span>
+                </Link>
+              </SidebarMenuButton>
+            </SidebarMenuItem>
           </SidebarMenu>
         </SidebarGroup>
       </SidebarContent>

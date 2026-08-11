@@ -2,6 +2,8 @@ import React from "react";
 import Image from "next/image";
 import { RentalResponse } from "@/type/type-gear";
 import { getCustomerDashboard } from "../../_actions/get-rentals";
+import ReviewButton from "../../_components/reviewButton";
+// import ReviewButton from "../../_components/reviewButton";
 
 const MyRentalsPage = async () => {
   const result: RentalResponse = await getCustomerDashboard();
@@ -43,6 +45,7 @@ const MyRentalsPage = async () => {
                 <th className="px-4 py-3 text-center">End Date</th>
                 <th className="px-4 py-3 text-center">Updated</th>
                 <th className="px-4 py-3 text-center">Status</th>
+                <th className="px-4 py-3 text-center">Review</th>
               </tr>
             </thead>
 
@@ -109,6 +112,17 @@ const MyRentalsPage = async () => {
                     >
                       {rental.status}
                     </span>
+                  </td>
+                  <td className="px-4 py-4 text-center">
+                    {rental.status === "RETURNED" && !rental.hasReview ? (
+                      <ReviewButton gearItemId={rental.gearItemId} />
+                    ) : rental.hasReview ? (
+                      <span className="text-sm text-green-600">Reviewed</span>
+                    ) : (
+                      <span className="text-xs text-gray-400">
+                        Not available
+                      </span>
+                    )}
                   </td>
                 </tr>
               ))}
