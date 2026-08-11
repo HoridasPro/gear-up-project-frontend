@@ -13,7 +13,7 @@ export async function getProviderGears() {
     const token = await getAuthToken();
 
     const res = await fetch(
-      `${process.env.BACKEND_API_URL}/api/provider/gear`,
+      `${process.env.BACKEND_API_URL}/api/provider/gears`,
       {
         headers: {
           Authorization: `Bearer ${token}`,
@@ -51,8 +51,6 @@ export async function createGear(data: Gear) {
       },
     );
 
- 
-
     return await res.json();
   } catch (error) {
     console.error(error);
@@ -81,8 +79,6 @@ export async function updateGear(id: string, data: Gear) {
       },
     );
 
-    
-
     return await res.json();
   } catch (error) {
     console.error(error);
@@ -108,8 +104,6 @@ export async function deleteGear(id: string) {
         },
       },
     );
-
-   
 
     return await res.json();
   } catch (error) {
