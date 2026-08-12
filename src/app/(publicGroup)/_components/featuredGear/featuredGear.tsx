@@ -1,0 +1,179 @@
+// /* eslint-disable @typescript-eslint/no-explicit-any */
+// import Image from "next/image";
+// import Link from "next/link";
+// import { Gear } from "@/type/type-gear";
+
+// type Props = {
+//   gear: Gear;
+// };
+
+// export default function FeaturedGearCard({ gear }: Props) {
+//   const BACKEND_URL = process.env.NEXT_PUBLIC_BACKEND_API_URL;
+//   const rawImg = gear?.gearItemImage;
+//   const imageUrl = rawImg
+//     ? rawImg.startsWith("http")
+//       ? rawImg
+//       : `${BACKEND_URL}/${rawImg.replace(/^\//, "")}`
+//     : "/placeholder.png";
+
+//   const gearId = gear?.id || (gear as Record<string, any>)?._id;
+
+//   return (
+//     <div className="rounded-xl border bg-white shadow-sm transition hover:shadow-lg overflow-hidden flex flex-col justify-between">
+//       <div className="relative h-56 w-full bg-gray-100 border-b">
+//         <Image
+//           src={imageUrl}
+//           alt={gear?.title || "Gear Image"}
+//           fill
+//           sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+//           unoptimized={true}
+//           className="rounded-t-xl object-cover"
+//         />
+//       </div>
+
+//       <div className="space-y-3 p-5 flex-1 flex flex-col justify-between">
+//         <div className="space-y-2">
+//           <h2 className="text-xl font-semibold line-clamp-1">
+//             {gear?.title || "Untitled Gear"}
+//           </h2>
+
+//           <p className="text-gray-500 text-sm">
+//             Category:
+//             <span className="ml-2 font-medium text-gray-800">
+//               {gear?.category || "N/A"}
+//             </span>
+//           </p>
+//           <p className="text-gray-500 text-sm">
+//             Brand:
+//             <span className="ml-2 font-medium text-gray-800">
+//               {gear?.brand || "N/A"}
+//             </span>
+//           </p>
+
+//           <p className="text-2xl font-bold text-green-600">
+//             ৳ {gear?.price ?? 0}
+//             <span className="text-base font-normal text-gray-500"> /day</span>
+//           </p>
+
+//           {gear?.quantity && gear.quantity > 0 ? (
+//             <span className="inline-block rounded-full bg-green-100 px-3 py-1 text-xs font-medium text-green-700">
+//               Available ({gear.quantity})
+//             </span>
+//           ) : (
+//             <span className="inline-block rounded-full bg-red-100 px-3 py-1 text-xs font-medium text-red-700">
+//               Out of Stock
+//             </span>
+//           )}
+//         </div>
+
+//         <Link
+//           href={`/gears/${gearId}`}
+//           className="mt-4 block w-full rounded-lg bg-black py-3 text-center text-sm font-medium text-white transition hover:bg-gray-800"
+//         >
+//           View Details
+//         </Link>
+//       </div>
+//     </div>
+//   );
+// }
+/* eslint-disable @typescript-eslint/no-explicit-any */
+import Image from "next/image";
+import Link from "next/link";
+import { Gear } from "@/type/type-gear";
+
+type Props = {
+  gear: Gear;
+};
+
+export default function FeaturedGearCard({ gear }: Props) {
+  const BACKEND_URL = process.env.NEXT_PUBLIC_BACKEND_API_URL;
+  const rawImg = gear?.gearItemImage;
+  const imageUrl = rawImg
+    ? rawImg.startsWith("http")
+      ? rawImg
+      : `${BACKEND_URL}/${rawImg.replace(/^\//, "")}`
+    : "/placeholder.png";
+
+  const gearId = gear?.id || (gear as Record<string, any>)?._id;
+
+  return (
+    <div className="group relative rounded-xl border-l-4 border-l-cyan-400 border-y border-r border-slate-800 bg-slate-950/90 p-1 transition-all duration-300 hover:-translate-y-1.5 hover:border-l-cyan-300 hover:border-r-slate-700 hover:shadow-[0_10px_30px_-10px_rgba(6,182,212,0.25)] flex flex-col justify-between w-full max-w-sm sm:max-w-md mx-auto overflow-hidden">
+      
+      {/* Background Mesh/Grid Effect */}
+      <div className="absolute inset-0 bg-[linear-gradient(to_right,#1e293b15_1px,transparent_1px),linear-gradient(to_bottom,#1e293b15_1px,transparent_1px)] bg-[size:16px_16px] pointer-events-none" />
+
+      {/* Top Image Container */}
+      <div className="relative h-48 sm:h-52 w-full rounded-lg bg-slate-900 overflow-hidden border border-slate-800/80">
+        <Image
+          src={imageUrl}
+          alt={gear?.title || "Gear Image"}
+          fill
+          sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
+          unoptimized={true}
+          className="object-cover transition-transform duration-700 ease-out group-hover:scale-110"
+        />
+        {/* Dark Vignette Overlay */}
+        <div className="absolute inset-0 bg-gradient-to-t from-slate-950 via-slate-950/20 to-transparent opacity-80" />
+        
+        {/* Floating Tag for Availability */}
+        <div className="absolute top-3 right-3 z-10">
+          {gear?.quantity && gear.quantity > 0 ? (
+            <span className="inline-flex items-center gap-1.5 rounded-full bg-slate-950/80 border border-emerald-500/40 px-2.5 py-0.5 text-[11px] font-medium text-emerald-400 backdrop-blur-md">
+              <span className="h-1.5 w-1.5 rounded-full bg-emerald-400 animate-pulse" />
+              Stock: {gear.quantity}
+            </span>
+          ) : (
+            <span className="inline-flex items-center gap-1.5 rounded-full bg-slate-950/80 border border-rose-500/40 px-2.5 py-0.5 text-[11px] font-medium text-rose-400 backdrop-blur-md">
+              <span className="h-1.5 w-1.5 rounded-full bg-rose-400" />
+              Unavailable
+            </span>
+          )}
+        </div>
+      </div>
+
+      {/* Content Container */}
+      <div className="relative z-10 space-y-4 p-4 sm:p-5 flex-1 flex flex-col justify-between">
+        <div className="space-y-3">
+          {/* Category & Brand Pills */}
+          <div className="flex flex-wrap items-center gap-2 text-[11px] font-semibold text-slate-400">
+            <span className="bg-slate-900 border border-slate-800 px-2.5 py-0.5 rounded-md text-cyan-400">
+              {gear?.category || "N/A"}
+            </span>
+            <span className="bg-slate-900 border border-slate-800 px-2.5 py-0.5 rounded-md text-slate-300">
+              {gear?.brand || "N/A"}
+            </span>
+          </div>
+
+          {/* Title */}
+          <h2 className="text-base sm:text-lg font-bold text-slate-100 group-hover:text-cyan-300 transition-colors duration-200 line-clamp-1">
+            {gear?.title || "Untitled Gear"}
+          </h2>
+
+          {/* Price Section */}
+          <div className="flex items-baseline gap-1 pt-1 border-t border-slate-800/80">
+            <span className="text-2xl sm:text-3xl font-black tracking-tight text-white">
+              ৳{gear?.price ?? 0}
+            </span>
+            <span className="text-xs font-medium text-slate-500">/ day</span>
+          </div>
+        </div>
+
+        {/* Action Button - Minimal Outline Style */}
+        <Link
+          href={`/gears/${gearId}`}
+          className="mt-2 group/btn relative inline-flex w-full items-center justify-center overflow-hidden rounded-lg border border-cyan-500/40 bg-slate-900/50 py-2.5 text-xs sm:text-sm font-semibold text-cyan-300 transition-all duration-300 hover:border-cyan-400 hover:bg-cyan-500 hover:text-slate-950 active:scale-[0.98]"
+        >
+          <span>View Details</span>
+          <svg
+            className="ml-2 h-4 w-4 transition-transform duration-300 group-hover/btn:translate-x-1"
+            fill="none"
+            viewBox="0 0 24 24"
+            stroke="currentColor"
+          >
+            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M14 5l7 7m0 0l-7 7m7-7H3" />
+          </svg>
+        </Link>
+      </div>
+    </div>
+  );
+}
