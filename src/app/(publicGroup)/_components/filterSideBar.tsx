@@ -10,7 +10,7 @@ export default async function FilterSidebar() {
   const prices = [...new Set(result.data.map((gear) => gear.price))];
 
   return (
-    <div className="rounded-xl border p-5">
+    <div className="flex flex-col sm:flex-row items-center gap-4">
       <SearchBar categories={categories} brands={brands} prices={prices} />
     </div>
   );

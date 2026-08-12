@@ -1,5 +1,5 @@
-import GearGrid from "../_components/gearGrid";
 import FilterSidebar from "../_components/filterSideBar";
+import GearGrid from "../_components/gearGrid";
 import InputSearch from "../_components/inputSearch";
 
 type Props = {
@@ -15,22 +15,29 @@ export default async function GearPage({ searchParams }: Props) {
   const params = await searchParams;
 
   return (
-    <div className="container mx-auto px-5 py-10">
-      <InputSearch />
-      <div className="grid grid-cols-12 gap-8">
-        <aside className="col-span-12 lg:col-span-3">
+    <div className="container mx-auto px-4 py-6 sm:px-6 sm:py-10">
+      {/* TOP ROW: Filter Sidebar (Left) & Input Search (Right) */}
+      <div className="mb-8 flex flex-col gap-4 lg:flex-row lg:items-center lg:justify-between">
+        {/* Left: Horizontal Filter */}
+        <div className="w-full lg:w-auto rounded-xl border border-sky-500/20 bg-[#111622]/60 p-4 backdrop-blur-md">
           <FilterSidebar />
-        </aside>
+        </div>
 
-        <main className="col-span-12 lg:col-span-9">
-          <GearGrid
-            search={params.search}
-            category={params.category}
-            brand={params.brand}
-            price={params.price}
-          />
-        </main>
+        {/* Right: Search Input */}
+        <div className="w-full sm:w-80 md:w-96">
+          <InputSearch />
+        </div>
       </div>
+
+      {/* SECTION 2: ALL CARDS GRID */}
+      <main className="w-full">
+        <GearGrid
+          search={params.search}
+          category={params.category}
+          brand={params.brand}
+          price={params.price}
+        />
+      </main>
     </div>
   );
 }

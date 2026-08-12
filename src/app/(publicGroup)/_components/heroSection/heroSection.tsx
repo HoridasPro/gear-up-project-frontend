@@ -1,8 +1,67 @@
+"use client";
+
+import { useState, useEffect } from "react";
 import Image from "next/image";
 import Link from "next/link";
-import { ArrowRight, CheckCircle2, ShieldCheck, Zap } from "lucide-react";
+import {
+  ArrowRight,
+  CheckCircle2,
+  ChevronLeft,
+  ChevronRight,
+  ShieldCheck,
+  Zap,
+} from "lucide-react";
+import { motion, AnimatePresence } from "framer-motion";
+
+const slides = [
+  {
+    id: 1,
+    image: "https://images.unsplash.com/photo-1552674605-db6ffd4facb5",
+    alt: "Sports and outdoor gear",
+    title: "Find your perfect gear",
+    subtitle: "Ready for your next adventure?",
+  },
+  {
+    id: 2,
+    image: "https://images.unsplash.com/photo-1504280390367-361c6d9f38f4",
+    alt: "Camping equipment in nature",
+    title: "Premium Camping Equipment",
+    subtitle: "Explore the wild with confidence",
+  },
+  {
+    id: 3,
+    image: "https://images.unsplash.com/photo-1517838277536-f5f99be501cd",
+    alt: "Athletic and fitness accessories",
+    title: "High Performance Fitness Gear",
+    subtitle: "Level up your workout routine",
+  },
+  {
+    id: 4,
+    image: "https://images.unsplash.com/photo-1501555088652-021faa106b9b",
+    alt: "Mountain trekking backpack and hiking gear",
+    title: "Mountain & Hiking Essentials",
+    subtitle: "Conquer new heights effortlessly",
+  },
+];
 
 const HeroSection = () => {
+  const [currentSlide, setCurrentSlide] = useState(0);
+
+  useEffect(() => {
+    const timer = setInterval(() => {
+      setCurrentSlide((prev) => (prev + 1) % slides.length);
+    }, 5000);
+    return () => clearInterval(timer);
+  }, []);
+
+  const handlePrev = () => {
+    setCurrentSlide((prev) => (prev === 0 ? slides.length - 1 : prev - 1));
+  };
+
+  const handleNext = () => {
+    setCurrentSlide((prev) => (prev + 1) % slides.length);
+  };
+
   return (
     <section className="relative overflow-hidden bg-[#0a0d14] text-white font-sans min-h-[100svh] flex items-center justify-center">
       {/* Background Atmosphere & Radial Glow */}
@@ -95,31 +154,74 @@ const HeroSection = () => {
           </div>
         </div>
 
-        {/* ================= RIGHT IMAGE ================= */}
+        {/* ================= RIGHT IMAGE SLIDER ================= */}
         <div className="relative mx-auto w-full max-w-xl px-2 sm:px-6 lg:px-0">
           {/* Main Image Container */}
           <div className="relative h-[320px] xs:h-[360px] w-full overflow-hidden rounded-2xl sm:rounded-3xl border border-sky-500/30 bg-[#111622]/60 shadow-[0_0_50px_rgba(2,132,199,0.2)] backdrop-blur-xl sm:h-[430px] md:h-[500px]">
-            <Image
-              src="https://images.unsplash.com/photo-1552674605-db6ffd4facb5"
-              alt="Sports and outdoor gear"
-              fill
-              priority
-              unoptimized
-              className="object-cover"
-            />
+            <AnimatePresence mode="wait">
+              <motion.div
+                key={slides[currentSlide].id}
+                initial={{ opacity: 0, scale: 1.05 }}
+                animate={{ opacity: 1, scale: 1 }}
+                exit={{ opacity: 0 }}
+                transition={{ duration: 0.6 }}
+                className="absolute inset-0 h-full w-full"
+              >
+                <Image
+                  src={slides[currentSlide].image}
+                  alt={slides[currentSlide].alt}
+                  fill
+                  priority
+                  unoptimized
+                  className="object-cover"
+                />
+              </motion.div>
+            </AnimatePresence>
 
             {/* Image Overlay */}
-            <div className="absolute inset-0 bg-gradient-to-t from-[#0a0d14] via-[#0a0d14]/30 to-transparent" />
+            <div className="absolute inset-0 bg-gradient-to-t from-[#0a0d14] via-[#0a0d14]/30 to-transparent pointer-events-none" />
+
+            {/* Slider Navigation Arrows */}
+            <button
+              onClick={handlePrev}
+              aria-label="Previous Slide"
+              className="absolute left-3 top-1/2 -translate-y-1/2 z-20 flex h-8 w-8 items-center justify-center rounded-full border border-sky-500/30 bg-[#111622]/60 text-white backdrop-blur-md transition-all hover:bg-sky-500/30 active:scale-95 sm:h-10 sm:w-10"
+            >
+              <ChevronLeft className="h-4 w-4 sm:h-5 sm:w-5" />
+            </button>
+            <button
+              onClick={handleNext}
+              aria-label="Next Slide"
+              className="absolute right-3 top-1/2 -translate-y-1/2 z-20 flex h-8 w-8 items-center justify-center rounded-full border border-sky-500/30 bg-[#111622]/60 text-white backdrop-blur-md transition-all hover:bg-sky-500/30 active:scale-95 sm:h-10 sm:w-10"
+            >
+              <ChevronRight className="h-4 w-4 sm:h-5 sm:w-5" />
+            </button>
+
+            {/* Slider Dots */}
+            <div className="absolute top-4 left-1/2 -translate-x-1/2 z-20 flex gap-1.5">
+              {slides.map((_, index) => (
+                <button
+                  key={index}
+                  onClick={() => setCurrentSlide(index)}
+                  aria-label={`Go to slide ${index + 1}`}
+                  className={`h-1.5 rounded-full transition-all duration-300 ${
+                    currentSlide === index
+                      ? "w-6 bg-sky-400 shadow-[0_0_8px_rgba(56,189,248,0.8)]"
+                      : "w-1.5 bg-white/40 hover:bg-white/70"
+                  }`}
+                />
+              ))}
+            </div>
 
             {/* Bottom Card */}
-            <div className="absolute bottom-3 left-3 right-3 rounded-xl border border-sky-500/30 bg-[#111622]/80 p-3 backdrop-blur-xl shadow-[0_0_20px_rgba(0,0,0,0.5)] sm:bottom-5 sm:left-5 sm:right-5 sm:rounded-2xl sm:p-4">
+            <div className="absolute bottom-3 left-3 right-3 z-20 rounded-xl border border-sky-500/30 bg-[#111622]/80 p-3 backdrop-blur-xl shadow-[0_0_20px_rgba(0,0,0,0.5)] sm:bottom-5 sm:left-5 sm:right-5 sm:rounded-2xl sm:p-4">
               <div className="flex items-center justify-between gap-3">
                 <div className="min-w-0">
                   <p className="text-xs text-slate-400 sm:text-sm">
-                    Ready for your next adventure?
+                    {slides[currentSlide].subtitle}
                   </p>
                   <p className="mt-0.5 truncate text-sm font-semibold text-white sm:text-base">
-                    Find your perfect gear
+                    {slides[currentSlide].title}
                   </p>
                 </div>
 
@@ -137,7 +239,7 @@ const HeroSection = () => {
           {/* ================= FLOATING STATS ================= */}
 
           {/* Sports Gears Card */}
-          <div className="absolute -bottom-4 left-0 rounded-xl sm:rounded-2xl border border-sky-500/30 bg-[#111622]/90 backdrop-blur-xl px-3 py-2 text-white shadow-[0_0_25px_rgba(2,132,199,0.2)] sm:-left-3 sm:px-4 sm:py-3 md:-left-6">
+          <div className="absolute -bottom-4 left-0 z-20 rounded-xl sm:rounded-2xl border border-sky-500/30 bg-[#111622]/90 backdrop-blur-xl px-3 py-2 text-white shadow-[0_0_25px_rgba(2,132,199,0.2)] sm:-left-3 sm:px-4 sm:py-3 md:-left-6">
             <p className="text-base font-extrabold text-sky-400 sm:text-2xl drop-shadow-[0_0_8px_rgba(56,189,248,0.5)]">
               100+
             </p>
@@ -147,7 +249,7 @@ const HeroSection = () => {
           </div>
 
           {/* Rating Card */}
-          <div className="absolute right-0 top-5 rounded-xl sm:rounded-2xl border border-sky-500/30 bg-[#111622]/90 backdrop-blur-xl px-3 py-2 text-white shadow-[0_0_25px_rgba(2,132,199,0.2)] sm:right-0 sm:px-4 sm:py-3 md:-right-4">
+          <div className="absolute right-0 top-5 z-20 rounded-xl sm:rounded-2xl border border-sky-500/30 bg-[#111622]/90 backdrop-blur-xl px-3 py-2 text-white shadow-[0_0_25px_rgba(2,132,199,0.2)] sm:right-0 sm:px-4 sm:py-3 md:-right-4">
             <div className="flex items-center gap-1.5 sm:gap-2">
               <span className="text-sm sm:text-base text-amber-400">★</span>
               <span className="text-xs font-bold sm:text-base text-sky-100">

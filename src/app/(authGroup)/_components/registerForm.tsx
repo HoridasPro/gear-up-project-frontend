@@ -248,12 +248,12 @@ const RegisterForm = () => {
 
   return (
     <div className="flex min-h-screen items-center justify-center">
-      <Card className="w-full max-w-md p-6">
-        <form
+      <form
           onSubmit={handleSubmit}
           encType="multipart/form-data"
-          className="space-y-5"
+          className="space-y-4"
         >
+      <Card className="p-5 space-y-4">
           {/* Name */}
           <div className="space-y-2">
             <Label htmlFor="name">
@@ -382,8 +382,10 @@ const RegisterForm = () => {
               ? "Registering..."
               : "Register"}
           </Button>
-        </form>
+          
       </Card>
+        </form>
+        
     </div>
   );
 };

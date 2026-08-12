@@ -5,6 +5,7 @@ import { getMe } from "@/server/getMe";
 import CustomerSidebar from "./_components/customerSidebar";
 import AdminSidebar from "./_components/adminSidebar";
 import { IUser } from "@/type/type-gear";
+import "@/app/globals.css";
 
 export default async function DashboardLayout({
   children,

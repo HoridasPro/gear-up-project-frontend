@@ -27,7 +27,7 @@ const features = [
 
 const WhyChooseGearUp = () => {
   return (
-    <section className="relative overflow-hidden py-16 sm:py-20 lg:py-28">
+    <section className="relative overflow-hidden py-16 sm:py-20 lg:py-20">
       {/* Background Decorative Ambient Lighting */}
       <div className="pointer-events-none absolute inset-0 z-0">
         <div className="absolute top-1/2 left-1/2 h-[500px] w-[500px] -translate-x-1/2 -translate-y-1/2 rounded-full bg-cyan-500/5 blur-[120px]" />

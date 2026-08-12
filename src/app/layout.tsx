@@ -5,8 +5,9 @@ import { cn } from "@/lib/utils";
 import { Toaster } from "sonner";
 import { Navbar } from "@/components/ui/navbar";
 import { getMe } from "@/server/getMe";
-import { ToastContainer } from 'react-toastify';
- 
+import { ToastContainer } from "react-toastify";
+import Footer from "./(publicGroup)/_components/footer/footer";
+
 
 const instrumentSansHeading = Instrument_Sans({
   subsets: ["latin"],
@@ -44,11 +45,8 @@ export default async function RootLayout({
         <Toaster position="top-right" richColors />
         <Navbar user={user} />
         {children}
-         <ToastContainer
-          position="top-right"
-          autoClose={3000}
-          theme="colored"
-        />
+        <Footer />
+        <ToastContainer position="top-right" autoClose={3000} theme="colored" />
       </body>
     </html>
   );
