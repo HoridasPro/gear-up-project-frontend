@@ -2,6 +2,7 @@ import Link from "next/link";
 import FeaturedGearGrid from "./_components/featuredGear/gridFeatured";
 import HeroSection from "./_components/heroSection/heroSection";
 import WhyChooseGearUp from "./_components/whyChooseGearup/whyChooseGearup";
+import HowGearUpWorks from "./_components/howGearUpWorks/howGearUpWorks";
 
 export default async function HomePage() {
   return (
@@ -70,8 +71,9 @@ export default async function HomePage() {
               </svg>
             </Link>
           </div>
+          <WhyChooseGearUp />
+          <HowGearUpWorks />
         </section>
-        <WhyChooseGearUp />
       </div>
     </main>
   );
