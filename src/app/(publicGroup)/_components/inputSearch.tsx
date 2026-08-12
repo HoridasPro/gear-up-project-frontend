@@ -6,16 +6,14 @@ import { useState } from "react";
 export default function InputSearch() {
   const router = useRouter();
   const searchParams = useSearchParams();
- 
+
   const currentSearch = searchParams.get("search") || "";
   const [search, setSearch] = useState(currentSearch);
 
- 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const value = e.target.value;
     setSearch(value);
 
-    
     if (!value.trim()) {
       const params = new URLSearchParams(searchParams.toString());
       params.delete("search");

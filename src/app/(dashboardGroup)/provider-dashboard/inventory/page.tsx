@@ -77,6 +77,7 @@ export default function InventoryPage() {
         <table className="w-full">
           <thead className="bg-gray-100">
             <tr>
+              <th className="px-4 py-3 text-left">SI</th>
               <th className="px-4 py-3 text-left">Image</th>
               <th className="px-4 py-3 text-left">Title</th>
               <th className="px-4 py-3 text-left">Category</th>
@@ -103,8 +104,9 @@ export default function InventoryPage() {
                 </td>
               </tr>
             ) : (
-              gears.map((gear) => (
+              gears.map((gear, index) => (
                 <tr key={gear.id} className="border-t">
+                  <td className="px-4 py-3">{index + 1}</td>
                   <div className="relative h-12 w-12">
                     <Image
                       src={gear.gearItemImage}

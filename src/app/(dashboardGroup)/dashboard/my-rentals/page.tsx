@@ -115,7 +115,10 @@ const MyRentalsPage = async () => {
                   </td>
                   <td className="px-4 py-4 text-center">
                     {rental.status === "RETURNED" && !rental.hasReview ? (
-                      <ReviewButton gearItemId={rental.gearItemId} />
+                      <ReviewButton
+                        rentalOrderId={rental.id}
+                        gearItemId={rental.gearItemId}
+                      />
                     ) : rental.hasReview ? (
                       <span className="text-sm text-green-600">Reviewed</span>
                     ) : (

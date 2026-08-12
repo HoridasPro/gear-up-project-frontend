@@ -3,6 +3,7 @@
 import { cookies } from "next/headers";
 
 export const createReview = async (data: {
+  rentalOrderId: string;
   gearItemId: string;
   rating: number;
   comment: string;
@@ -17,21 +18,19 @@ export const createReview = async (data: {
     };
   }
 
-  const res = await fetch(
-    `${process.env.BACKEND_API_URL}/api/reviews`,
-    {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-        Authorization: `Bearer ${token}`,
-      },
-      body: JSON.stringify({
-        gearItemId: data.gearItemId,
-        rating: data.rating,
-        comment: data.comment,
-      }),
-    }
-  );
+  const res = await fetch(`${process.env.BACKEND_API_URL}/api/reviews`, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: `Bearer ${token}`,
+    },
+    body: JSON.stringify({
+      rentalOrderId: data.rentalOrderId,
+      gearItemId: data.gearItemId,
+      rating: data.rating,
+      comment: data.comment,
+    }),
+  });
 
   const result = await res.json();
 

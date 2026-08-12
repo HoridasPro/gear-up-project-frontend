@@ -16,15 +16,13 @@ import CustomerPieChart from "../_components/customerPaichart";
 import { getAdminOrdersDashboard } from "../_actions/get-admin-orders";
 import { getAdminUsers } from "../_actions/get-admin-users";
 import { getAdminAllGears } from "../_actions/get-admin-gears";
- 
 
 const AdminDashboard = async () => {
-  const [usersResult, ordersResult, gearsResult] =
-    await Promise.all([
-      getAdminUsers(),
-      getAdminOrdersDashboard(),
-      getAdminAllGears(),
-    ]);
+  const [usersResult, ordersResult, gearsResult] = await Promise.all([
+    getAdminUsers(),
+    getAdminOrdersDashboard(),
+    getAdminAllGears(),
+  ]);
 
   const users = usersResult?.data || [];
 
@@ -33,14 +31,12 @@ const AdminDashboard = async () => {
 
   const orders = ordersResult?.data || [];
   const gears = gearsResult?.data || [];
- 
 
   const totalUsers = usersResult?.total ?? 0;
 
   const totalOrders = orders.length;
 
   const totalGears = gears.length;
-  
 
   const pendingOrders = orders.filter(
     (order: any) => order.status === "PENDING" || order.status === "PLACED",
@@ -248,12 +244,6 @@ const AdminDashboard = async () => {
 
               <span className="font-bold text-green-600">{returnedOrders}</span>
             </div>
-
-            {/* <div className="flex items-center justify-between">
-              <span className="text-muted-foreground">Cancelled</span>
-
-              <span className="font-bold text-red-600">{cancelledOrders}</span>
-            </div> */}
           </div>
         </div>
       </div>
@@ -262,5 +252,3 @@ const AdminDashboard = async () => {
 };
 
 export default AdminDashboard;
- 
- 

@@ -1,12 +1,12 @@
 import { NextResponse } from "next/server";
 import type { NextRequest } from "next/server";
 import { jwtUtils } from "./lib/jwt";
- 
+
 const AUTH_ROUTES = ["/login", "/register"];
 const PUBLIC_ROUTES = ["/", "/gears"];
 export async function proxy(request: NextRequest) {
   const pathname = request.nextUrl.pathname;
-   
+
   const accessToken = request.cookies.get("accessToken")?.value;
   const decodedToken = accessToken
     ? jwtUtils.verifyToken(accessToken, process.env.JWT_ACCESS_SECRET as string)
@@ -54,4 +54,3 @@ export async function proxy(request: NextRequest) {
 export const config = {
   matcher: ["/((?!api|_next/static|favicon.ico|_next/image|.*\\.png$).*)"],
 };
- 
