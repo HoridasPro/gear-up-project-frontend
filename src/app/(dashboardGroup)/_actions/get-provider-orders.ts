@@ -1,4 +1,4 @@
- "use server";
+"use server";
 
 import { cookies } from "next/headers";
 
@@ -12,7 +12,7 @@ export const getProviderOrders = async () => {
       headers: {
         Authorization: `Bearer ${token}`,
       },
-    }
+    },
   );
 
   return res.json();

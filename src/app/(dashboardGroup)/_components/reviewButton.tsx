@@ -10,7 +10,10 @@ interface ReviewButtonProps {
   gearItemId: string;
 }
 
-export default function ReviewButton({ rentalOrderId,gearItemId }: ReviewButtonProps) {
+export default function ReviewButton({
+  rentalOrderId,
+  gearItemId,
+}: ReviewButtonProps) {
   const [open, setOpen] = useState(false);
   const [rating, setRating] = useState(5);
   const [comment, setComment] = useState("");

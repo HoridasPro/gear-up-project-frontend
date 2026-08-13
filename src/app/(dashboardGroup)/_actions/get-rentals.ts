@@ -17,8 +17,3 @@ export const getCustomerDashboard = async () => {
 
   return res.json();
 };
-
-   
- 
-
-  

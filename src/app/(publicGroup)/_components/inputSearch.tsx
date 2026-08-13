@@ -66,7 +66,7 @@ export default function InputSearch() {
 
       <button
         type="submit"
-        className="rounded-lg bg-blue-600 px-6 py-3 font-medium text-white hover:bg-blue-700"
+        className="group/btn relative inline-flex items-center justify-center overflow-hidden rounded-xl border border-cyan-500/40 bg-[#08121e] px-6 py-3 text-sm font-mono font-semibold text-cyan-400 transition-all duration-300 hover:border-cyan-400 hover:bg-cyan-500 hover:text-slate-950 active:scale-[0.98]"
       >
         Search
       </button>

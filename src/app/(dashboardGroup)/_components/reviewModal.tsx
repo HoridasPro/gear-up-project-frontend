@@ -20,7 +20,10 @@ export default function ReviewModal({
   const [hoverRating, setHoverRating] = useState<number>(0);
   const [comment, setComment] = useState<string>("");
   const [loading, setLoading] = useState<boolean>(false);
-  const [message, setMessage] = useState<{ text: string; type: "success" | "error" } | null>(null);
+  const [message, setMessage] = useState<{
+    text: string;
+    type: "success" | "error";
+  } | null>(null);
 
   if (!isOpen) return null;
 
@@ -40,7 +43,10 @@ export default function ReviewModal({
         setMessage({ text: "Review submitted successfully!", type: "success" });
         setTimeout(() => onClose(), 1500);
       } else {
-        setMessage({ text: "Failed to submit review. Try again.", type: "error" });
+        setMessage({
+          text: "Failed to submit review. Try again.",
+          type: "error",
+        });
       }
     } catch (error) {
       console.error(error);
@@ -62,7 +68,8 @@ export default function ReviewModal({
 
         <h2 className="text-xl font-bold text-gray-900">Leave a Review</h2>
         <p className="mt-1 text-sm text-muted-foreground">
-          How was your experience with <span className="font-semibold">{gearTitle}</span>?
+          How was your experience with{" "}
+          <span className="font-semibold">{gearTitle}</span>?
         </p>
 
         {message && (
@@ -79,7 +86,9 @@ export default function ReviewModal({
 
         <form onSubmit={handleSubmit} className="mt-5 space-y-4">
           <div>
-            <label className="block text-sm font-medium text-gray-700">Rating</label>
+            <label className="block text-sm font-medium text-gray-700">
+              Rating
+            </label>
             <div className="mt-2 flex items-center gap-1">
               {[1, 2, 3, 4, 5].map((star) => (
                 <button
@@ -103,7 +112,10 @@ export default function ReviewModal({
           </div>
 
           <div>
-            <label htmlFor="comment" className="block text-sm font-medium text-gray-700">
+            <label
+              htmlFor="comment"
+              className="block text-sm font-medium text-gray-700"
+            >
               Your Feedback
             </label>
             <textarea
@@ -130,7 +142,11 @@ export default function ReviewModal({
               disabled={loading}
               className="flex items-center justify-center rounded-lg bg-indigo-600 px-5 py-2 text-sm font-medium text-white hover:bg-indigo-700 disabled:opacity-50"
             >
-              {loading ? <Loader2 className="h-4 w-4 animate-spin" /> : "Submit Review"}
+              {loading ? (
+                <Loader2 className="h-4 w-4 animate-spin" />
+              ) : (
+                "Submit Review"
+              )}
             </button>
           </div>
         </form>

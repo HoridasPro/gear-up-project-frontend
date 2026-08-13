@@ -29,7 +29,6 @@ export default function RentalCheckout({ gear }: Props) {
 
   const handleConfirm = async () => {
     toast.success("Rental Confirmed");
-
   };
 
   return (

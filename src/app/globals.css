@@ -78,7 +78,6 @@
     @apply font-mono;
   }
 
- 
   body {
     margin: 0;
     padding: 0;
@@ -94,11 +93,9 @@
       ),
       linear-gradient(to right, rgba(56, 189, 248, 0.08) 1px, transparent 1px),
       linear-gradient(to bottom, rgba(56, 189, 248, 0.08) 1px, transparent 1px);
-    /* background-size:
-      100% 100%,
-      100% 100%,
-      40px 40px,
-      40px 40px; */
     background-attachment: fixed;
   }
+}
+@utility btn-cyber {
+  @apply relative inline-flex items-center justify-center overflow-hidden rounded-xl border border-cyan-500/40 bg-[#08121e] px-6 py-3 text-sm font-mono font-semibold text-cyan-400 transition-all duration-300 hover:border-cyan-400 hover:bg-cyan-500 hover:text-slate-950 active:scale-[0.98];
 }

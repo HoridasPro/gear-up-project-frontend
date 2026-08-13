@@ -59,7 +59,6 @@ export const getAdminUsersSearch = async (
   }
 };
 
- 
 export const updateAdminStatus = async (userId: string, newStatus: string) => {
   try {
     const cookieStore = await cookies();
@@ -91,8 +90,6 @@ export const updateAdminStatus = async (userId: string, newStatus: string) => {
         message: result?.message || "Failed to update status",
       };
     }
-
-   
 
     return {
       success: true,

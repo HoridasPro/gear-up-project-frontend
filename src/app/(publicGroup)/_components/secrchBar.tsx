@@ -12,35 +12,32 @@ export default function SearchBar({ categories, brands, prices }: Props) {
   const router = useRouter();
   const searchParams = useSearchParams();
 
-  const handleFilter = (
-  key: string,
-  value: string | number
-) => {
-  const params = new URLSearchParams(searchParams);
+  const handleFilter = (key: string, value: string | number) => {
+    const params = new URLSearchParams(searchParams);
 
-  if (key === "category") {
-    params.delete("brand");
-    params.delete("price");
-  }
+    if (key === "category") {
+      params.delete("brand");
+      params.delete("price");
+    }
 
-  if (key === "brand") {
-    params.delete("category");
-    params.delete("price");
-  }
+    if (key === "brand") {
+      params.delete("category");
+      params.delete("price");
+    }
 
-  if (key === "price") {
-    params.delete("category");
-    params.delete("brand");
-  }
+    if (key === "price") {
+      params.delete("category");
+      params.delete("brand");
+    }
 
-  if (value !== "" && value !== undefined) {
-    params.set(key, String(value));
-  } else {
-    params.delete(key);
-  }
+    if (value !== "" && value !== undefined) {
+      params.set(key, String(value));
+    } else {
+      params.delete(key);
+    }
 
-  router.push(`/gears?${params.toString()}`);
-};
+    router.push(`/gears?${params.toString()}`);
+  };
   return (
     <div className="space-y-4">
       {/* Category */}

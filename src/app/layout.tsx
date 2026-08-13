@@ -8,7 +8,6 @@ import { getMe } from "@/server/getMe";
 import { ToastContainer } from "react-toastify";
 import Footer from "./(publicGroup)/_components/footer/footer";
 
-
 const instrumentSansHeading = Instrument_Sans({
   subsets: ["latin"],
   variable: "--font-heading",

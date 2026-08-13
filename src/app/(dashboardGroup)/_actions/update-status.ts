@@ -1,12 +1,9 @@
- "use server";
+"use server";
 
 import { cookies } from "next/headers";
 import { revalidatePath } from "next/cache";
 
-export const updateOrderStatus = async (
-  id: string,
-  status: string
-) => {
+export const updateOrderStatus = async (id: string, status: string) => {
   const token = (await cookies()).get("accessToken")?.value;
 
   const res = await fetch(
@@ -18,7 +15,7 @@ export const updateOrderStatus = async (
         Authorization: `Bearer ${token}`,
       },
       body: JSON.stringify({ status }),
-    }
+    },
   );
 
   revalidatePath("/provider-dashboard/orders");

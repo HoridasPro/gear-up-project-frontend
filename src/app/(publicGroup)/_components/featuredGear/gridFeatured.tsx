@@ -1,7 +1,6 @@
 import { GearResponse } from "@/type/type-gear";
-
-import FeaturedGearCard from "./featuredGear";
 import { getGears } from "../../_actions/get-gears";
+import FeaturedGearCard from "./featuredGear";
 
 export default async function FeaturedGearGrid() {
   const result: GearResponse = await getGears({});
@@ -12,7 +11,7 @@ export default async function FeaturedGearGrid() {
 
   return (
     <div className="grid gap-8 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
-      {result.data.slice(0, 8).map((gear) => (
+      {result.data.slice(2, 10).map((gear) => (
         <FeaturedGearCard key={gear.id} gear={gear} />
       ))}
     </div>
