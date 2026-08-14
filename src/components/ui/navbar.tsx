@@ -175,23 +175,18 @@ export function Navbar({ user }: NavbarProps) {
                         </Link>
                       </DropdownMenuItem>
 
-                      <DropdownMenuItem className="cursor-pointer rounded-lg focus:bg-sky-500/15 focus:text-sky-400 transition-colors">
-                        <Settings className="mr-2 h-4 w-4 text-sky-400" />
-                        <span>Settings</span>
-                      </DropdownMenuItem>
-
-                      <DropdownMenuItem className="cursor-pointer rounded-lg focus:bg-sky-500/15 focus:text-sky-400 transition-colors">
-                        <CreditCard className="mr-2 h-4 w-4 text-sky-400" />
-                        <span>Billing</span>
+                      <DropdownMenuItem
+                        asChild
+                        className="cursor-pointer rounded-lg focus:bg-sky-500/15 focus:text-sky-400 transition-colors"
+                      >
+                        <Link href="/settings">
+                          <Settings className="mr-2 h-4 w-4 text-sky-400" />
+                          <span>Settings</span>
+                        </Link>
                       </DropdownMenuItem>
                     </DropdownMenuGroup>
 
                     <DropdownMenuSeparator className="bg-sky-500/20 my-1" />
-
-                    <DropdownMenuItem className="cursor-pointer rounded-lg focus:bg-sky-500/15 focus:text-sky-400 transition-colors">
-                      <LifeBuoy className="mr-2 h-4 w-4 text-sky-400" />
-                      <span>Support</span>
-                    </DropdownMenuItem>
 
                     <DropdownMenuSeparator className="bg-sky-500/20 my-1" />
 
