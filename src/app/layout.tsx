@@ -41,11 +41,17 @@ export default async function RootLayout({
     >
       <body className="min-h-full flex flex-col">
         {" "}
-        <Toaster position="top-right" richColors />
-        <Navbar user={user} />
-        {children}
-        <Footer />
-        <ToastContainer position="top-right" autoClose={3000} theme="colored" />
+        <div className="flex min-h-screen flex-col">
+          <Toaster position="top-right" richColors />
+          <Navbar user={user} />
+          <main className="flex-1"> {children}</main>
+          <Footer />
+          <ToastContainer
+            position="top-right"
+            autoClose={3000}
+            theme="colored"
+          />
+        </div>
       </body>
     </html>
   );

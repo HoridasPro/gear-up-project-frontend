@@ -1,14 +1,6 @@
 "use client";
 
-import {
-  Clock,
-  Mail,
-  MapPin,
-  MessageCircle,
-  Phone,
-  Send,
-  Sparkles,
-} from "lucide-react";
+import { Clock, Mail, MapPin, Phone, Send, Sparkles } from "lucide-react";
 import Link from "next/link";
 
 const ContactPage = () => {

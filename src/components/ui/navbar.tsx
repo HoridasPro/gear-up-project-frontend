@@ -1,14 +1,6 @@
 "use client";
 import Link from "next/link";
-import {
-  Menu,
-  User,
-  Settings,
-  CreditCard,
-  LifeBuoy,
-  LogOut,
-  LayoutDashboard,
-} from "lucide-react";
+import { Menu, User, Settings, LogOut, LayoutDashboard } from "lucide-react";
 
 import { Button } from "@/components/ui/button";
 import {
@@ -38,6 +30,8 @@ import {
   TooltipProvider,
   TooltipTrigger,
 } from "@/components/ui/tooltip";
+import Image from "next/image";
+import logoImg from "../../../public/logo.png";
 
 interface NavItem {
   label: string;
@@ -79,18 +73,21 @@ export function Navbar({ user }: NavbarProps) {
   };
 
   return (
-    <header className="sticky top-0 z-50 w-full border-b border-sky-500/30 bg-[#0a0d14]/80 backdrop-blur-xl">
-      <div className="container mx-auto flex h-16 items-center justify-between px-4 sm:px-6 lg:px-8">
+    <header className="sticky top-0 z-50 w-full border-b border-sky-500/50 bg-[#0a0d14]/80 backdrop-blur-xl">
+      <div className="container mx-auto flex h-20 items-center justify-between px-4 sm:px-6 lg:px-8">
         {/* Logo */}
         <Link
           href="/"
           className="flex items-center gap-2.5 text-xl font-bold tracking-tight text-white transition-opacity hover:opacity-90"
         >
-          <span className="flex h-8 w-8 items-center justify-center rounded-lg bg-sky-500/10 border border-sky-500/40 text-sky-400 font-extrabold shadow-[0_0_15px_rgba(56,189,248,0.4)]">
-            N
-          </span>
-          <span className="font-extrabold text-white">
-            Nav<span className="text-sky-400">UI</span>
+          <span className="flex h-12 w-12 items-center justify-center overflow-hidden rounded-lg bg-sky-500/10 border border-sky-500/40 shadow-[0_0_15px_rgba(56,189,248,0.4)]">
+            <Image
+              src={logoImg}
+              alt="GearUp Logo"
+              width={32}
+              height={32}
+              className="h-full w-full object-contain"
+            />
           </span>
         </Link>
 
@@ -100,7 +97,7 @@ export function Navbar({ user }: NavbarProps) {
             <Button
               key={item.to}
               variant="ghost"
-              size="sm"
+              size="lg"
               asChild
               className="text-slate-400 hover:text-sky-400 hover:bg-sky-500/10 transition-colors"
             >
@@ -255,7 +252,7 @@ export function Navbar({ user }: NavbarProps) {
                   ))}
                 </nav>
 
-                {/* {!user && (
+                {!user && (
                   <div className="mt-4 flex flex-col gap-2 pt-4 border-t border-sky-500/20">
                     <SheetClose asChild>
                       <Button variant="outline" className="btn-cyber" asChild>
@@ -269,7 +266,7 @@ export function Navbar({ user }: NavbarProps) {
                       </Button>
                     </SheetClose>
                   </div>
-                )} */}
+                )}
               </div>
             </SheetContent>
           </Sheet>

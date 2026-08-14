@@ -80,6 +80,10 @@ export const GearDetailsPage = ({ gear }: Props) => {
           <h2 className="text-xl font-bold">Provider Information</h2>
 
           <p className="mt-2">
+            Provider I:
+            {gear.providerId}
+          </p>
+          <p className="mt-2">
             Provider ID:
             {gear.providerId}
           </p>
