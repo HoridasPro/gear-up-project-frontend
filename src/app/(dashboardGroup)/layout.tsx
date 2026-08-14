@@ -13,8 +13,16 @@ export default async function DashboardLayout({
   children: React.ReactNode;
 }) {
   const user: IUser = await getMe();
+  const dashboardTitle =
+    user?.data?.role === "CUSTOMER"
+      ? "Customer Dashboard"
+      : user?.data?.role === "PROVIDER"
+        ? "Provider Dashboard"
+        : user?.data?.role === "ADMIN"
+          ? "Admin Dashboard"
+          : "Dashboard";
   return (
-    <div className={cn("min-h-screen bg-slate-100 antialiased")}>
+    <div className={cn("min-h-screen antialiased")}>
       <SidebarProvider>
         {user?.data?.role === "CUSTOMER" && <CustomerSidebar />}
 
@@ -23,10 +31,12 @@ export default async function DashboardLayout({
         {user?.data?.role === "ADMIN" && <AdminSidebar />}
 
         <main className="flex-1">
-          <div className="sticky top-0 z-10 flex h-16 items-center border-b bg-white px-6 shadow-sm">
+          <div className="sticky top-0 z-10 flex h-16 items-center border-b border-gray-800/80 bg-[#0b0f19]/80 px-6 shadow-sm">
             <SidebarTrigger />
 
-            <h1 className="ml-4 text-xl font-bold text-slate-800">Dashboard</h1>
+            <h1 className="ml-4 text-xl font-bold text-white">
+              {dashboardTitle}
+            </h1>
           </div>
           <div className="p-6">{children}</div>
         </main>

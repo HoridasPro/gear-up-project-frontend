@@ -42,89 +42,131 @@ export default function AddGearPage() {
   }
 
   return (
-    <div className="mx-auto mt-10 max-w-2xl rounded-lg border bg-white p-6 shadow">
-      <h1 className="mb-6 text-3xl font-bold">Add New Gear</h1>
-
-      <form action={addGearAction} className="space-y-5">
-        <div>
-          <label className="mb-2 block font-medium">Title</label>
-          <input
-            type="text"
-            name="title"
-            required
-            className="w-full rounded border p-2"
-          />
+    <div className="flex min-h-screen items-center justify-center p-4 sm:p-6 lg:p-8">
+      <div className="w-full max-w-2xl transform overflow-hidden rounded-2xl border border-gray-800/80 bg-[#0b0f19]/90 p-6 sm:p-8 lg:p-10 shadow-2xl backdrop-blur-xl transition-all">
+        {/* Header */}
+        <div className="mb-8">
+          <h1 className="text-2xl sm:text-3xl font-extrabold tracking-tight text-white">
+            Add New Gear
+          </h1>
+          <p className="mt-2 text-xs sm:text-sm text-gray-400">
+            Fill in the details below to add a new item to your gear inventory.
+          </p>
         </div>
 
-        <div>
-          <label className="mb-2 block font-medium">Description</label>
-          <textarea
-            name="description"
-            rows={4}
-            required
-            className="w-full rounded border p-2"
-          />
-        </div>
-
-        <div>
-          <label className="mb-2 block font-medium">Category</label>
-          <input
-            type="text"
-            name="category"
-            required
-            className="w-full rounded border p-2"
-          />
-        </div>
-
-        <div>
-          <label className="mb-2 block font-medium">Brand</label>
-          <input
-            type="text"
-            name="brand"
-            required
-            className="w-full rounded border p-2"
-          />
-        </div>
-
-        <div className="grid grid-cols-2 gap-4">
+        {/* Form */}
+        <form action={addGearAction} className="space-y-5 sm:space-y-6">
+          {/* Title */}
           <div>
-            <label className="mb-2 block font-medium">Price</label>
+            <label className="mb-2 block text-xs sm:text-sm font-medium text-gray-300">
+              Title
+            </label>
             <input
-              type="number"
-              name="price"
+              type="text"
+              name="title"
               required
-              className="w-full rounded border p-2"
+              placeholder="e.g. Sony Alpha A7 III Camera"
+              className="w-full rounded-xl border border-gray-800/80 bg-gray-900/60 p-3 text-xs sm:text-sm text-gray-100 placeholder:text-gray-500 outline-none focus:border-emerald-500/60 focus:ring-1 focus:ring-emerald-500/60 transition-all shadow-inner"
             />
           </div>
 
+          {/* Description */}
           <div>
-            <label className="mb-2 block font-medium">Quantity</label>
-            <input
-              type="number"
-              name="quantity"
+            <label className="mb-2 block text-xs sm:text-sm font-medium text-gray-300">
+              Description
+            </label>
+            <textarea
+              name="description"
+              rows={4}
               required
-              className="w-full rounded border p-2"
+              placeholder="Provide a detailed description of the gear..."
+              className="w-full resize-none rounded-xl border border-gray-800/80 bg-gray-900/60 p-3 text-xs sm:text-sm text-gray-100 placeholder:text-gray-500 outline-none focus:border-emerald-500/60 focus:ring-1 focus:ring-emerald-500/60 transition-all shadow-inner"
             />
           </div>
-        </div>
 
-        <div>
-          <label className="mb-2 block font-medium">Image URL</label>
-          <input
-            type="url"
-            name="gearItemImage"
-            required
-            className="w-full rounded border p-2"
-          />
-        </div>
+          {/* Category & Brand Grid */}
+          <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
+            <div>
+              <label className="mb-2 block text-xs sm:text-sm font-medium text-gray-300">
+                Category
+              </label>
+              <input
+                type="text"
+                name="category"
+                required
+                placeholder="e.g. Cameras"
+                className="w-full rounded-xl border border-gray-800/80 bg-gray-900/60 p-3 text-xs sm:text-sm text-gray-100 placeholder:text-gray-500 outline-none focus:border-emerald-500/60 focus:ring-1 focus:ring-emerald-500/60 transition-all shadow-inner"
+              />
+            </div>
 
-        <button
-          type="submit"
-          className="w-full rounded bg-blue-600 py-3 font-semibold text-white hover:bg-blue-700"
-        >
-          Add Gear
-        </button>
-      </form>
+            <div>
+              <label className="mb-2 block text-xs sm:text-sm font-medium text-gray-300">
+                Brand
+              </label>
+              <input
+                type="text"
+                name="brand"
+                required
+                placeholder="e.g. Sony"
+                className="w-full rounded-xl border border-gray-800/80 bg-gray-900/60 p-3 text-xs sm:text-sm text-gray-100 placeholder:text-gray-500 outline-none focus:border-emerald-500/60 focus:ring-1 focus:ring-emerald-500/60 transition-all shadow-inner"
+              />
+            </div>
+          </div>
+
+          {/* Price & Quantity Grid */}
+          <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
+            <div>
+              <label className="mb-2 block text-xs sm:text-sm font-medium text-gray-300">
+                Price (৳)
+              </label>
+              <input
+                type="number"
+                name="price"
+                required
+                placeholder="0.00"
+                className="w-full rounded-xl border border-gray-800/80 bg-gray-900/60 p-3 text-xs sm:text-sm text-gray-100 placeholder:text-gray-500 outline-none focus:border-emerald-500/60 focus:ring-1 focus:ring-emerald-500/60 transition-all shadow-inner"
+              />
+            </div>
+
+            <div>
+              <label className="mb-2 block text-xs sm:text-sm font-medium text-gray-300">
+                Quantity
+              </label>
+              <input
+                type="number"
+                name="quantity"
+                required
+                placeholder="1"
+                className="w-full rounded-xl border border-gray-800/80 bg-gray-900/60 p-3 text-xs sm:text-sm text-gray-100 placeholder:text-gray-500 outline-none focus:border-emerald-500/60 focus:ring-1 focus:ring-emerald-500/60 transition-all shadow-inner"
+              />
+            </div>
+          </div>
+
+          {/* Image URL */}
+          <div>
+            <label className="mb-2 block text-xs sm:text-sm font-medium text-gray-300">
+              Image URL
+            </label>
+            <input
+              type="url"
+              name="gearItemImage"
+              required
+              placeholder="https://example.com/image.jpg"
+              className="w-full rounded-xl border border-gray-800/80 bg-gray-900/60 p-3 text-xs sm:text-sm text-gray-100 placeholder:text-gray-500 outline-none focus:border-emerald-500/60 focus:ring-1 focus:ring-emerald-500/60 transition-all shadow-inner"
+            />
+          </div>
+
+          {/* Submit Button */}
+          <div className="pt-2">
+            <button
+              type="submit"
+              className="w-full rounded-xl bg-cyan-500 py-3.5 text-xl sm:text-sm font-semibold text-white transition-all duration-200 hover:bg-cyan-600 active:scale-[0.98] shadow-lg shadow-emerald-500/20 cursor-pointer"
+            >
+              Add Gear
+            </button>
+          </div>
+        </form>
+      </div>
     </div>
   );
 }

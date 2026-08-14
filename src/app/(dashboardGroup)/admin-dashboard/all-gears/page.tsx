@@ -1,119 +1,166 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { Gear, GearResponse } from "@/type/type-gear";
-import { getProviderGears } from "../../_actions/get-provider-gear";
 import Image from "next/image";
+import { getAdminAllGears } from "../../_actions/get-admin-gears";
 
 export default async function ProviderDashboard() {
   let gears: Gear[] = [];
-
   try {
-    const result: GearResponse = await getProviderGears();
+    const result: GearResponse = await getAdminAllGears();
     gears = result?.data || [];
   } catch (error) {
     console.error("Failed to fetch provider gears:", error);
   }
 
-  const BACKEND_URL =
-    process.env.NEXT_PUBLIC_API_URL || "http://localhost:5000";
+  const BACKEND_URL = process.env.NEXT_PUBLIC_API_URL;
 
   return (
-    <div>
-      <h1 className="text-2xl font-bold">Provider Dashboard</h1>
+    <div className="w-full space-y-6">
+      {/* Header */}
+      <div className="flex flex-col gap-1">
+        <h1 className="text-2xl font-bold tracking-tight text-white sm:text-3xl">
+          All Gears
+        </h1>
+        <p className="text-sm text-slate-400">Overview of your inventory</p>
+      </div>
 
-      <p className="mt-2 text-muted-foreground">Overview of your inventory</p>
-
-      <div className="mt-6 overflow-x-auto rounded-lg border bg-white">
-        <table className="w-full text-left">
-          <thead className="border-b bg-gray-100">
-            <tr>
-              <th className="p-3">SI</th>
-              <th className="p-3">Image</th>
-              <th className="p-3">Title</th>
-              <th className="p-3">Category</th>
-              <th className="p-3 text-center">Price</th>
-              <th className="p-3 text-center">Quantity</th>
-              <th className="p-3">Brand</th>
-              <th className="p-3">CreatedAt</th>
-              <th className="p-3">UpdatedAt</th>
-            </tr>
-          </thead>
-
-          <tbody>
-            {gears.length > 0 ? (
-              gears.map((gear, index) => {
-                const rawImg = gear.gearItemImage;
-
-                const imageUrl = rawImg
-                  ? rawImg.startsWith("http")
-                    ? rawImg
-                    : `${BACKEND_URL}/${rawImg.replace(/^\//, "")}`
-                  : null;
-
-                const itemKey = gear.id || (gear as Record<string, any>)._id;
-
-                return (
-                  <tr key={itemKey} className="border-t hover:bg-gray-50">
-                    {/* SI */}
-                    <td className="p-3">{index + 1}</td>
-
-                    {/* Image */}
-                    <td className="p-3">
-                      <div className="relative h-12 w-12 overflow-hidden rounded border bg-gray-100">
-                        {imageUrl ? (
-                          <Image
-                            src={imageUrl}
-                            alt={gear.title || "Gear image"}
-                            fill
-                            unoptimized
-                            className="object-cover"
-                          />
-                        ) : (
-                          <span className="flex h-full items-center justify-center p-1 text-center text-[10px] text-gray-400">
-                            No Img
-                          </span>
-                        )}
-                      </div>
-                    </td>
-
-                    {/* Title */}
-                    <td className="p-3 font-medium">{gear.title || "N/A"}</td>
-
-                    {/* Category */}
-                    <td className="p-3">{gear.category || "N/A"}</td>
-
-                    {/* Price */}
-                    <td className="p-3 text-center">৳ {gear.price ?? 0}</td>
-
-                    {/* Quantity */}
-                    <td className="p-3 text-center">{gear.quantity ?? 0}</td>
-
-                    {/* Brand */}
-                    <td className="p-3">{gear.brand || "N/A"}</td>
-
-                    {/* Created At */}
-                    <td className="p-3">
-                      {gear.createdAt
-                        ? new Date(gear.createdAt).toLocaleDateString()
-                        : "N/A"}
-                    </td>
-                    <td className="p-3">
-                      {gear.createdAt
-                        ? new Date(gear.updatedAt).toLocaleDateString()
-                        : "N/A"}
-                    </td>
-                  </tr>
-                );
-              })
-            ) : (
-              <tr>
-                <td colSpan={8} className="p-6 text-center text-gray-500">
-                  No gear items found. Please check your backend connection or
-                  authentication.
-                </td>
+      {/* Table Container - Mobile/Desktop Responsive */}
+      <div className="w-full overflow-hidden rounded-2xl border border-slate-800/80 bg-slate-900/60 text-slate-100 shadow-xl backdrop-blur-xl">
+        <div className="overflow-x-auto">
+          <table className="w-full min-w-[1000px] border-collapse text-left text-sm">
+            {/* Table Header */}
+            <thead>
+              <tr className="border-b border-slate-800/80 bg-slate-900/90 text-xs font-semibold uppercase tracking-wider text-slate-400">
+                <th scope="col" className="px-4 py-4 text-center">
+                  SI
+                </th>
+                <th scope="col" className="px-4 py-4">
+                  Image
+                </th>
+                <th scope="col" className="px-4 py-4">
+                  Title
+                </th>
+                <th scope="col" className="px-4 py-4">
+                  Category
+                </th>
+                <th scope="col" className="px-4 py-4 text-center">
+                  Price
+                </th>
+                <th scope="col" className="px-4 py-4 text-center">
+                  Quantity
+                </th>
+                <th scope="col" className="px-4 py-4">
+                  Brand
+                </th>
+                <th scope="col" className="px-4 py-4">
+                  CreatedAt
+                </th>
+                <th scope="col" className="px-4 py-4">
+                  UpdatedAt
+                </th>
               </tr>
-            )}
-          </tbody>
-        </table>
+            </thead>
+
+            {/* Table Body */}
+            <tbody className="divide-y divide-slate-800/80 bg-slate-900/40">
+              {gears.length > 0 ? (
+                gears.map((gear, index) => {
+                  const rawImg = gear.gearItemImage;
+
+                  const imageUrl = rawImg
+                    ? rawImg.startsWith("http")
+                      ? rawImg
+                      : `${BACKEND_URL}/${rawImg.replace(/^\//, "")}`
+                    : null;
+
+                  const itemKey = gear.id || (gear as Record<string, any>)._id;
+
+                  return (
+                    <tr
+                      key={itemKey}
+                      className="transition-colors duration-150 ease-in-out hover:bg-slate-800/50"
+                    >
+                      {/* SI */}
+                      <td className="whitespace-nowrap px-4 py-4 text-center text-xs font-medium text-slate-400">
+                        {index + 1}
+                      </td>
+
+                      {/* Image */}
+                      <td className="whitespace-nowrap px-4 py-4">
+                        <div className="relative h-11 w-11 overflow-hidden rounded-xl border border-slate-700/80 bg-slate-800 ring-2 ring-slate-700/50">
+                          {imageUrl ? (
+                            <Image
+                              src={imageUrl}
+                              alt={gear.title || "Gear image"}
+                              fill
+                              unoptimized
+                              className="object-cover"
+                            />
+                          ) : (
+                            <span className="flex h-full items-center justify-center p-1 text-center text-[10px] font-medium text-slate-400">
+                              No Img
+                            </span>
+                          )}
+                        </div>
+                      </td>
+
+                      {/* Title */}
+                      <td className="whitespace-nowrap px-4 py-4 font-semibold text-white">
+                        {gear.title || "N/A"}
+                      </td>
+
+                      {/* Category */}
+                      <td className="whitespace-nowrap px-4 py-4 text-slate-300">
+                        <span className="inline-flex items-center rounded-full border border-blue-500/20 bg-blue-500/10 px-3 py-1 text-xs font-medium text-blue-400">
+                          {gear.category || "N/A"}
+                        </span>
+                      </td>
+
+                      {/* Price */}
+                      <td className="whitespace-nowrap px-4 py-4 text-center font-semibold text-emerald-400">
+                        ৳ {gear.price ?? 0}
+                      </td>
+
+                      {/* Quantity */}
+                      <td className="whitespace-nowrap px-4 py-4 text-center font-medium text-slate-200">
+                        {gear.quantity ?? 0}
+                      </td>
+
+                      {/* Brand */}
+                      <td className="whitespace-nowrap px-4 py-4 text-slate-300">
+                        {gear.brand || "N/A"}
+                      </td>
+
+                      {/* Created At */}
+                      <td className="whitespace-nowrap px-4 py-4 text-slate-400">
+                        {gear.createdAt
+                          ? new Date(gear.createdAt).toLocaleDateString("en-GB")
+                          : "N/A"}
+                      </td>
+
+                      {/* Updated At */}
+                      <td className="whitespace-nowrap px-4 py-4 text-slate-400">
+                        {gear.createdAt
+                          ? new Date(gear.updatedAt).toLocaleDateString("en-GB")
+                          : "N/A"}
+                      </td>
+                    </tr>
+                  );
+                })
+              ) : (
+                <tr>
+                  <td
+                    colSpan={9}
+                    className="px-4 py-12 text-center text-slate-400"
+                  >
+                    No gear items found. Please check your backend connection or
+                    authentication.
+                  </td>
+                </tr>
+              )}
+            </tbody>
+          </table>
+        </div>
       </div>
     </div>
   );

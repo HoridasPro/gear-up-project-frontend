@@ -44,7 +44,6 @@ const LoginForm = () => {
 
           <Button type="submit" className="cursor-pointer">
             {pending ? "Submiting..." : "Login"}
-            Login
           </Button>
         </Card>
       </form>

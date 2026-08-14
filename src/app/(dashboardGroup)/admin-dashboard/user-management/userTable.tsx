@@ -98,161 +98,213 @@ export default function UserTables({
   const effectiveTotalPages = totalPages && totalPages > 0 ? totalPages : 1;
 
   return (
-    <div className="space-y-4">
-      {/* Search Input */}
-      <input
-        type="text"
-        placeholder="Search by name or email..."
-        value={searchTerm}
-        onChange={(e) => handleSearchChange(e.target.value)}
-        className="w-full rounded-lg border px-4 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
-      />
+    <div className="w-full space-y-4">
+      {/* Search Input Box */}
+      <div className="relative w-full">
+        <input
+          type="text"
+          placeholder="Search by name or email..."
+          value={searchTerm}
+          onChange={(e) => handleSearchChange(e.target.value)}
+          className="w-full rounded-xl border border-slate-800/80 bg-slate-900/60 px-4 py-2.5 text-sm text-slate-100 placeholder-slate-400 shadow-xl backdrop-blur-xl transition-all duration-200 focus:border-blue-500/50 focus:outline-none focus:ring-2 focus:ring-blue-500/20"
+        />
+        {isPending && (
+          <div className="absolute right-3 top-1/2 -translate-y-1/2 text-xs font-medium text-blue-400">
+            Searching...
+          </div>
+        )}
+      </div>
 
-      {isPending && <p className="text-sm text-blue-500">Loading...</p>}
-
-      {/* Table */}
-      <div className="overflow-x-auto rounded-lg border bg-white shadow-sm">
-        <table className="w-full border-collapse text-left">
-          <thead className="bg-gray-100 text-sm font-semibold text-gray-700">
-            <tr>
-              <th className="border-b p-3">SI</th>
-              <th className="border-b p-3">Profile</th>
-              <th className="border-b p-3">Name</th>
-              <th className="border-b p-3">Email</th>
-              <th className="border-b p-3">Role</th>
-              <th className="border-b p-3">Status</th>
-              <th className="border-b p-3">Created At</th>
-              <th className="border-b p-3">Updated At</th>
-              <th className="border-b p-3 text-center">Action</th>
-            </tr>
-          </thead>
-
-          <tbody className="divide-y text-sm">
-            {users && users.length > 0 ? (
-              users.map((user, index) => {
-                const userId = user.id || index;
-                const isUserActive = user.status === "ACTIVE";
-
-                // Role Color
-                const roleColor =
-                  user.role === "ADMIN"
-                    ? "bg-purple-100 text-purple-800"
-                    : user.role === "PROVIDER"
-                      ? "bg-blue-100 text-blue-800"
-                      : user.role === "CUSTOMER"
-                        ? "bg-green-100 text-green-800"
-                        : "bg-gray-100 text-gray-800";
-
-                return (
-                  <tr key={userId} className="hover:bg-gray-50">
-                    {/* SI */}
-                    <td className="p-3">{index + 1}</td>
-
-                    {/* Profile */}
-                    <td className="p-3">
-                      {user.profilePhoto ? (
-                        <Image
-                          src={user.profilePhoto}
-                          alt={user.name || "User"}
-                          width={45}
-                          height={45}
-                          className="h-11 w-11 rounded-full object-cover"
-                        />
-                      ) : (
-                        <div className="flex h-11 w-11 items-center justify-center rounded-full bg-gray-200 text-sm font-semibold text-gray-600">
-                          {user.name?.charAt(0).toUpperCase() || "U"}
-                        </div>
-                      )}
-                    </td>
-
-                    {/* Name */}
-                    <td className="p-3 font-medium">{user.name || "N/A"}</td>
-
-                    {/* Email */}
-                    <td className="p-3 text-gray-600">{user.email || "N/A"}</td>
-
-                    {/* Role */}
-                    <td className="p-3">
-                      <span
-                        className={`inline-flex items-center rounded-full px-2.5 py-0.5 text-xs font-semibold ${roleColor}`}
-                      >
-                        {user.role || "N/A"}
-                      </span>
-                    </td>
-
-                    {/* Status */}
-                    <td className="p-3">
-                      <span
-                        className={`inline-flex items-center rounded-full px-2.5 py-0.5 text-xs font-medium ${
-                          isUserActive
-                            ? "bg-green-100 text-green-800"
-                            : "bg-red-100 text-red-800"
-                        }`}
-                      >
-                        {user.status || "SUSPEND"}
-                      </span>
-                    </td>
-
-                    {/* Created At */}
-                    <td className="p-3 text-gray-600">
-                      {user.createdAt
-                        ? new Date(user.createdAt).toLocaleDateString()
-                        : "N/A"}
-                    </td>
-
-                    {/* Updated At */}
-                    <td className="p-3 text-gray-600">
-                      {user.updatedAt
-                        ? new Date(user.updatedAt).toLocaleDateString()
-                        : "N/A"}
-                    </td>
-
-                    {/* Action */}
-                    <td className="p-3 text-center">
-                      <button
-                        onClick={() =>
-                          handleToggleStatus(userId, user.status || "SUSPEND")
-                        }
-                        disabled={loadingId === userId}
-                        className={`rounded px-3 py-1 text-xs font-semibold transition disabled:opacity-50 ${
-                          isUserActive
-                            ? "bg-red-500 text-white hover:bg-red-600"
-                            : "bg-green-500 text-white hover:bg-green-600"
-                        }`}
-                      >
-                        {loadingId === userId
-                          ? "Updating..."
-                          : isUserActive
-                            ? "Suspend"
-                            : "Activate"}
-                      </button>
-                    </td>
-                  </tr>
-                );
-              })
-            ) : (
-              <tr>
-                <td colSpan={9} className="p-6 text-center text-gray-500">
-                  No users found.
-                </td>
+      {/* Table Container */}
+      <div className="w-full overflow-hidden rounded-2xl border border-slate-800/80 bg-slate-900/60 text-slate-100 shadow-xl backdrop-blur-xl">
+        <div className="overflow-x-auto">
+          <table className="w-full min-w-[1000px] border-collapse text-left text-sm">
+            {/* Header */}
+            <thead>
+              <tr className="border-b border-slate-800/80 bg-slate-900/90 text-xs font-semibold uppercase tracking-wider text-slate-400">
+                <th scope="col" className="px-4 py-4 text-center">
+                  SI
+                </th>
+                <th scope="col" className="px-4 py-4">
+                  Profile
+                </th>
+                <th scope="col" className="px-4 py-4">
+                  Name
+                </th>
+                <th scope="col" className="px-4 py-4">
+                  Email
+                </th>
+                <th scope="col" className="px-4 py-4">
+                  Role
+                </th>
+                <th scope="col" className="px-4 py-4">
+                  Status
+                </th>
+                <th scope="col" className="px-4 py-4">
+                  Created At
+                </th>
+                <th scope="col" className="px-4 py-4">
+                  Updated At
+                </th>
+                <th scope="col" className="px-4 py-4 text-center">
+                  Action
+                </th>
               </tr>
-            )}
-          </tbody>
-        </table>
+            </thead>
+
+            {/* Body */}
+            <tbody className="divide-y divide-slate-800/80 bg-slate-900/40">
+              {users && users.length > 0 ? (
+                users.map((user, index) => {
+                  const userId = user.id || index;
+                  const isUserActive = user.status === "ACTIVE";
+
+                  // Role Color matching AdminDashboard badges
+                  const roleColor =
+                    user.role === "ADMIN"
+                      ? "bg-purple-500/10 text-purple-400 border border-purple-500/20"
+                      : user.role === "PROVIDER"
+                        ? "bg-blue-500/10 text-blue-400 border border-blue-500/20"
+                        : user.role === "CUSTOMER"
+                          ? "bg-emerald-500/10 text-emerald-400 border border-emerald-500/20"
+                          : "bg-slate-800/80 text-slate-300 border border-slate-700/80";
+
+                  return (
+                    <tr
+                      key={userId}
+                      className="transition-colors duration-150 ease-in-out hover:bg-slate-800/50"
+                    >
+                      {/* SI */}
+                      <td className="whitespace-nowrap px-4 py-4 text-center text-xs font-medium text-slate-400">
+                        {index + 1}
+                      </td>
+
+                      {/* Profile */}
+                      <td className="whitespace-nowrap px-4 py-4">
+                        {user.profilePhoto ? (
+                          <Image
+                            src={user.profilePhoto.trim()}
+                            alt={user.name || "User"}
+                            width={45}
+                            height={45}
+                            className="h-11 w-11 rounded-full object-cover ring-2 ring-slate-700"
+                          />
+                        ) : (
+                          <div className="flex h-11 w-11 items-center justify-center rounded-full bg-slate-800 text-sm font-semibold text-slate-300 ring-2 ring-slate-700">
+                            {user.name?.charAt(0).toUpperCase() || "U"}
+                          </div>
+                        )}
+                      </td>
+
+                      {/* Name */}
+                      <td className="whitespace-nowrap px-4 py-4 font-semibold text-white">
+                        {user.name || "N/A"}
+                      </td>
+
+                      {/* Email */}
+                      <td className="whitespace-nowrap px-4 py-4 text-slate-300">
+                        {user.email || "N/A"}
+                      </td>
+
+                      {/* Role */}
+                      <td className="whitespace-nowrap px-4 py-4">
+                        <span
+                          className={`inline-flex items-center rounded-full px-3 py-1 text-xs font-semibold ${roleColor}`}
+                        >
+                          {user.role || "N/A"}
+                        </span>
+                      </td>
+
+                      {/* Status */}
+                      <td className="whitespace-nowrap px-4 py-4">
+                        <span
+                          className={`inline-flex items-center gap-1.5 rounded-full px-3 py-1 text-xs font-medium ${
+                            isUserActive
+                              ? "bg-emerald-500/10 text-emerald-400 border border-emerald-500/20"
+                              : "bg-rose-500/10 text-rose-400 border border-rose-500/20"
+                          }`}
+                        >
+                          <span
+                            className={`h-1.5 w-1.5 rounded-full ${
+                              isUserActive ? "bg-emerald-400" : "bg-rose-400"
+                            }`}
+                          />
+                          {user.status || "SUSPEND"}
+                        </span>
+                      </td>
+
+                      {/* Created At */}
+                      <td className="whitespace-nowrap px-4 py-4 text-slate-400">
+                        {user.createdAt
+                          ? new Date(user.createdAt).toLocaleDateString()
+                          : "N/A"}
+                      </td>
+
+                      {/* Updated At */}
+                      <td className="whitespace-nowrap px-4 py-4 text-slate-400">
+                        {user.updatedAt
+                          ? new Date(user.updatedAt).toLocaleDateString()
+                          : "N/A"}
+                      </td>
+
+                      {/* Action */}
+                      <td className="whitespace-nowrap px-4 py-4 text-center">
+                        <button
+                          onClick={() =>
+                            handleToggleStatus(userId, user.status || "SUSPEND")
+                          }
+                          disabled={loadingId === userId}
+                          className={`inline-flex items-center justify-center rounded-lg px-3.5 py-1.5 text-xs font-medium transition duration-150 disabled:cursor-not-allowed disabled:opacity-50 cursor-pointer ${
+                            isUserActive
+                              ? "bg-rose-500/10 text-rose-400 border border-rose-500/20 hover:bg-rose-500/20"
+                              : "bg-emerald-500/10 text-emerald-400 border border-emerald-500/20 hover:bg-emerald-500/20"
+                          }`}
+                        >
+                          {loadingId === userId ? (
+                            <span className="flex items-center gap-1">
+                              <span className="h-3 w-3 animate-spin rounded-full border-2 border-current border-t-transparent" />
+                              Updating...
+                            </span>
+                          ) : isUserActive ? (
+                            "Suspend"
+                          ) : (
+                            "Activate"
+                          )}
+                        </button>
+                      </td>
+                    </tr>
+                  );
+                })
+              ) : (
+                <tr>
+                  <td
+                    colSpan={9}
+                    className="px-4 py-12 text-center text-slate-400"
+                  >
+                    No users found.
+                  </td>
+                </tr>
+              )}
+            </tbody>
+          </table>
+        </div>
       </div>
 
       {/* Pagination Controls */}
-      <div className="flex items-center justify-between pt-2">
-        <p className="text-sm text-gray-600">
-          Page <span className="font-semibold">{currentPage}</span> of{" "}
-          <span className="font-semibold">{effectiveTotalPages}</span>
+      <div className="flex flex-col items-center justify-between gap-3 pt-2 sm:flex-row">
+        <p className="text-sm text-slate-400">
+          Page{" "}
+          <span className="font-semibold text-slate-200">{currentPage}</span> of{" "}
+          <span className="font-semibold text-slate-200">
+            {effectiveTotalPages}
+          </span>
         </p>
 
-        <div className="space-x-2">
+        <div className="flex items-center space-x-2">
           <button
             onClick={() => handlePageChange(currentPage - 1)}
             disabled={currentPage <= 1 || isPending}
-            className="rounded border px-3 py-1 text-sm font-medium hover:bg-gray-50 disabled:opacity-50"
+            className="rounded-lg border border-slate-800/80 bg-slate-900/60 px-4 py-1.5 text-sm font-medium text-slate-300 backdrop-blur-xl transition duration-150 hover:bg-slate-800 hover:text-white disabled:cursor-not-allowed disabled:opacity-40"
           >
             Previous
           </button>
@@ -260,7 +312,7 @@ export default function UserTables({
           <button
             onClick={() => handlePageChange(currentPage + 1)}
             disabled={currentPage >= effectiveTotalPages || isPending}
-            className="rounded border px-3 py-1 text-sm font-medium hover:bg-gray-50 disabled:opacity-50"
+            className="rounded-lg border border-slate-800/80 bg-slate-900/60 px-4 py-1.5 text-sm font-medium text-slate-300 backdrop-blur-xl transition duration-150 hover:bg-slate-800 hover:text-white disabled:cursor-not-allowed disabled:opacity-40"
           >
             Next
           </button>

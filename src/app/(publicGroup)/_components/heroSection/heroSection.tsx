@@ -110,18 +110,12 @@ const HeroSection = () => {
 
           {/* Buttons */}
           <div className="mt-8 flex flex-col gap-3 sm:flex-row sm:justify-center lg:justify-start">
-            <Link
-              href="/gears"
-              className="group inline-flex w-full items-center justify-center gap-2 rounded-full bg-gradient-to-r from-sky-600 via-sky-500 to-cyan-500 px-6 py-3.5 text-xs xs:text-sm md:text-base font-semibold text-white shadow-[0_0_25px_rgba(14,165,233,0.4)] transition-all duration-300 hover:brightness-110 hover:shadow-[0_0_35px_rgba(14,165,233,0.7)] active:scale-[0.98] sm:w-auto"
-            >
+            <Link href="/gears" className="btn-cyber">
               Browse Gears
               <ArrowRight className="h-5 w-5 transition-transform group-hover:translate-x-1" />
             </Link>
 
-            <Link
-              href="/register"
-              className="inline-flex w-full items-center justify-center rounded-full border border-sky-500/30 bg-[#111622]/60 px-6 py-3.5 text-xs xs:text-sm md:text-base font-semibold text-sky-100 backdrop-blur-md transition-all duration-300 hover:border-sky-400 hover:bg-sky-500/10 active:scale-[0.98] sm:w-auto"
-            >
+            <Link href="/register" className="btn-cyber">
               Get Started
             </Link>
           </div>
@@ -228,7 +222,7 @@ const HeroSection = () => {
                 <Link
                   href="/gears"
                   aria-label="Browse gears"
-                  className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-gradient-to-r from-sky-600 to-cyan-500 text-white shadow-[0_0_15px_rgba(14,165,233,0.5)] transition-all hover:brightness-110 active:scale-95 sm:h-11 sm:w-11"
+                  className="btn-cyber"
                 >
                   <ArrowRight className="h-4 w-4 sm:h-5 sm:w-5" />
                 </Link>

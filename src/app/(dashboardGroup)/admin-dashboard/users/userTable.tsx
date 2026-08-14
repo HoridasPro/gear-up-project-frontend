@@ -12,105 +12,145 @@ export default function UserTable({ users }: UserTableProps) {
   console.log("UserTable users =", users);
 
   return (
-    <div className="overflow-x-auto">
-      <table className="w-full min-w-[1100px]">
-        <thead>
-          <tr className="border-b bg-gray-50">
-            <th className="p-3 text-left">SI</th>
-            <th className="p-3 text-left">Profile</th>
-            <th className="p-3 text-left">Users Name</th>
-            <th className="p-3 text-left">Email</th>
-            <th className="p-3 text-left">Address</th>
-            <th className="p-3 text-left">CreatedAt</th>
-            <th className="p-3 text-left">UpdatedAt</th>
-            <th className="p-3 text-left">Role</th>
-            <th className="p-3 text-left">Status</th>
-          </tr>
-        </thead>
+    <div className="w-full overflow-hidden rounded-2xl border border-slate-800/80 bg-slate-900/60 text-slate-100 shadow-xl backdrop-blur-xl">
+      <div className="overflow-x-auto">
+        <table className="w-full min-w-[1000px] border-collapse text-left text-sm">
+          {/* Header */}
+          <thead>
+            <tr className="border-b border-slate-800/80 bg-slate-900/90 text-xs font-semibold uppercase tracking-wider text-slate-400">
+              <th scope="col" className="px-4 py-4 text-center">
+                SI
+              </th>
+              <th scope="col" className="px-4 py-4">
+                Profile
+              </th>
+              <th scope="col" className="px-4 py-4">
+                Users Name
+              </th>
+              <th scope="col" className="px-4 py-4">
+                Email
+              </th>
+              <th scope="col" className="px-4 py-4">
+                Address
+              </th>
+              <th scope="col" className="px-4 py-4">
+                CreatedAt
+              </th>
+              <th scope="col" className="px-4 py-4">
+                UpdatedAt
+              </th>
+              <th scope="col" className="px-4 py-4">
+                Role
+              </th>
+              <th scope="col" className="px-4 py-4">
+                Status
+              </th>
+            </tr>
+          </thead>
 
-        <tbody>
-          {users && users.length > 0 ? (
-            users.map((user, index) => (
-              <tr key={user.id} className="border-t hover:bg-gray-50">
-                <td className="px-4 py-4">{index + 1}</td>
-                {/* Photo */}
-                <td className="p-3">
-                  {user.profilePhoto ? (
-                    <Image
-                      src={user.profilePhoto}
-                      alt={user.name || "User"}
-                      width={45}
-                      height={45}
-                      className="h-11 w-11 rounded-full object-cover"
-                    />
-                  ) : (
-                    <div className="flex h-11 w-11 items-center justify-center rounded-full bg-gray-200 text-xs">
-                      N/A
-                    </div>
-                  )}
-                </td>
+          {/* Body */}
+          <tbody className="divide-y divide-slate-800/80 bg-slate-900/40">
+            {users && users.length > 0 ? (
+              users.map((user, index) => (
+                <tr
+                  key={user.id}
+                  className="transition-colors duration-150 ease-in-out hover:bg-slate-800/50"
+                >
+                  {/* SI */}
+                  <td className="whitespace-nowrap px-4 py-4 text-center text-xs font-medium text-slate-400">
+                    {index + 1}
+                  </td>
 
-                {/* Name */}
-                <td className="p-3 font-medium">{user.name}</td>
+                  {/* Photo */}
+                  <td className="whitespace-nowrap px-4 py-4">
+                    {user.profilePhoto ? (
+                      <Image
+                        src={user.profilePhoto.trim()}
+                        alt={user.name || "User"}
+                        width={45}
+                        height={45}
+                        className="h-11 w-11 rounded-full object-cover ring-2 ring-slate-700"
+                      />
+                    ) : (
+                      <div className="flex h-11 w-11 items-center justify-center rounded-full bg-slate-800 text-xs font-medium text-slate-400 ring-2 ring-slate-700">
+                        N/A
+                      </div>
+                    )}
+                  </td>
 
-                {/* Email */}
-                <td className="p-3 text-sm text-gray-600">{user.email}</td>
+                  {/* Name */}
+                  <td className="whitespace-nowrap px-4 py-4 font-semibold text-white">
+                    {user.name}
+                  </td>
 
-                {/* Address */}
-                <td className="max-w-[180px] truncate p-3 text-sm">
-                  {user.address || "Not provided"}
-                </td>
+                  {/* Email */}
+                  <td className="whitespace-nowrap px-4 py-4 text-slate-300">
+                    {user.email}
+                  </td>
 
-                {/* Created Date */}
-                <td className="p-3 text-sm text-gray-600">
-                  {user.createdAt
-                    ? new Date(user.createdAt).toLocaleDateString("en-GB")
-                    : "N/A"}
-                </td>
+                  {/* Address */}
+                  <td className="max-w-[180px] truncate px-4 py-4 text-slate-400">
+                    {user.address || "Not provided"}
+                  </td>
 
-                {/* Updated Date */}
-                <td className="p-3 text-sm text-gray-600">
-                  {user.updatedAt
-                    ? new Date(user.updatedAt).toLocaleDateString("en-GB")
-                    : "N/A"}
-                </td>
-                <td className="p-3">
-                  <span
-                    className={`rounded-full px-3 py-1 text-xs font-semibold ${
-                      user.role === "ADMIN"
-                        ? "bg-purple-100 text-purple-700"
-                        : user.role === "PROVIDER"
-                          ? "bg-blue-100 text-blue-700"
-                          : "bg-gray-100 text-gray-700"
-                    }`}
-                  >
-                    {user.role}
-                  </span>
-                </td>
-                <td className="p-3">
-                  <span
-                    className={`rounded-full px-3 py-1 text-xs font-semibold ${
-                      user.status === "ACTIVE"
-                        ? "bg-green-100 text-green-700"
-                        : user.status === "SUSPEND"
-                          ? "bg-yellow-100 text-yellow-700"
-                          : "bg-red-100 text-red-700"
-                    }`}
-                  >
-                    {user.status}
-                  </span>
+                  {/* Created Date */}
+                  <td className="whitespace-nowrap px-4 py-4 text-slate-400">
+                    {user.createdAt
+                      ? new Date(user.createdAt).toLocaleDateString("en-GB")
+                      : "N/A"}
+                  </td>
+
+                  {/* Updated Date */}
+                  <td className="whitespace-nowrap px-4 py-4 text-slate-400">
+                    {user.updatedAt
+                      ? new Date(user.updatedAt).toLocaleDateString("en-GB")
+                      : "N/A"}
+                  </td>
+
+                  {/* Role */}
+                  <td className="whitespace-nowrap px-4 py-4">
+                    <span
+                      className={`inline-flex items-center rounded-full px-3 py-1 text-xs font-semibold ${
+                        user.role === "ADMIN"
+                          ? "bg-purple-500/10 text-purple-400 border border-purple-500/20"
+                          : user.role === "PROVIDER"
+                            ? "bg-blue-500/10 text-blue-400 border border-blue-500/20"
+                            : "bg-slate-800/80 text-slate-300 border border-slate-700/80"
+                      }`}
+                    >
+                      {user.role}
+                    </span>
+                  </td>
+
+                  {/* Status */}
+                  <td className="whitespace-nowrap px-4 py-4">
+                    <span
+                      className={`inline-flex items-center rounded-full px-3 py-1 text-xs font-semibold ${
+                        user.status === "ACTIVE"
+                          ? "bg-emerald-500/10 text-emerald-400 border border-emerald-500/20"
+                          : user.status === "SUSPEND"
+                            ? "bg-amber-500/10 text-amber-400 border border-amber-500/20"
+                            : "bg-rose-500/10 text-rose-400 border border-rose-500/20"
+                      }`}
+                    >
+                      {user.status}
+                    </span>
+                  </td>
+                </tr>
+              ))
+            ) : (
+              <tr>
+                <td
+                  colSpan={9}
+                  className="px-4 py-12 text-center text-slate-400"
+                >
+                  No users found.
                 </td>
               </tr>
-            ))
-          ) : (
-            <tr>
-              <td colSpan={9} className="p-8 text-center text-gray-500">
-                No users found.
-              </td>
-            </tr>
-          )}
-        </tbody>
-      </table>
+            )}
+          </tbody>
+        </table>
+      </div>
     </div>
   );
 }

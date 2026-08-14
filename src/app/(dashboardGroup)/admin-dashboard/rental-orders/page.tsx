@@ -7,118 +7,174 @@ const MyRentalsPage = async () => {
   const result: RentalResponse = await getAdminOrdersDashboard();
   const rentals = result?.data || [];
 
-  return (
-    <div className="space-y-6">
-      {/* Header */}
-      <div>
-        <h1 className="text-2xl font-bold">My Rentals</h1>
+  // Helper function for dynamic status badge colors
+  const getStatusBadgeClass = (status: string) => {
+    switch (status?.toUpperCase()) {
+      case "PENDING":
+        return "border-amber-500/20 bg-amber-500/10 text-amber-400";
+      case "APPROVED":
+      case "PICKEDUP":
+      case "PICKED_UP":
+        return "border-emerald-500/20 bg-emerald-500/10 text-emerald-400"; // Green color for Pickedup & Approved
+      case "RETURNED":
+        return "border-blue-500/20 bg-blue-500/10 text-blue-400";
+      case "CANCELLED":
+      case "REJECTED":
+        return "border-rose-500/20 bg-rose-500/10 text-rose-400";
+      default:
+        return "border-slate-700 bg-slate-800/80 text-slate-300";
+    }
+  };
 
-        <p className="mt-2 text-muted-foreground">
+  return (
+    <div className="w-full space-y-6">
+      {/* Header */}
+      <div className="flex flex-col gap-1">
+        <h1 className="text-2xl font-bold tracking-tight text-white sm:text-3xl">
+          Rental Orders
+        </h1>
+        <p className="text-sm text-slate-400">
           View and manage all of your rental orders.
         </p>
       </div>
 
       {rentals.length === 0 ? (
-        <div className="flex h-64 items-center justify-center rounded-xl border border-dashed">
-          <div className="text-center">
-            <h2 className="text-xl font-semibold">No Rentals Found</h2>
-
-            <p className="mt-2 text-muted-foreground">
-              You havent rented any gear yet.
-            </p>
+        /* Empty State */
+        <div className="flex h-64 w-full flex-col items-center justify-center rounded-2xl border border-dashed border-slate-800/80 bg-slate-900/40 p-6 text-center backdrop-blur-xl">
+          <div className="flex h-12 w-12 items-center justify-center rounded-full bg-slate-800/80 text-slate-400 ring-1 ring-slate-700/50">
+            <svg
+              className="h-6 w-6"
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth="1.5"
+                d="M20 13V6a2 2 0 00-2-2H6a2 2 0 00-2 2v7m16 0v5a2 2 0 01-2 2H6a2 2 0 01-2-2v-5m16 0h-2.586a1 1 0 00-.707.293l-2.414 2.414a1 1 0 01-.707.293h-3.172a1 1 0 01-.707-.293l-2.414-2.414A1 1 0 006.586 13H4"
+              />
+            </svg>
           </div>
+          <h2 className="mt-4 text-lg font-semibold text-white">
+            No Rentals Found
+          </h2>
+          <p className="mt-1 text-sm text-slate-400">
+            You havent rented any gear yet.
+          </p>
         </div>
       ) : (
-        <div className="overflow-x-auto rounded-xl border bg-white shadow-sm">
-          <table className="w-full min-w-[1200px]">
-            <thead className="bg-muted">
-              <tr>
-                <th className="px-4 py-3 text-left">SI</th>
-
-                <th className="px-4 py-3 text-left">Gear Image</th>
-
-                <th className="px-4 py-3 text-left">Gear ID</th>
-
-                <th className="px-4 py-3 text-center">Quantity</th>
-
-                <th className="px-4 py-3 text-center">Total Price</th>
-
-                <th className="px-4 py-3 text-center">Start Date</th>
-
-                <th className="px-4 py-3 text-center">End Date</th>
-
-                <th className="px-4 py-3 text-center">UpdatedAt</th>
-
-                <th className="px-4 py-3 text-center">Status</th>
-              </tr>
-            </thead>
-
-            <tbody>
-              {rentals.map((rental, index) => (
-                <tr
-                  key={rental.id}
-                  className="border-t transition hover:bg-muted/50"
-                >
-                  <td className="px-4 py-4">{index + 1}</td>
-
-                  {/* Gear Image */}
-                  <td className="px-4 py-4">
-                    {rental.gearItem?.gearItemImage ? (
-                      <Image
-                        src={rental.gearItem.gearItemImage}
-                        alt={rental.gearItem?.title || "Gear"}
-                        width={50}
-                        height={50}
-                        className="h-12 w-12 rounded-lg object-cover"
-                      />
-                    ) : (
-                      <div className="flex h-12 w-12 items-center justify-center rounded-lg bg-gray-100 text-xs text-gray-500">
-                        No Image
-                      </div>
-                    )}
-                  </td>
-
-                  <td className="px-4 py-4 font-mono text-xs">
-                    {rental.gearItemId}
-                  </td>
-
-                  <td className="px-4 py-4 text-center">{rental.quantity}</td>
-
-                  <td className="px-4 py-4 text-center font-semibold text-green-600">
-                    ৳ {rental.totalPrice}
-                  </td>
-
-                  <td className="px-4 py-4 text-center">
-                    {new Date(rental.startDate).toLocaleDateString()}
-                  </td>
-
-                  <td className="px-4 py-4 text-center">
-                    {new Date(rental.endDate).toLocaleDateString()}
-                  </td>
-
-                  <td className="px-4 py-4 text-center">
-                    {new Date(rental.updatedAt).toLocaleDateString()}
-                  </td>
-
-                  <td className="px-4 py-4 text-center">
-                    <span
-                      className={`rounded-full px-3 py-1 text-xs font-semibold ${
-                        rental.status === "PENDING"
-                          ? "bg-yellow-100 text-yellow-700"
-                          : rental.status === "APPROVED"
-                            ? "bg-green-100 text-green-700"
-                            : rental.status === "RETURNED"
-                              ? "bg-blue-100 text-blue-700"
-                              : "bg-red-100 text-red-700"
-                      }`}
-                    >
-                      {rental.status}
-                    </span>
-                  </td>
+        /* Table Container - Mobile/Desktop Responsive */
+        <div className="w-full overflow-hidden rounded-2xl border border-slate-800/80 bg-slate-900/60 text-slate-100 shadow-xl backdrop-blur-xl">
+          <div className="overflow-x-auto">
+            <table className="w-full min-w-[1000px] border-collapse text-left text-sm">
+              {/* Table Header */}
+              <thead>
+                <tr className="border-b border-slate-800/80 bg-slate-900/90 text-xs font-semibold uppercase tracking-wider text-slate-400">
+                  <th scope="col" className="px-4 py-4 text-center">
+                    SI
+                  </th>
+                  <th scope="col" className="px-4 py-4">
+                    Gear Image
+                  </th>
+                  <th scope="col" className="px-4 py-4">
+                    Gear ID
+                  </th>
+                  <th scope="col" className="px-4 py-4 text-center">
+                    Quantity
+                  </th>
+                  <th scope="col" className="px-4 py-4 text-center">
+                    Total Price
+                  </th>
+                  <th scope="col" className="px-4 py-4 text-center">
+                    Start Date
+                  </th>
+                  <th scope="col" className="px-4 py-4 text-center">
+                    End Date
+                  </th>
+                  <th scope="col" className="px-4 py-4 text-center">
+                    UpdatedAt
+                  </th>
+                  <th scope="col" className="px-4 py-4 text-center">
+                    Status
+                  </th>
                 </tr>
-              ))}
-            </tbody>
-          </table>
+              </thead>
+
+              {/* Table Body */}
+              <tbody className="divide-y divide-slate-800/80 bg-slate-900/40">
+                {rentals.map((rental, index) => (
+                  <tr
+                    key={rental.id}
+                    className="transition-colors duration-150 ease-in-out hover:bg-slate-800/50"
+                  >
+                    {/* SI */}
+                    <td className="whitespace-nowrap px-4 py-4 text-center text-xs font-medium text-slate-400">
+                      {index + 1}
+                    </td>
+
+                    {/* Gear Image */}
+                    <td className="whitespace-nowrap px-4 py-4">
+                      {rental.gearItem?.gearItemImage ? (
+                        <Image
+                          src={rental.gearItem.gearItemImage}
+                          alt={rental.gearItem?.title || "Gear"}
+                          width={50}
+                          height={50}
+                          className="h-11 w-11 rounded-xl object-cover ring-2 ring-slate-700/80"
+                        />
+                      ) : (
+                        <div className="flex h-11 w-11 items-center justify-center rounded-xl bg-slate-800 text-[10px] font-medium text-slate-400 ring-2 ring-slate-700/80">
+                          No Image
+                        </div>
+                      )}
+                    </td>
+
+                    {/* Gear ID */}
+                    <td className="whitespace-nowrap px-4 py-4 font-mono text-xs text-slate-300">
+                      {rental.gearItemId}
+                    </td>
+
+                    {/* Quantity */}
+                    <td className="whitespace-nowrap px-4 py-4 text-center font-medium text-slate-200">
+                      {rental.quantity}
+                    </td>
+
+                    {/* Total Price */}
+                    <td className="whitespace-nowrap px-4 py-4 text-center font-semibold text-emerald-400">
+                      ৳ {rental.totalPrice}
+                    </td>
+
+                    {/* Start Date */}
+                    <td className="whitespace-nowrap px-4 py-4 text-center text-slate-400">
+                      {new Date(rental.startDate).toLocaleDateString("en-GB")}
+                    </td>
+
+                    {/* End Date */}
+                    <td className="whitespace-nowrap px-4 py-4 text-center text-slate-400">
+                      {new Date(rental.endDate).toLocaleDateString("en-GB")}
+                    </td>
+
+                    {/* Updated At */}
+                    <td className="whitespace-nowrap px-4 py-4 text-center text-slate-400">
+                      {new Date(rental.updatedAt).toLocaleDateString("en-GB")}
+                    </td>
+
+                    {/* Status */}
+                    <td className="whitespace-nowrap px-4 py-4 text-center">
+                      <span
+                        className={`inline-flex items-center rounded-full border px-3 py-1 text-xs font-semibold ${getStatusBadgeClass(
+                          rental.status,
+                        )}`}
+                      >
+                        {rental.status}
+                      </span>
+                    </td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
         </div>
       )}
     </div>

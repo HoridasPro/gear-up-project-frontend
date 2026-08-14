@@ -7,6 +7,7 @@ import {
   CreditCard,
   LifeBuoy,
   LogOut,
+  LayoutDashboard,
 } from "lucide-react";
 
 import { Button } from "@/components/ui/button";
@@ -118,7 +119,7 @@ export function Navbar({ user }: NavbarProps) {
                     <TooltipTrigger asChild>
                       <DropdownMenuTrigger asChild>
                         <button className="gap-2 rounded-full bg-[#111622]/60 px-2 md:px-3 text-slate-300 hover:bg-sky-500/10 hover:text-white transition-all shadow-[0_0_15px_rgba(2,132,199,0.15)]">
-                          <Avatar className="h-8 w-8 border border-sky-500/40 shadow-[0_0_10px_rgba(56,189,248,0.3)]">
+                          <Avatar className="h-8 w-8 border border-sky-500/40 shadow-[0_0_10px_rgba(56,189,248,0.3)] cursor-pointer">
                             <AvatarImage
                               src={user?.data?.profilePhoto}
                               alt={user?.data?.name || "User avatar"}
@@ -163,13 +164,15 @@ export function Navbar({ user }: NavbarProps) {
                         onClick={handleDashboard}
                         className="cursor-pointer rounded-lg focus:bg-sky-500/15 focus:text-sky-400 transition-colors"
                       >
-                        <User className="mr-2 h-4 w-4 text-sky-400" />
+                        <LayoutDashboard className="mr-2 h-4 w-4 text-sky-400" />
                         <span>Dashboard</span>
                       </DropdownMenuItem>
 
                       <DropdownMenuItem className="cursor-pointer rounded-lg focus:bg-sky-500/15 focus:text-sky-400 transition-colors">
-                        <User className="mr-2 h-4 w-4 text-sky-400" />
-                        <span>Profile</span>
+                        <Link href="/profile" className="flex items-center">
+                          <User className="mr-2 h-4 w-4 text-sky-400" />
+                          <span>View Profile</span>
+                        </Link>
                       </DropdownMenuItem>
 
                       <DropdownMenuItem className="cursor-pointer rounded-lg focus:bg-sky-500/15 focus:text-sky-400 transition-colors">

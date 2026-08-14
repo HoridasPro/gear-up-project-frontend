@@ -471,10 +471,7 @@ const AboutPage = () => {
               </p>
 
               <div className="mt-7">
-                <Link
-                  href="/gears"
-                  className="inline-flex min-h-11 w-full max-w-xs items-center justify-center rounded-full bg-sky-500 px-6 py-3 text-sm font-semibold text-slate-950 transition-all duration-300 hover:bg-sky-400 hover:shadow-[0_0_30px_rgba(56,189,248,0.35)] sm:w-auto"
-                >
+                <Link href="/gears" className="btn-cyber">
                   Explore Gears
                 </Link>
               </div>

@@ -224,12 +224,9 @@ const ContactPage = () => {
 
                 {/* Submit Button */}
                 <div>
-                  <button
-                    type="submit"
-                    className="group relative inline-flex w-full items-center justify-center gap-2 overflow-hidden rounded-xl bg-gradient-to-r from-blue-600 to-indigo-600 px-8 py-4 text-sm font-semibold text-white shadow-lg shadow-blue-600/25 transition duration-300 hover:from-blue-500 hover:to-indigo-500 active:scale-[0.99] sm:w-auto"
-                  >
+                  <button type="submit" className="btn-cyber">
                     <span>Send Message</span>
-                    <Send className="h-4 w-4 transition-transform duration-300 group-hover:translate-x-1" />
+                    <Send className="h-4 w-7 transition-transform duration-300 group-hover:translate-x-1" />
                   </button>
                 </div>
               </form>
@@ -253,7 +250,7 @@ const ContactPage = () => {
             find the perfect gear for your next adventure.
           </p>
 
-          <Link href="/gears" className="btn-cyber">
+          <Link href="/gears" className="btn-cyber mt-4">
             Explore Gears
           </Link>
         </div>

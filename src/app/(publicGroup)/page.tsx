@@ -41,10 +41,7 @@ export default async function HomePage() {
             <FeaturedGearGrid />
 
             <div className="mt-12 text-center sm:mt-16">
-              <Link
-                href="/gears"
-                className="group relative inline-flex items-center gap-2 overflow-hidden rounded-xl bg-gradient-to-r from-cyan-500 to-blue-600 px-8 py-3.5 text-sm sm:text-base font-semibold text-white shadow-[0_0_20px_rgba(6,182,212,0.3)] transition-all duration-300 hover:shadow-[0_0_30px_rgba(6,182,212,0.6)] hover:scale-105 active:scale-95"
-              >
+              <Link href="/gears" className="btn-cyber">
                 <span>Explore All Gears</span>
                 <svg
                   className="h-5 w-5 transition-transform duration-300 group-hover:translate-x-1"

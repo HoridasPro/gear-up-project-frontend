@@ -29,7 +29,7 @@ export default function CustomerPieChart({
   ];
 
   return (
-    <div className="rounded-xl border bg-white p-6 shadow-sm">
+    <div className="rounded-xl border-gray-800/80 bg-[#0b0f19]/80 p-6 shadow-sm">
       <h2 className="mb-4 text-xl font-semibold">Rental Status Overview</h2>
 
       <div className="h-80">
