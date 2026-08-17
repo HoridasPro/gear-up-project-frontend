@@ -1,7 +1,8 @@
 "use client";
-
 import React, { useState } from "react";
-
+import { z } from "zod";
+import { toast, ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 import { Card } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
@@ -15,45 +16,109 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 
+const registerSchema = z.object({
+  name: z.string().trim().min(1, "Name is required"),
+
+  email: z
+    .string()
+    .trim()
+    .min(1, "Email is required")
+    .email("Email is not valid"),
+
+  password: z
+    .string()
+    .trim()
+    .min(1, "Password is required")
+    .min(6, "Password must be at least 6 characters"),
+
+  role: z
+    .string()
+    .trim()
+    .min(1, "Role is required")
+    .transform((value) => value.toUpperCase())
+    .refine((value) => value === "CUSTOMER" || value === "PROVIDER", {
+      message: "Role must be CUSTOMER or PROVIDER",
+    }),
+
+  address: z.string().trim().min(1, "Address is required"),
+});
+
 const RegisterForm = () => {
   const [loading, setLoading] = useState(false);
-  const [message, setMessage] = useState("");
-  const [success, setSuccess] = useState(false);
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
     setLoading(true);
-    setMessage("");
-    setSuccess(false);
 
     const form = e.currentTarget;
     const formData = new FormData(form);
 
-    // Get selected image
-    const profilePhoto = formData.get("profilePhoto") as File | null;
+    const validationResult = registerSchema.safeParse({
+      name: formData.get("name"),
+      email: formData.get("email"),
+      password: formData.get("password"),
+      role: formData.get("role"),
+      address: formData.get("address"),
+    });
 
-    // Image required
-    if (!profilePhoto || profilePhoto.size === 0) {
-      setMessage("Profile photo is required");
+    if (!validationResult.success) {
+      const errors = validationResult.error.flatten().fieldErrors;
+
+      if (errors.name?.[0]) {
+        toast.error(errors.name[0]);
+        setLoading(false);
+        return;
+      }
+
+      if (errors.email?.[0]) {
+        toast.error(errors.email[0]);
+        setLoading(false);
+        return;
+      }
+
+      if (errors.password?.[0]) {
+        toast.error(errors.password[0]);
+        setLoading(false);
+        return;
+      }
+
+      if (errors.role?.[0]) {
+        toast.error(errors.role[0]);
+        setLoading(false);
+        return;
+      }
+
+      if (errors.address?.[0]) {
+        toast.error(errors.address[0]);
+        setLoading(false);
+        return;
+      }
+
       setLoading(false);
       return;
     }
 
-    // Maximum 10 MB
+    const profilePhoto = formData.get("profilePhoto") as File | null;
+
+    if (!profilePhoto || profilePhoto.size === 0) {
+      toast.error("Profile photo is required");
+      setLoading(false);
+      return;
+    }
+
     const maxSize = 10 * 1024 * 1024;
 
     if (profilePhoto.size > maxSize) {
-      setMessage("Profile photo must be less than 10MB");
+      toast.error("Profile photo must be less than 10MB");
       setLoading(false);
       return;
     }
 
-    // Allowed image types
     const allowedTypes = ["image/jpeg", "image/png", "image/webp"];
 
     if (!allowedTypes.includes(profilePhoto.type)) {
-      setMessage("Only JPG, PNG and WEBP images are allowed");
+      toast.error("Only JPG, PNG and WEBP images are allowed");
       setLoading(false);
       return;
     }
@@ -69,29 +134,22 @@ const RegisterForm = () => {
 
       const result = await res.json();
 
-      console.log("REGISTER RESULT =", result);
-
       if (!res.ok || !result.success) {
-        setSuccess(false);
-        setMessage(result.message || "Registration failed");
+        toast.error(result.message || "Registration failed");
         return;
       }
 
-      setSuccess(true);
-      setMessage("Registration successful!");
+      toast.success("Registration successful!");
 
-      // Reset form
       form.reset();
 
-      // Go to login
       setTimeout(() => {
         window.location.href = "/login";
       }, 1000);
     } catch (error) {
       console.error("Register Error:", error);
 
-      setSuccess(false);
-      setMessage("Something went wrong during registration");
+      toast.error("Something went wrong during registration");
     } finally {
       setLoading(false);
     }
@@ -99,13 +157,13 @@ const RegisterForm = () => {
 
   return (
     <div className="flex min-h-screen items-center justify-center">
+      <ToastContainer position="top-right" autoClose={3000} />
       <form
         onSubmit={handleSubmit}
         encType="multipart/form-data"
         className="space-y-4"
       >
         <Card className="p-5 space-y-4">
-          {/* Name */}
           <div className="space-y-2">
             <Label htmlFor="name">Name</Label>
 
@@ -114,11 +172,9 @@ const RegisterForm = () => {
               name="name"
               type="text"
               placeholder="Enter your name"
-              required
             />
           </div>
 
-          {/* Email */}
           <div className="space-y-2">
             <Label htmlFor="email">Email</Label>
 
@@ -127,11 +183,9 @@ const RegisterForm = () => {
               name="email"
               type="email"
               placeholder="Enter your email"
-              required
             />
           </div>
 
-          {/* Password */}
           <div className="space-y-2">
             <Label htmlFor="password">Password</Label>
 
@@ -140,11 +194,9 @@ const RegisterForm = () => {
               name="password"
               type="password"
               placeholder="Enter your password"
-              required
             />
           </div>
 
-          {/* Address */}
           <div className="space-y-2">
             <Label htmlFor="address">Address</Label>
 
@@ -153,11 +205,9 @@ const RegisterForm = () => {
               name="address"
               type="text"
               placeholder="Enter your address"
-              required
             />
           </div>
 
-          {/* Role */}
           <div className="space-y-2">
             <Label htmlFor="role">Role</Label>
 
@@ -174,7 +224,6 @@ const RegisterForm = () => {
             </Select>
           </div>
 
-          {/* Profile Photo */}
           <div className="space-y-2">
             <Label htmlFor="profilePhoto">Profile Photo</Label>
 
@@ -183,7 +232,6 @@ const RegisterForm = () => {
               name="profilePhoto"
               type="file"
               accept="image/jpeg,image/png,image/webp"
-              required
             />
 
             <p className="text-xs text-gray-500">
@@ -191,18 +239,6 @@ const RegisterForm = () => {
             </p>
           </div>
 
-          {/* Message */}
-          {message && (
-            <p
-              className={
-                success ? "text-sm text-green-600" : "text-sm text-red-500"
-              }
-            >
-              {message}
-            </p>
-          )}
-
-          {/* Submit */}
           <Button
             type="submit"
             disabled={loading}

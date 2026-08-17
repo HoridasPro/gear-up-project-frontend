@@ -5,6 +5,8 @@ import { useRouter, usePathname, useSearchParams } from "next/navigation";
 import { updateAdminStatus } from "../../_actions/get-admin-status";
 import { CustomerIfo } from "@/type/type-gear";
 import Image from "next/image";
+import { updateAdminRole } from "../../_actions/adminRolePatch";
+import { toast } from "sonner";
 
 interface UserTableProps {
   users: CustomerIfo[];
@@ -83,13 +85,37 @@ export default function UserTables({
       const res = await updateAdminStatus(String(id), nextStatus);
 
       if (res?.success) {
+        toast.success(res?.message || "User status updated successfully");
         router.refresh();
       } else {
-        alert(res?.message || "Failed to update status");
+        toast.error(res?.message || "Failed to update status");
       }
     } catch (error) {
       console.error("Status Update Error:", error);
-      alert("Something went wrong!");
+      toast.error("Something went wrong!");
+    } finally {
+      setLoadingId(null);
+    }
+  };
+
+  const handleRoleChange = async (
+    id: string | number,
+    role: "ADMIN" | "PROVIDER" | "CUSTOMER",
+  ) => {
+    setLoadingId(id);
+
+    try {
+      const res = await updateAdminRole(String(id), role);
+
+      if (res?.success) {
+        toast.success(res?.message || "User role updated successfully");
+        router.refresh();
+      } else {
+        toast.error(res?.message || "Failed to update role");
+      }
+    } catch (error) {
+      console.error("Role Update Error:", error);
+      toast.error("Something went wrong!");
     } finally {
       setLoadingId(null);
     }
@@ -207,12 +233,41 @@ export default function UserTables({
                       </td>
 
                       {/* Role */}
+
                       <td className="whitespace-nowrap px-4 py-4">
-                        <span
-                          className={`inline-flex items-center rounded-full px-3 py-1 text-xs font-semibold ${roleColor}`}
+                        <select
+                          value={user.role || "CUSTOMER"}
+                          disabled={loadingId === userId}
+                          onChange={(e) =>
+                            handleRoleChange(
+                              userId,
+                              e.target.value as
+                                | "ADMIN"
+                                | "PROVIDER"
+                                | "CUSTOMER",
+                            )
+                          }
+                          className={`cursor-pointer rounded-lg px-3 py-1.5 text-xs font-semibold outline-none transition disabled:cursor-not-allowed disabled:opacity-50 ${roleColor}`}
                         >
-                          {user.role || "N/A"}
-                        </span>
+                          <option
+                            value="CUSTOMER"
+                            className="bg-slate-800 text-slate-200"
+                          >
+                            Customer
+                          </option>
+                          <option
+                            value="PROVIDER"
+                            className="bg-slate-800 text-slate-200"
+                          >
+                            Provider
+                          </option>
+                          <option
+                            value="ADMIN"
+                            className="bg-slate-800 text-slate-200"
+                          >
+                            Admin
+                          </option>
+                        </select>
                       </td>
 
                       {/* Status */}

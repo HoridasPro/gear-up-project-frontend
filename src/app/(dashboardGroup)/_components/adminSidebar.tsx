@@ -1,117 +1,14 @@
-// import Link from "next/link";
-// import {
-//   LayoutDashboard,
-//   Users,
-//   Package,
-//   ShoppingCart,
-//   CreditCard,
-// } from "lucide-react";
-
-// import {
-//   Sidebar,
-//   SidebarContent,
-//   SidebarGroup,
-//   SidebarHeader,
-//   SidebarMenu,
-//   SidebarMenuButton,
-//   SidebarMenuItem,
-// } from "@/components/ui/sidebar";
-
-// export default function AdminSidebar() {
-//   return (
-//     <Sidebar className="border-r border-slate-800/80 bg-slate-900/95 text-slate-100 backdrop-blur-xl">
-//       {/* Header */}
-//       <SidebarHeader className="mt-6 border-b border-slate-800/80 px-6 py-5">
-//         <h2 className="bg-gradient-to-r from-blue-400 to-indigo-400 bg-clip-text text-2xl font-bold text-transparent">
-//           GearUp
-//         </h2>
-//         <p className="text-xs font-medium tracking-wide text-slate-400 uppercase">
-//           Admin Dashboard
-//         </p>
-//       </SidebarHeader>
-
-//       {/* Content */}
-//       <SidebarContent className="px-3 py-4">
-//         <SidebarGroup>
-//           <SidebarMenu className="space-y-1.5">
-//             {/* Dashboard Link */}
-//             <SidebarMenuItem>
-//               <SidebarMenuButton
-//                 asChild
-//                 className="flex items-center gap-3 rounded-xl px-4 py-3 text-sm font-medium text-slate-300 transition-all duration-200 hover:bg-slate-800/80 hover:text-white active:bg-slate-800"
-//               >
-//                 <Link href="/admin-dashboard">
-//                   <LayoutDashboard className="h-5 w-5 text-blue-400" />
-//                   <span>Dashboard</span>
-//                 </Link>
-//               </SidebarMenuButton>
-//             </SidebarMenuItem>
-
-//             {/* All Users Link */}
-//             <SidebarMenuItem>
-//               <SidebarMenuButton
-//                 asChild
-//                 className="flex items-center gap-3 rounded-xl px-4 py-3 text-sm font-medium text-slate-300 transition-all duration-200 hover:bg-slate-800/80 hover:text-white active:bg-slate-800"
-//               >
-//                 <Link href="/admin-dashboard/users">
-//                   <Users className="h-5 w-5 text-indigo-400" />
-//                   <span>All Users</span>
-//                 </Link>
-//               </SidebarMenuButton>
-//             </SidebarMenuItem>
-
-//             {/* User Management Link */}
-//             <SidebarMenuItem>
-//               <SidebarMenuButton
-//                 asChild
-//                 className="flex items-center gap-3 rounded-xl px-4 py-3 text-sm font-medium text-slate-300 transition-all duration-200 hover:bg-slate-800/80 hover:text-white active:bg-slate-800"
-//               >
-//                 <Link href="/admin-dashboard/user-management">
-//                   <Package className="h-5 w-5 text-purple-400" />
-//                   <span>User Management</span>
-//                 </Link>
-//               </SidebarMenuButton>
-//             </SidebarMenuItem>
-
-//             {/* Rental Orders Link */}
-//             <SidebarMenuItem>
-//               <SidebarMenuButton
-//                 asChild
-//                 className="flex items-center gap-3 rounded-xl px-4 py-3 text-sm font-medium text-slate-300 transition-all duration-200 hover:bg-slate-800/80 hover:text-white active:bg-slate-800"
-//               >
-//                 <Link href="/admin-dashboard/rental-orders">
-//                   <ShoppingCart className="h-5 w-5 text-amber-400" />
-//                   <span>Rental Orders</span>
-//                 </Link>
-//               </SidebarMenuButton>
-//             </SidebarMenuItem>
-
-//             {/* All Gears Link */}
-//             <SidebarMenuItem>
-//               <SidebarMenuButton
-//                 asChild
-//                 className="flex items-center gap-3 rounded-xl px-4 py-3 text-sm font-medium text-slate-300 transition-all duration-200 hover:bg-slate-800/80 hover:text-white active:bg-slate-800"
-//               >
-//                 <Link href="/admin-dashboard/all-gears">
-//                   <CreditCard className="h-5 w-5 text-emerald-400" />
-//                   <span>All Gears</span>
-//                 </Link>
-//               </SidebarMenuButton>
-//             </SidebarMenuItem>
-//           </SidebarMenu>
-//         </SidebarGroup>
-//       </SidebarContent>
-//     </Sidebar>
-//   );
-// }
+"use client";
 
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 import {
   LayoutDashboard,
   Users,
-  Package,
+  UserCog,
   ShoppingCart,
-  CreditCard,
+  Package,
+  User,
 } from "lucide-react";
 
 import {
@@ -125,6 +22,48 @@ import {
 } from "@/components/ui/sidebar";
 
 export default function AdminSidebar() {
+  const pathname = usePathname();
+
+  const menuItems = [
+    {
+      title: "Dashboard",
+      href: "/admin-dashboard",
+      icon: LayoutDashboard,
+      color: "text-blue-400",
+      exact: true,
+    },
+    {
+      title: "All Users",
+      href: "/admin-dashboard/users",
+      icon: Users,
+      color: "text-indigo-400",
+    },
+    {
+      title: "User Management",
+      href: "/admin-dashboard/user-management",
+      icon: UserCog,
+      color: "text-purple-400",
+    },
+    {
+      title: "Rental Orders",
+      href: "/admin-dashboard/rental-orders",
+      icon: ShoppingCart,
+      color: "text-amber-400",
+    },
+    {
+      title: "All Gears",
+      href: "/admin-dashboard/all-gears",
+      icon: Package,
+      color: "text-emerald-400",
+    },
+    {
+      title: "My Profile",
+      href: "/profile",
+      icon: User,
+      color: "text-emerald-400",
+    },
+  ];
+
   return (
     <Sidebar className="sticky top-16 h-[calc(100vh-4rem)] border-r border-b mb-6 border-slate-800/60 bg-[#0b0f19]/90 text-slate-100 backdrop-blur-2xl">
       {/* Header */}
@@ -141,70 +80,30 @@ export default function AdminSidebar() {
       <SidebarContent className="flex-1 overflow-y-auto px-3 py-4">
         <SidebarGroup>
           <SidebarMenu className="space-y-1.5">
-            {/* Dashboard Link */}
-            <SidebarMenuItem>
-              <SidebarMenuButton
-                asChild
-                className="flex items-center gap-3 rounded-xl px-4 py-3 text-sm font-medium text-slate-300 transition-all duration-200 hover:bg-slate-800/50 hover:text-white active:bg-slate-800/80"
-              >
-                <Link href="/admin-dashboard">
-                  <LayoutDashboard className="h-5 w-5 text-blue-400" />
-                  <span>Dashboard</span>
-                </Link>
-              </SidebarMenuButton>
-            </SidebarMenuItem>
+            {menuItems.map((item) => {
+              const Icon = item.icon;
+              const isActive = item.exact
+                ? pathname === item.href
+                : pathname.startsWith(item.href);
 
-            {/* All Users Link */}
-            <SidebarMenuItem>
-              <SidebarMenuButton
-                asChild
-                className="flex items-center gap-3 rounded-xl px-4 py-3 text-sm font-medium text-slate-300 transition-all duration-200 hover:bg-slate-800/50 hover:text-white active:bg-slate-800/80"
-              >
-                <Link href="/admin-dashboard/users">
-                  <Users className="h-5 w-5 text-indigo-400" />
-                  <span>All Users</span>
-                </Link>
-              </SidebarMenuButton>
-            </SidebarMenuItem>
-
-            {/* User Management Link */}
-            <SidebarMenuItem>
-              <SidebarMenuButton
-                asChild
-                className="flex items-center gap-3 rounded-xl px-4 py-3 text-sm font-medium text-slate-300 transition-all duration-200 hover:bg-slate-800/50 hover:text-white active:bg-slate-800/80"
-              >
-                <Link href="/admin-dashboard/user-management">
-                  <Package className="h-5 w-5 text-purple-400" />
-                  <span>User Management</span>
-                </Link>
-              </SidebarMenuButton>
-            </SidebarMenuItem>
-
-            {/* Rental Orders Link */}
-            <SidebarMenuItem>
-              <SidebarMenuButton
-                asChild
-                className="flex items-center gap-3 rounded-xl px-4 py-3 text-sm font-medium text-slate-300 transition-all duration-200 hover:bg-slate-800/50 hover:text-white active:bg-slate-800/80"
-              >
-                <Link href="/admin-dashboard/rental-orders">
-                  <ShoppingCart className="h-5 w-5 text-amber-400" />
-                  <span>Rental Orders</span>
-                </Link>
-              </SidebarMenuButton>
-            </SidebarMenuItem>
-
-            {/* All Gears Link */}
-            <SidebarMenuItem>
-              <SidebarMenuButton
-                asChild
-                className="flex items-center gap-3 rounded-xl px-4 py-3 text-sm font-medium text-slate-300 transition-all duration-200 hover:bg-slate-800/50 hover:text-white active:bg-slate-800/80"
-              >
-                <Link href="/admin-dashboard/all-gears">
-                  <CreditCard className="h-5 w-5 text-emerald-400" />
-                  <span>All Gears</span>
-                </Link>
-              </SidebarMenuButton>
-            </SidebarMenuItem>
+              return (
+                <SidebarMenuItem key={item.href}>
+                  <SidebarMenuButton
+                    asChild
+                    className={`flex items-center gap-3 rounded-xl px-4 py-3 text-sm font-medium transition-all duration-200 ${
+                      isActive
+                        ? "bg-slate-800/90 text-white font-semibold border-l-4 border-blue-500 shadow-lg shadow-blue-500/10"
+                        : "text-slate-300 hover:bg-slate-800/50 hover:text-white active:bg-slate-800/80"
+                    }`}
+                  >
+                    <Link href={item.href}>
+                      <Icon className={`h-5 w-5 ${item.color}`} />
+                      <span>{item.title}</span>
+                    </Link>
+                  </SidebarMenuButton>
+                </SidebarMenuItem>
+              );
+            })}
           </SidebarMenu>
         </SidebarGroup>
       </SidebarContent>

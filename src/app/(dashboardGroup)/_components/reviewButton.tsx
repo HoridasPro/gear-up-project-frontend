@@ -64,7 +64,7 @@ export default function ReviewButton({
   // Modal Content
   const modalContent = open ? (
     <div className="fixed inset-0 z-[9999] flex items-center justify-center bg-black/80 p-4 sm:p-6 backdrop-blur-md transition-all duration-300">
-      <div className="w-full max-w-md transform overflow-hidden rounded-2xl border border-gray-800/80 bg-[#0b0f19]/95 p-5 sm:p-7 shadow-2xl backdrop-blur-2xl transition-all">
+      <div className="w-full max-w-md transform  rounded-2xl border border-gray-800/80 bg-[#0b0f19]/95 p-5 sm:p-7 shadow-2xl backdrop-blur-2xl transition-all">
         <h2 className="text-xl sm:text-2xl font-bold text-white tracking-wide">
           Review Gear
         </h2>

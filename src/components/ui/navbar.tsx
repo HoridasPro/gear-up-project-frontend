@@ -1,5 +1,6 @@
 "use client";
 import Link from "next/link";
+import { usePathname, useRouter } from "next/navigation";
 import { Menu, User, Settings, LogOut, LayoutDashboard } from "lucide-react";
 
 import { Button } from "@/components/ui/button";
@@ -19,7 +20,6 @@ import {
   SheetTrigger,
   SheetClose,
 } from "@/components/ui/sheet";
-import { useRouter } from "next/navigation";
 import { toast } from "sonner";
 import { logout } from "@/server/logout";
 import { IUser } from "@/type/type-gear";
@@ -51,6 +51,7 @@ type NavbarProps = {
 
 export function Navbar({ user }: NavbarProps) {
   const router = useRouter();
+  const pathname = usePathname();
 
   const handleDashboard = () => {
     if (user?.data?.role === "ADMIN") {
@@ -93,17 +94,26 @@ export function Navbar({ user }: NavbarProps) {
 
         {/* Desktop Navigation */}
         <nav className="hidden items-center gap-1 md:flex">
-          {navItems.map((item) => (
-            <Button
-              key={item.to}
-              variant="ghost"
-              size="lg"
-              asChild
-              className="text-slate-400 hover:text-sky-400 hover:bg-sky-500/10 transition-colors"
-            >
-              <Link href={item.to}>{item.label}</Link>
-            </Button>
-          ))}
+          {navItems.map((item) => {
+            const isActive =
+              item.to === "/" ? pathname === "/" : pathname.startsWith(item.to);
+
+            return (
+              <Button
+                key={item.to}
+                variant="ghost"
+                size="lg"
+                asChild
+                className={`transition-colors ${
+                  isActive
+                    ? "text-sky-400 bg-sky-500/10 font-semibold shadow-[0_0_12px_rgba(56,189,248,0.2)]"
+                    : "text-slate-400 hover:text-sky-400 hover:bg-sky-500/10"
+                }`}
+              >
+                <Link href={item.to}>{item.label}</Link>
+              </Button>
+            );
+          })}
         </nav>
 
         {/* Right Section */}
@@ -185,8 +195,6 @@ export function Navbar({ user }: NavbarProps) {
 
                     <DropdownMenuSeparator className="bg-sky-500/20 my-1" />
 
-                    <DropdownMenuSeparator className="bg-sky-500/20 my-1" />
-
                     <DropdownMenuItem
                       onClick={async () => {
                         await handleLogout("logout");
@@ -239,17 +247,28 @@ export function Navbar({ user }: NavbarProps) {
                 </Link>
 
                 <nav className="flex flex-col gap-1">
-                  {navItems.map((item) => (
-                    <SheetClose key={item.to} asChild>
-                      <Button
-                        variant="ghost"
-                        className="justify-start text-slate-300 hover:bg-sky-500/10 hover:text-sky-400 rounded-xl"
-                        asChild
-                      >
-                        <Link href={item.to}>{item.label}</Link>
-                      </Button>
-                    </SheetClose>
-                  ))}
+                  {navItems.map((item) => {
+                    const isActive =
+                      item.to === "/"
+                        ? pathname === "/"
+                        : pathname.startsWith(item.to);
+
+                    return (
+                      <SheetClose key={item.to} asChild>
+                        <Button
+                          variant="ghost"
+                          className={`justify-start rounded-xl ${
+                            isActive
+                              ? "text-sky-400 bg-sky-500/10 font-semibold"
+                              : "text-slate-300 hover:bg-sky-500/10 hover:text-sky-400"
+                          }`}
+                          asChild
+                        >
+                          <Link href={item.to}>{item.label}</Link>
+                        </Button>
+                      </SheetClose>
+                    );
+                  })}
                 </nav>
 
                 {!user && (

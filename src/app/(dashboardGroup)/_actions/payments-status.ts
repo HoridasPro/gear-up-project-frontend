@@ -13,7 +13,7 @@ export async function paymentsStatus() {
       headers: {
         "Content-Type": "application/json",
         ...(token ? { Authorization: `Bearer ${token}` } : {}),
-        Cookie: cookieStore.toString(), // কুকি পাস করা
+        Cookie: cookieStore.toString(), 
       },
       cache: "no-store",
     });

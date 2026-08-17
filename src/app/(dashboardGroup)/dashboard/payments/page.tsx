@@ -34,7 +34,7 @@ const PaymentsPage = async () => {
   }
 
   return (
-    <div className="space-y-6 sm:space-y-8 text-gray-100 p-4 sm:p-6 lg:p-8">
+    <div className="overflow-x-hidden space-y-6 sm:space-y-8 text-gray-100 p-4 sm:p-6 lg:p-8">
       {/* Header */}
       <div>
         <h1 className="text-2xl font-bold tracking-tight text-white sm:text-3xl lg:text-4xl">
@@ -48,7 +48,7 @@ const PaymentsPage = async () => {
 
       {/* No Payment */}
       {paymentsList.length === 0 ? (
-        <div className="flex h-64 items-center justify-center rounded-2xl border border-dashed border-gray-800 bg-[#0b0f19]/80 p-6 shadow-2xl backdrop-blur-xl">
+        <div className="w-full overflow-x-hidden flex h-64 items-center justify-center rounded-2xl border border-dashed border-gray-800 bg-[#0b0f19]/80 p-6 shadow-2xl backdrop-blur-xl">
           <div className="text-center">
             <h2 className="text-lg font-semibold text-white sm:text-xl">
               No Payment History Found
@@ -85,9 +85,9 @@ const PaymentsPage = async () => {
                   Payment ID
                 </th>
 
-                <th className="px-4 py-3 sm:px-6 sm:py-4 font-semibold text-left">
+                {/* <th className="px-4 py-3 sm:px-6 sm:py-4 font-semibold text-left">
                   Rental ID
-                </th>
+                </th> */}
 
                 <th className="px-4 py-3 sm:px-6 sm:py-4 font-semibold text-center">
                   Amount
@@ -159,9 +159,9 @@ const PaymentsPage = async () => {
                       {payment.id}
                     </td>
 
-                    <td className="px-4 py-4 sm:px-6 font-mono text-xs text-gray-400">
+                    {/* <td className="px-4 py-4 sm:px-6 font-mono text-xs text-gray-400">
                       {payment.rentalOrderId}
-                    </td>
+                    </td> */}
 
                     <td className="px-4 py-4 sm:px-6 text-center font-semibold text-emerald-400 whitespace-nowrap">
                       ৳ {payment.amount}

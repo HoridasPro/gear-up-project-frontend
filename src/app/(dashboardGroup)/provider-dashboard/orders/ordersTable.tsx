@@ -52,6 +52,9 @@ export default function OrdersTable({ orders }: Props) {
               Total Price
             </th>
             <th className="w-[18%] sm:w-[12%] p-2 sm:p-3 font-semibold text-center">
+              Status
+            </th>
+            <th className="w-[18%] sm:w-[12%] p-2 sm:p-3 font-semibold text-center">
               Action
             </th>
           </tr>
@@ -130,6 +133,32 @@ export default function OrdersTable({ orders }: Props) {
               <td className="p-2 sm:p-3 text-center font-bold text-emerald-400 truncate">
                 ৳ {order.totalPrice}
               </td>
+              {/* Status */}
+              {/* <td className="p-2 sm:p-3 text-center font-bold text-emerald-400 truncate">
+                ৳ {order.status}
+              </td> */}
+              {/* Status */}
+<td className="p-2 sm:p-3 text-center font-bold truncate">
+  <span
+    className={`inline-block rounded-full border px-2 py-1 text-[10px] sm:text-xs font-semibold ${
+      order.status === "PLACED"
+        ? "border-amber-500/30 bg-amber-500/10 text-amber-400"
+        : order.status === "CONFIRMED"
+          ? "border-blue-500/30 bg-blue-500/10 text-blue-400"
+          : order.status === "PAID"
+            ? "border-purple-500/30 bg-purple-500/10 text-purple-400"
+            : order.status === "PICKEDUP"
+              ? "border-emerald-500/30 bg-emerald-500/10 text-emerald-400"
+              : order.status === "RETURNED"
+                ? "border-gray-500/30 bg-gray-500/10 text-gray-400"
+                : order.status === "CANCELLED"
+                  ? "border-red-500/30 bg-red-500/10 text-red-400"
+                  : "border-gray-500/30 bg-gray-500/10 text-gray-400"
+    }`}
+  >
+    {order.status}
+  </span>
+</td>
 
               {/* Action */}
               <td className="p-2 sm:p-3 text-center">
@@ -137,18 +166,22 @@ export default function OrdersTable({ orders }: Props) {
                   defaultValue={order.status}
                   onChange={(e) => handleUpdate(order.id, e.target.value)}
                   className={`w-full cursor-pointer rounded-full border px-1.5 py-1 text-[10px] sm:text-xs font-semibold outline-none transition-all duration-200 shadow-sm  text-center ${
-                    order.status === "PENDING"
+                    order.status === "PLACED"
                       ? "border-amber-500/30 bg-amber-500/10 text-amber-400 focus:border-amber-500"
                       : order.status === "PICKEDUP"
                         ? "border-emerald-500/30 bg-emerald-500/10 text-emerald-400 focus:border-emerald-500"
-                        : "border-purple-500/30 bg-purple-500/10 text-purple-400 focus:border-purple-500"
+                        : order.status === "CONFIRMED"
+                          ? "border-blue-500/30 bg-blue-500/10 text-blue-400 focus:border-blue-500"
+                          : order.status === "RETURNED"
+                            ? "border-gray-500/30 bg-gray-500/10 text-gray-400 focus:border-gray-500"
+                            : "border-purple-500/30 bg-purple-500/10 text-purple-400 focus:border-purple-500"
                   }`}
                 >
                   <option
-                    value="PENDING"
+                    value="PLACED"
                     className="bg-gray-900 text-amber-400 font-medium"
                   >
-                    PENDING
+                    PLACED
                   </option>
 
                   <option
@@ -156,6 +189,12 @@ export default function OrdersTable({ orders }: Props) {
                     className="bg-gray-900 text-emerald-400 font-medium"
                   >
                     PICKED UP
+                  </option>
+                  <option
+                    value="CONFIRMED"
+                    className="bg-gray-900 text-emerald-400 font-medium"
+                  >
+                    CONFIRMED
                   </option>
 
                   <option

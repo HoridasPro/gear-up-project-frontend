@@ -1,5 +1,4 @@
 import Image from "next/image";
-
 import { Gear } from "@/type/type-gear";
 import { RentSection } from "./rentSection";
 
@@ -8,7 +7,6 @@ type Props = {
 };
 
 export const GearDetailsPage = ({ gear }: Props) => {
-  console.log("gear get", gear);
   return (
     <div className="grid gap-10 lg:grid-cols-2">
       <div>
@@ -31,7 +29,6 @@ export const GearDetailsPage = ({ gear }: Props) => {
             alt="image"
             className="rounded-lg"
           />
-
           <Image
             src={gear.gearItemImage}
             width={150}
@@ -40,7 +37,6 @@ export const GearDetailsPage = ({ gear }: Props) => {
             alt="image"
             className="rounded-lg"
           />
-
           <Image
             src={gear.gearItemImage}
             width={150}
@@ -78,19 +74,14 @@ export const GearDetailsPage = ({ gear }: Props) => {
 
         <div className="rounded-xl border p-5">
           <h2 className="text-xl font-bold">Provider Information</h2>
-
-          <p className="mt-2">
-            Provider I:
-            {gear.providerId}
-          </p>
-          <p className="mt-2">
-            Provider ID:
-            {gear.providerId}
-          </p>
+          <p className="mt-2">Provider ID: {gear.providerId}</p>
         </div>
 
+        
         <RentSection gear={gear} />
       </div>
     </div>
   );
 };
+
+ 

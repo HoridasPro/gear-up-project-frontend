@@ -17,10 +17,8 @@ const RegisterPage = () => {
           </p>
         </div>
 
-        {/* Register Form */}
         <RegisterForm />
 
-        {/* Login Link */}
         <p className="t-6 text-center text-sm text-gray-600">
           Already have an account? Please{" "}
           <Link

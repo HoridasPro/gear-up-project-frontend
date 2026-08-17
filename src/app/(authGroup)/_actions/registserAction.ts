@@ -1,5 +1,4 @@
 "use server";
-
 import { redirect } from "next/navigation";
 
 type RegisterAction = {
@@ -37,8 +36,6 @@ export const registerAction = async (
       data: null,
     };
   }
-
-  // Maximum image size: 10MB
   const maxSize = 10 * 1024 * 1024;
 
   if (profilePhoto.size > maxSize) {
@@ -49,8 +46,6 @@ export const registerAction = async (
       data: null,
     };
   }
-
-  // Check image type
   const allowedTypes = ["image/jpeg", "image/png", "image/webp"];
 
   if (!allowedTypes.includes(profilePhoto.type)) {
@@ -61,7 +56,6 @@ export const registerAction = async (
       data: null,
     };
   }
-
   const registerFormData = new FormData();
 
   registerFormData.append("name", name);
@@ -79,10 +73,7 @@ export const registerAction = async (
         body: registerFormData,
       },
     );
-
     const result = await res.json();
-
-    console.log("REGISTER RESULT =", result);
 
     if (!res.ok || !result.success) {
       return {
@@ -94,7 +85,6 @@ export const registerAction = async (
     }
   } catch (error) {
     console.error("Register Error:", error);
-
     return {
       success: false,
       statusCode: 500,

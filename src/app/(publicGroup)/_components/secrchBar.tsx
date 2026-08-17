@@ -48,7 +48,6 @@ export default function SearchBar({ categories, brands, prices }: Props) {
         <p className="text-xs text-gray-400">Refine your search results</p>
       </div>
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-        {/* Category */}
         <div className="relative">
           <label className="mb-2 block font-semibold text-gray-300 text-sm">
             Category
@@ -57,7 +56,7 @@ export default function SearchBar({ categories, brands, prices }: Props) {
             <select
               onChange={(e) => handleFilter("category", e.target.value)}
               value={searchParams.get("category") || ""}
-              className="w-full rounded-xl border border-gray-700 bg-gray-900 text-gray-100 p-3.5 pl-5 pr-10 appearance-none focus:border-blue-500 focus:ring-2 focus:ring-blue-500/20 transition duration-150 ease-in-out text-base shadow-inner"
+              className="btn-cyber"
             >
               <option value="">All Category</option>
               {categories.map((category) => (
@@ -73,19 +72,11 @@ export default function SearchBar({ categories, brands, prices }: Props) {
                 stroke="currentColor"
                 viewBox="0 0 24 24"
                 xmlns="http://www.w3.org/2000/svg"
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth="2"
-                  d="M19 9l-7 7-7-7"
-                ></path>
-              </svg>
+              ></svg>
             </div>
           </div>
         </div>
 
-        {/* Brand */}
         <div className="relative">
           <label className="mb-2 block font-semibold text-gray-300 text-sm">
             Brand
@@ -94,7 +85,7 @@ export default function SearchBar({ categories, brands, prices }: Props) {
             <select
               onChange={(e) => handleFilter("brand", e.target.value)}
               value={searchParams.get("brand") || ""}
-              className="w-full rounded-xl border border-gray-700 bg-gray-900 text-gray-100 p-3.5 pl-5 pr-10 appearance-none focus:border-blue-500 focus:ring-2 focus:ring-blue-500/20 transition duration-150 ease-in-out text-base shadow-inner"
+              className="btn-cyber"
             >
               <option value="">All Brand</option>
               {brands.map((brand) => (
@@ -110,19 +101,11 @@ export default function SearchBar({ categories, brands, prices }: Props) {
                 stroke="currentColor"
                 viewBox="0 0 24 24"
                 xmlns="http://www.w3.org/2000/svg"
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth="2"
-                  d="M19 9l-7 7-7-7"
-                ></path>
-              </svg>
+              ></svg>
             </div>
           </div>
         </div>
 
-        {/* Price */}
         <div className="relative">
           <label className="mb-2 block font-semibold text-gray-300 text-sm">
             Price
@@ -131,7 +114,7 @@ export default function SearchBar({ categories, brands, prices }: Props) {
             <select
               onChange={(e) => handleFilter("price", e.target.value)}
               value={searchParams.get("price") || ""}
-              className="w-full rounded-xl border border-gray-700 bg-gray-900 text-gray-100 p-3.5 pl-5 pr-10 appearance-none focus:border-blue-500 focus:ring-2 focus:ring-blue-500/20 transition duration-150 ease-in-out text-base shadow-inner"
+              className="btn-cyber"
             >
               <option value="">All Price</option>
               {prices.map((price) => (
@@ -147,14 +130,7 @@ export default function SearchBar({ categories, brands, prices }: Props) {
                 stroke="currentColor"
                 viewBox="0 0 24 24"
                 xmlns="http://www.w3.org/2000/svg"
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth="2"
-                  d="M19 9l-7 7-7-7"
-                ></path>
-              </svg>
+              ></svg>
             </div>
           </div>
         </div>

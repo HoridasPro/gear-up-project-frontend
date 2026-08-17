@@ -1,9 +1,15 @@
+"use client";
+
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 import {
   LayoutDashboard,
   Package,
   ShoppingCart,
   PlusCircle,
+  Boxes,
+  Star,
+  User,
 } from "lucide-react";
 
 import {
@@ -17,10 +23,58 @@ import {
 } from "@/components/ui/sidebar";
 
 export default function ProviderSidebar() {
+  const pathname = usePathname();
+
+  const menuItems = [
+    {
+      title: "Dashboard",
+      href: "/provider-dashboard",
+      icon: LayoutDashboard,
+      color: "text-blue-400",
+      exact: true,
+    },
+    {
+      title: "My Gears",
+      href: "/provider-dashboard/my-gears",
+      icon: Package,
+      color: "text-indigo-400",
+    },
+    {
+      title: "Add Gear",
+      href: "/provider-dashboard/gear/new",
+      icon: PlusCircle,
+      color: "text-emerald-400",
+    },
+    {
+      title: "Inventory",
+      href: "/provider-dashboard/inventory",
+      icon: Boxes, // Contextual icon fix: Boxes for Inventory
+      color: "text-purple-400",
+    },
+    {
+      title: "Orders",
+      href: "/provider-dashboard/orders",
+      icon: ShoppingCart,
+      color: "text-amber-400",
+    },
+    {
+      title: "Reviews",
+      href: "/provider-dashboard/reviews",
+      icon: Star, // Contextual icon fix: Star for Reviews
+      color: "text-rose-400",
+    },
+    {
+      title: "My Profile",
+      href: "/profile",
+      icon: User, // Contextual icon fix: User for Profile
+      color: "text-sky-400",
+    },
+  ];
+
   return (
     <Sidebar className="sticky top-16 h-[calc(100vh-4rem)] border-r border-b mb-8 border-slate-800/60 bg-[#0b0f19]/90 text-slate-100 backdrop-blur-2xl">
       {/* Header */}
-      <SidebarHeader className="border-b border-slate-800/60 bg-[#0b0f19] px-5 ml-4 ">
+      <SidebarHeader className="border-b border-slate-800/60 bg-[#0b0f19] px-5 ml-4">
         <h2 className="bg-gradient-to-r from-blue-400 to-indigo-400 bg-clip-text text-xl font-bold text-transparent">
           GearUp
         </h2>
@@ -33,94 +87,30 @@ export default function ProviderSidebar() {
       <SidebarContent className="flex-1 overflow-y-auto bg-[#0b0f19] px-3 py-4">
         <SidebarGroup>
           <SidebarMenu className="space-y-1.5">
-            {/* Dashboard Link */}
-            <SidebarMenuItem>
-              <SidebarMenuButton
-                asChild
-                className="flex items-center gap-3 rounded-xl px-4 py-3 text-sm font-medium text-slate-300 transition-all duration-200 hover:bg-slate-800/60 hover:text-white active:bg-slate-800"
-              >
-                <Link href="/provider-dashboard">
-                  <LayoutDashboard className="h-5 w-5 text-blue-400" />
-                  <span>Dashboard</span>
-                </Link>
-              </SidebarMenuButton>
-            </SidebarMenuItem>
+            {menuItems.map((item) => {
+              const Icon = item.icon;
+              const isActive = item.exact
+                ? pathname === item.href
+                : pathname.startsWith(item.href);
 
-            {/* My Gears Link */}
-            <SidebarMenuItem>
-              <SidebarMenuButton
-                asChild
-                className="flex items-center gap-3 rounded-xl px-4 py-3 text-sm font-medium text-slate-300 transition-all duration-200 hover:bg-slate-800/60 hover:text-white active:bg-slate-800"
-              >
-                <Link href="/provider-dashboard/my-gears">
-                  <Package className="h-5 w-5 text-indigo-400" />
-                  <span>My Gears</span>
-                </Link>
-              </SidebarMenuButton>
-            </SidebarMenuItem>
-
-            {/* Add Gear Link */}
-            <SidebarMenuItem>
-              <SidebarMenuButton
-                asChild
-                className="flex items-center gap-3 rounded-xl px-4 py-3 text-sm font-medium text-slate-300 transition-all duration-200 hover:bg-slate-800/60 hover:text-white active:bg-slate-800"
-              >
-                <Link href="/provider-dashboard/gear/new">
-                  <PlusCircle className="h-5 w-5 text-emerald-400" />
-                  <span>Add Gear</span>
-                </Link>
-              </SidebarMenuButton>
-            </SidebarMenuItem>
-
-            {/* Inventory Link */}
-            <SidebarMenuItem>
-              <SidebarMenuButton
-                asChild
-                className="flex items-center gap-3 rounded-xl px-4 py-3 text-sm font-medium text-slate-300 transition-all duration-200 hover:bg-slate-800/60 hover:text-white active:bg-slate-800"
-              >
-                <Link href="/provider-dashboard/inventory">
-                  <PlusCircle className="h-5 w-5 text-purple-400" />
-                  <span>Inventory</span>
-                </Link>
-              </SidebarMenuButton>
-            </SidebarMenuItem>
-
-            {/* Orders Link */}
-            <SidebarMenuItem>
-              <SidebarMenuButton
-                asChild
-                className="flex items-center gap-3 rounded-xl px-4 py-3 text-sm font-medium text-slate-300 transition-all duration-200 hover:bg-slate-800/60 hover:text-white active:bg-slate-800"
-              >
-                <Link href="/provider-dashboard/orders">
-                  <ShoppingCart className="h-5 w-5 text-amber-400" />
-                  <span>Orders</span>
-                </Link>
-              </SidebarMenuButton>
-            </SidebarMenuItem>
-
-            {/* Reviews Link */}
-            <SidebarMenuItem>
-              <SidebarMenuButton
-                asChild
-                className="flex items-center gap-3 rounded-xl px-4 py-3 text-sm font-medium text-slate-300 transition-all duration-200 hover:bg-slate-800/60 hover:text-white active:bg-slate-800"
-              >
-                <Link href="/provider-dashboard/reviews">
-                  <ShoppingCart className="h-5 w-5 text-rose-400" />
-                  <span>Reviews</span>
-                </Link>
-              </SidebarMenuButton>
-            </SidebarMenuItem>
-            <SidebarMenuItem>
-              <SidebarMenuButton
-                asChild
-                className="flex items-center gap-3 rounded-xl px-4 py-3 text-sm font-medium text-slate-300 transition-all duration-200 hover:bg-slate-800/60 hover:text-white active:bg-slate-800"
-              >
-                <Link href="/profile">
-                  <ShoppingCart className="h-5 w-5 text-rose-400" />
-                  <span>My Profile</span>
-                </Link>
-              </SidebarMenuButton>
-            </SidebarMenuItem>
+              return (
+                <SidebarMenuItem key={item.href}>
+                  <SidebarMenuButton
+                    asChild
+                    className={`flex items-center gap-3 rounded-xl px-4 py-3 text-sm font-medium transition-all duration-200 ${
+                      isActive
+                        ? "bg-slate-800/90 text-white font-semibold border-l-4 border-blue-500 shadow-lg shadow-blue-500/10"
+                        : "text-slate-300 hover:bg-slate-800/60 hover:text-white active:bg-slate-800"
+                    }`}
+                  >
+                    <Link href={item.href}>
+                      <Icon className={`h-5 w-5 ${item.color}`} />
+                      <span>{item.title}</span>
+                    </Link>
+                  </SidebarMenuButton>
+                </SidebarMenuItem>
+              );
+            })}
           </SidebarMenu>
         </SidebarGroup>
       </SidebarContent>

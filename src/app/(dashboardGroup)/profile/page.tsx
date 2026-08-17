@@ -1,5 +1,5 @@
 import { myProfile } from "../_actions/getProfile";
-import ProfileContent from "../_components/prodileContent";
+import ProfileContent from "../_components/profileContent";
 const ProfilePage = async () => {
   const user = await myProfile();
 

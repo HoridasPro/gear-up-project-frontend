@@ -1,78 +1,3 @@
-// "use client";
-
-// import { useRouter, useSearchParams } from "next/navigation";
-// import { useState } from "react";
-
-// export default function InputSearch() {
-//   const router = useRouter();
-//   const searchParams = useSearchParams();
-
-//   const currentSearch = searchParams.get("search") || "";
-//   const [search, setSearch] = useState(currentSearch);
-
-//   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-//     const value = e.target.value;
-//     setSearch(value);
-
-//     if (!value.trim()) {
-//       const params = new URLSearchParams(searchParams.toString());
-//       params.delete("search");
-//       router.push(`/gears?${params.toString()}`);
-//     }
-//   };
-
-//   const handleSearch = (e: React.FormEvent) => {
-//     e.preventDefault();
-
-//     const params = new URLSearchParams(searchParams.toString());
-
-//     if (search.trim()) {
-//       params.set("search", search.trim());
-//     } else {
-//       params.delete("search");
-//     }
-
-//     router.push(`/gears?${params.toString()}`);
-//   };
-
-//   const handleClear = () => {
-//     setSearch("");
-//     const params = new URLSearchParams(searchParams.toString());
-//     params.delete("search");
-//     router.push(`/gears?${params.toString()}`);
-//   };
-
-//   return (
-//     <form onSubmit={handleSearch} className="mb-6 flex gap-3">
-//       <div className="relative w-full">
-//         <input
-//           type="text"
-//           placeholder="Search gears..."
-//           value={search}
-//           onChange={handleChange}
-//           className="w-full rounded-lg border px-4 py-3 outline-none focus:ring-2 focus:ring-blue-500"
-//         />
-
-//         {search && (
-//           <button
-//             type="button"
-//             onClick={handleClear}
-//             className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-400 hover:text-gray-600"
-//           >
-//             ✕
-//           </button>
-//         )}
-//       </div>
-
-//       <button
-//         type="submit"
-//         className="group/btn relative inline-flex items-center justify-center overflow-hidden rounded-xl border border-cyan-500/40 bg-[#08121e] px-6 py-3 text-sm font-mono font-semibold text-cyan-400 transition-all duration-300 hover:border-cyan-400 hover:bg-cyan-500 hover:text-slate-950 active:scale-[0.98]"
-//       >
-//         Search
-//       </button>
-//     </form>
-//   );
-// }
 "use client";
 
 import { useRouter, useSearchParams } from "next/navigation";
@@ -121,7 +46,7 @@ export default function InputSearch() {
   return (
     <form
       onSubmit={handleSearch}
-      className="mb-6 flex flex-col sm:flex-row items-center gap-3 w-full"
+      className="mb-6 flex flex-col sm:flex-row items-center gap-3 w-full rounded-2xl border border-gray-800 bg-[#0a0d14]/50 p-6 backdrop-blur-sm shadow-xl"
     >
       <div className="relative w-full group">
         {/* Search Icon */}
@@ -152,7 +77,7 @@ export default function InputSearch() {
       </div>
 
       {/* Submit Button */}
-      <button type="submit" className="btn-cyber">
+      <button type="submit" className="btn-cyber whitespace-nowrap">
         <Search className="h-4 w-4 sm:hidden group-hover/btn:rotate-12 transition-transform" />
         <span>Search</span>
       </button>
