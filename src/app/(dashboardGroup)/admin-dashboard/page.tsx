@@ -24,10 +24,10 @@ const AdminDashboard = async () => {
     getAdminAllGears(),
   ]);
 
-  const users = usersResult?.data || [];
+  // const users = usersResult?.data || [];
 
-  console.log("Admin Dashboard users:", users);
-  console.log("Admin Dashboard total users:", usersResult?.total);
+  // console.log("Admin Dashboard users:", users);
+  // console.log("Admin Dashboard total users:", usersResult?.total);
 
   const orders = ordersResult?.data || [];
   const gears = gearsResult?.data || [];
@@ -38,7 +38,7 @@ const AdminDashboard = async () => {
 
   const totalGears = gears.length;
 
-  const pendingOrders = orders.filter(
+  const placeOrders = orders.filter(
     (order: any) => order.status === "PENDING" || order.status === "PLACED",
   ).length;
 
@@ -87,7 +87,9 @@ const AdminDashboard = async () => {
         <div className="group relative overflow-hidden rounded-2xl border border-slate-800/80 bg-slate-900/60 p-5 sm:p-6 shadow-xl backdrop-blur-xl transition-all duration-300 hover:border-blue-500/50 hover:shadow-blue-500/10">
           <div className="flex items-center justify-between">
             <div>
-              <p className="text-xs sm:text-sm font-medium text-slate-400">All Users</p>
+              <p className="text-xs sm:text-sm font-medium text-slate-400">
+                All Users
+              </p>
               <h2 className="mt-2 text-2xl sm:text-3xl font-extrabold text-white tracking-tight">
                 {totalUsers}
               </h2>
@@ -102,7 +104,9 @@ const AdminDashboard = async () => {
         <div className="group relative overflow-hidden rounded-2xl border border-slate-800/80 bg-slate-900/60 p-5 sm:p-6 shadow-xl backdrop-blur-xl transition-all duration-300 hover:border-purple-500/50 hover:shadow-purple-500/10">
           <div className="flex items-center justify-between">
             <div>
-              <p className="text-xs sm:text-sm font-medium text-slate-400">All Orders</p>
+              <p className="text-xs sm:text-sm font-medium text-slate-400">
+                All Orders
+              </p>
               <h2 className="mt-2 text-2xl sm:text-3xl font-extrabold text-white tracking-tight">
                 {totalOrders}
               </h2>
@@ -117,7 +121,9 @@ const AdminDashboard = async () => {
         <div className="group relative overflow-hidden rounded-2xl border border-slate-800/80 bg-slate-900/60 p-5 sm:p-6 shadow-xl backdrop-blur-xl transition-all duration-300 hover:border-emerald-500/50 hover:shadow-emerald-500/10">
           <div className="flex items-center justify-between">
             <div>
-              <p className="text-xs sm:text-sm font-medium text-slate-400">All Gears</p>
+              <p className="text-xs sm:text-sm font-medium text-slate-400">
+                All Gears
+              </p>
               <h2 className="mt-2 text-2xl sm:text-3xl font-extrabold text-white tracking-tight">
                 {totalGears}
               </h2>
@@ -132,7 +138,9 @@ const AdminDashboard = async () => {
         <div className="group relative overflow-hidden rounded-2xl border border-slate-800/80 bg-slate-900/60 p-5 sm:p-6 shadow-xl backdrop-blur-xl transition-all duration-300 hover:border-amber-500/50 hover:shadow-amber-500/10">
           <div className="flex items-center justify-between">
             <div>
-              <p className="text-xs sm:text-sm font-medium text-slate-400">Active Orders</p>
+              <p className="text-xs sm:text-sm font-medium text-slate-400">
+                Active Orders
+              </p>
               <h2 className="mt-2 text-2xl sm:text-3xl font-extrabold text-white tracking-tight">
                 {activeOrders}
               </h2>
@@ -156,8 +164,10 @@ const AdminDashboard = async () => {
               Action Needed
             </span>
           </div>
-          <h2 className="mt-4 text-2xl sm:text-3xl font-extrabold text-white">{pendingOrders}</h2>
-          <p className="mt-1 text-xs sm:text-sm text-slate-400">Pending Orders</p>
+          <h2 className="mt-4 text-2xl sm:text-3xl font-extrabold text-white">
+            {placeOrders}
+          </h2>
+          <p className="mt-1 text-xs sm:text-sm text-slate-400">Place Orders</p>
         </div>
 
         {/* PickedUp Orders */}
@@ -170,8 +180,12 @@ const AdminDashboard = async () => {
               In Progress
             </span>
           </div>
-          <h2 className="mt-4 text-2xl sm:text-3xl font-extrabold text-white">{pickedupOrders}</h2>
-          <p className="mt-1 text-xs sm:text-sm text-slate-400">PickedUp Orders</p>
+          <h2 className="mt-4 text-2xl sm:text-3xl font-extrabold text-white">
+            {pickedupOrders}
+          </h2>
+          <p className="mt-1 text-xs sm:text-sm text-slate-400">
+            PickedUp Orders
+          </p>
         </div>
 
         {/* Returned Orders */}
@@ -184,8 +198,12 @@ const AdminDashboard = async () => {
               Completed
             </span>
           </div>
-          <h2 className="mt-4 text-2xl sm:text-3xl font-extrabold text-white">{returnedOrders}</h2>
-          <p className="mt-1 text-xs sm:text-sm text-slate-400">Returned Orders</p>
+          <h2 className="mt-4 text-2xl sm:text-3xl font-extrabold text-white">
+            {returnedOrders}
+          </h2>
+          <p className="mt-1 text-xs sm:text-sm text-slate-400">
+            Returned Orders
+          </p>
         </div>
       </div>
 
@@ -215,7 +233,7 @@ const AdminDashboard = async () => {
       {/* Pie Chart Section */}
       <div className="rounded-2xl border border-slate-800/80 bg-slate-900/60 p-4 sm:p-6 shadow-xl backdrop-blur-xl overflow-hidden">
         <CustomerPieChart
-          pending={pendingOrders}
+          place={placeOrders}
           pickedup={pickedupOrders}
           returned={returnedOrders}
         />
@@ -231,28 +249,36 @@ const AdminDashboard = async () => {
 
           <div className="space-y-4">
             <div className="flex items-center justify-between p-3 rounded-xl bg-slate-800/30 border border-slate-800/50">
-              <span className="text-xs sm:text-sm font-medium text-slate-400">All Users</span>
+              <span className="text-xs sm:text-sm font-medium text-slate-400">
+                All Users
+              </span>
               <span className="font-bold text-sm sm:text-base text-blue-400 bg-blue-500/10 px-3 py-1 rounded-lg border border-blue-500/20">
                 {totalUsers}
               </span>
             </div>
 
             <div className="flex items-center justify-between p-3 rounded-xl bg-slate-800/30 border border-slate-800/50">
-              <span className="text-xs sm:text-sm font-medium text-slate-400">All Orders</span>
+              <span className="text-xs sm:text-sm font-medium text-slate-400">
+                All Orders
+              </span>
               <span className="font-bold text-sm sm:text-base text-purple-400 bg-purple-500/10 px-3 py-1 rounded-lg border border-purple-500/20">
                 {totalOrders}
               </span>
             </div>
 
             <div className="flex items-center justify-between p-3 rounded-xl bg-slate-800/30 border border-slate-800/50">
-              <span className="text-xs sm:text-sm font-medium text-slate-400">All Gears</span>
+              <span className="text-xs sm:text-sm font-medium text-slate-400">
+                All Gears
+              </span>
               <span className="font-bold text-sm sm:text-base text-emerald-400 bg-emerald-500/10 px-3 py-1 rounded-lg border border-emerald-500/20">
                 {totalGears}
               </span>
             </div>
 
             <div className="flex items-center justify-between p-3 rounded-xl bg-slate-800/30 border border-slate-800/50">
-              <span className="text-xs sm:text-sm font-medium text-slate-400">Active Orders</span>
+              <span className="text-xs sm:text-sm font-medium text-slate-400">
+                Active Orders
+              </span>
               <span className="font-bold text-sm sm:text-base text-amber-400 bg-amber-500/10 px-3 py-1 rounded-lg border border-amber-500/20">
                 {activeOrders}
               </span>
@@ -268,28 +294,36 @@ const AdminDashboard = async () => {
 
           <div className="space-y-4">
             <div className="flex items-center justify-between p-3 rounded-xl bg-slate-800/30 border border-slate-800/50">
-              <span className="text-xs sm:text-sm font-medium text-slate-400">Pending</span>
+              <span className="text-xs sm:text-sm font-medium text-slate-400">
+                Place
+              </span>
               <span className="font-bold text-sm sm:text-base text-yellow-400 bg-yellow-500/10 px-3 py-1 rounded-lg border border-yellow-500/20">
-                {pendingOrders}
+                {placeOrders}
               </span>
             </div>
 
             <div className="flex items-center justify-between p-3 rounded-xl bg-slate-800/30 border border-slate-800/50">
-              <span className="text-xs sm:text-sm font-medium text-slate-400">PickedUp</span>
+              <span className="text-xs sm:text-sm font-medium text-slate-400">
+                PickedUp
+              </span>
               <span className="font-bold text-sm sm:text-base text-blue-400 bg-blue-500/10 px-3 py-1 rounded-lg border border-blue-500/20">
                 {pickedupOrders}
               </span>
             </div>
 
             <div className="flex items-center justify-between p-3 rounded-xl bg-slate-800/30 border border-slate-800/50">
-              <span className="text-xs sm:text-sm font-medium text-slate-400">Active</span>
+              <span className="text-xs sm:text-sm font-medium text-slate-400">
+                Active
+              </span>
               <span className="font-bold text-sm sm:text-base text-amber-400 bg-amber-500/10 px-3 py-1 rounded-lg border border-amber-500/20">
                 {activeOrders}
               </span>
             </div>
 
             <div className="flex items-center justify-between p-3 rounded-xl bg-slate-800/30 border border-slate-800/50">
-              <span className="text-xs sm:text-sm font-medium text-slate-400">Returned</span>
+              <span className="text-xs sm:text-sm font-medium text-slate-400">
+                Returned
+              </span>
               <span className="font-bold text-sm sm:text-base text-emerald-400 bg-emerald-500/10 px-3 py-1 rounded-lg border border-emerald-500/20">
                 {returnedOrders}
               </span>

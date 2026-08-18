@@ -159,10 +159,6 @@ const PaymentsPage = async () => {
                       {payment.id}
                     </td>
 
-                    {/* <td className="px-4 py-4 sm:px-6 font-mono text-xs text-gray-400">
-                      {payment.rentalOrderId}
-                    </td> */}
-
                     <td className="px-4 py-4 sm:px-6 text-center font-semibold text-emerald-400 whitespace-nowrap">
                       ৳ {payment.amount}
                     </td>
@@ -177,14 +173,12 @@ const PaymentsPage = async () => {
                       <span
                         className={`inline-block rounded-full px-3 py-1 text-xs font-medium border ${
                           payment.status === "PAID"
-                            ? "border-emerald-500/30 bg-emerald-500/10 text-emerald-400"
+                            ? "border-purple-500/30 bg-purple-500/10 text-purple-400"
                             : payment.status === "PENDING"
                               ? "border-yellow-500/30 bg-yellow-500/10 text-yellow-400"
                               : payment.status === "CANCELLED"
                                 ? "border-rose-500/30 bg-rose-500/10 text-rose-400"
-                                : payment.status === "FAILED"
-                                  ? "border-rose-500/30 bg-rose-500/10 text-rose-400"
-                                  : "border-gray-500/30 bg-gray-500/10 text-gray-400"
+                                : "border-gray-500/30 bg-gray-500/10 text-gray-400"
                         }`}
                       >
                         {payment.status}

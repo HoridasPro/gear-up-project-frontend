@@ -129,7 +129,7 @@ export default function UserTable({ users }: UserTableProps) {
                         user.status === "ACTIVE"
                           ? "bg-emerald-500/10 text-emerald-400 border border-emerald-500/20"
                           : user.status === "SUSPEND"
-                            ? "bg-amber-500/10 text-amber-400 border border-amber-500/20"
+                            ? "bg-red-500/10 text-red-400 border border-red-500/20"
                             : "bg-rose-500/10 text-rose-400 border border-rose-500/20"
                       }`}
                     >

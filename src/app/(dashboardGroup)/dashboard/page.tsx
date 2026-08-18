@@ -11,8 +11,8 @@ const CustomerDashboard = async () => {
 
   const totalRentals = rentals.length;
 
-  const pendingRentals = rentals.filter(
-    (item: any) => item.status === "PENDING",
+  const placeRentals = rentals.filter(
+    (item: any) => item.status === "PLACED",
   ).length;
 
   const pickedupRentals = rentals.filter(
@@ -50,9 +50,9 @@ const CustomerDashboard = async () => {
         <div className="rounded-2xl border border-gray-800/80 bg-[#0b0f19]/80 p-5 shadow-2xl backdrop-blur-xl sm:p-6 transition duration-300 hover:border-yellow-500/40">
           <Clock3 className="mb-3 h-8 w-8 text-yellow-500 sm:mb-4 sm:h-10 sm:w-10" />
           <h2 className="text-2xl font-bold text-white sm:text-3xl">
-            {pendingRentals}
+            {placeRentals}
           </h2>
-          <p className="text-xs text-gray-400 sm:text-sm">Pending Rentals</p>
+          <p className="text-xs text-gray-400 sm:text-sm">Place Rentals</p>
         </div>
 
         {/* PickedUp Rentals */}
@@ -77,7 +77,7 @@ const CustomerDashboard = async () => {
       {/* Rental Status Chart */}
       <div className="overflow-hidden rounded-2xl border border-gray-800/80 bg-[#0b0f19]/80 p-4 shadow-2xl backdrop-blur-xl sm:p-6">
         <CustomerPieChart
-          pending={pendingRentals}
+          place={placeRentals}
           pickedup={pickedupRentals}
           returned={returnedRentals}
         />
@@ -98,10 +98,8 @@ const CustomerDashboard = async () => {
             </div>
 
             <div className="flex items-center justify-between border-b border-gray-800/60 pb-3">
-              <span className="text-gray-400">Pending Rentals</span>
-              <span className="font-bold text-yellow-400">
-                {pendingRentals}
-              </span>
+              <span className="text-gray-400">Place Rentals</span>
+              <span className="font-bold text-yellow-400">{placeRentals}</span>
             </div>
 
             <div className="flex items-center justify-between border-b border-gray-800/60 pb-3">
@@ -130,7 +128,7 @@ const CustomerDashboard = async () => {
             <div className="flex items-center justify-between border-b border-gray-800/60 pb-3">
               <span className="text-gray-400">Active Rentals</span>
               <span className="font-semibold text-white">
-                {pendingRentals + pickedupRentals}
+                {placeRentals + pickedupRentals}
               </span>
             </div>
 

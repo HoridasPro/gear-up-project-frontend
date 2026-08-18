@@ -218,7 +218,7 @@ function PaymentContent() {
             account.
           </p>
           <Link
-            href="/gears"
+            href="/dashboard/my-rentals"
             className="mt-8 inline-flex w-full items-center justify-center rounded-xl bg-cyan-500 px-6 py-3.5 text-xl sm:text-base font-semibold text-black shadow-lg shadow-blue-600/25 hover:bg-cyan-600 focus:outline-none focus:ring-2 focus:ring-cyan-500 focus:ring-offset-2 focus:ring-offset-[#111C33] transition-all duration-200"
           >
             Try Again

@@ -21,8 +21,8 @@ const ProviderDashboard = async () => {
   const totalGears = gears.length;
   const totalOrders = orders.length;
 
-  const pendingOrders = orders.filter(
-    (item: any) => item.status === "PENDING",
+  const placeOrders = orders.filter(
+    (item: any) => item.status === "PLACED",
   ).length;
 
   const pickedupOrders = orders.filter(
@@ -69,8 +69,8 @@ const ProviderDashboard = async () => {
 
         <StatCard
           icon={<Clock3 className="h-6 w-6 sm:h-7 sm:w-7 text-amber-400" />}
-          title="Pending Orders"
-          value={pendingOrders}
+          title="Place Orders"
+          value={placeOrders}
           badgeColor="bg-amber-500/10 border-amber-500/20"
         />
 
@@ -103,7 +103,7 @@ const ProviderDashboard = async () => {
       {/* Chart */}
       <div className="rounded-2xl border border-gray-800/80 bg-[#0b0f19]/90 p-4 sm:p-6 shadow-2xl backdrop-blur-xl">
         <ProviderPieChart
-          pending={pendingOrders}
+          place={placeOrders}
           pickedup={pickedupOrders}
           returned={returnedOrders}
         />
@@ -120,7 +120,7 @@ const ProviderDashboard = async () => {
           <div className="space-y-4">
             <SummaryRow label="Total Orders" value={totalOrders} />
 
-            <SummaryRow label="Pending Orders" value={pendingOrders} />
+            <SummaryRow label="Place Orders" value={placeOrders} />
 
             <SummaryRow label="Pickedup Orders" value={pickedupOrders} />
 

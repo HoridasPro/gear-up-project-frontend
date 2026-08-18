@@ -7,6 +7,9 @@ export type RentalGear = {
   endDate: string;
   rentalDate: string;
   status: string;
+  payment?: {
+    status: string;
+  };
   gearItemId: string;
   gearItem: Gear;
   hasReview: boolean;

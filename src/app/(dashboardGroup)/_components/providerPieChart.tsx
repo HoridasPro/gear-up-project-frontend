@@ -10,7 +10,7 @@ import {
 } from "recharts";
 
 type Props = {
-  pending: number;
+  place: number;
   pickedup: number;
   returned: number;
 };
@@ -18,7 +18,7 @@ type Props = {
 const COLORS = ["#FACC15", "#22C55E", "#8B5CF6"];
 
 export default function ProviderPieChart({
-  pending,
+  place: pending,
   pickedup,
   returned,
 }: Props) {
