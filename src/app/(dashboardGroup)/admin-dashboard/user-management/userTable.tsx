@@ -3,18 +3,10 @@
 import { useState, useTransition } from "react";
 import { useRouter, usePathname, useSearchParams } from "next/navigation";
 import { updateAdminStatus } from "../../_actions/get-admin-status";
-import { CustomerIfo } from "@/type/type-gear";
+import { UserTableProps } from "@/type/type-gear";
 import Image from "next/image";
 import { updateAdminRole } from "../../_actions/adminRolePatch";
 import { toast } from "sonner";
-
-interface UserTableProps {
-  users: CustomerIfo[];
-  totalPages: number;
-  currentPage: number;
-  currentSearch: string;
-  limit?: number;
-}
 
 export default function UserTables({
   users,
@@ -27,15 +19,12 @@ export default function UserTables({
   const pathname = usePathname();
   const searchParams = useSearchParams();
 
-  console.log("just limit", limit);
-
   const [isPending, startTransition] = useTransition();
   const [loadingId, setLoadingId] = useState<string | number | null>(null);
 
   const [searchTerm, setSearchTerm] = useState(currentSearch || "");
   const [prevSearch, setPrevSearch] = useState(currentSearch);
 
-  // Search Param Caching Fix
   if (prevSearch !== currentSearch) {
     setPrevSearch(currentSearch);
     setSearchTerm(currentSearch || "");
@@ -125,7 +114,6 @@ export default function UserTables({
 
   return (
     <div className="w-full space-y-4">
-      {/* Search Input Box */}
       <div className="relative w-full">
         <input
           type="text"
@@ -141,11 +129,9 @@ export default function UserTables({
         )}
       </div>
 
-      {/* Table Container */}
       <div className="w-full overflow-hidden rounded-2xl border border-slate-800/80 bg-slate-900/60 text-slate-100 shadow-xl backdrop-blur-xl">
         <div className="overflow-x-auto">
           <table className="w-full min-w-[1000px] border-collapse text-left text-sm">
-            {/* Header */}
             <thead>
               <tr className="border-b border-slate-800/80 bg-slate-900/90 text-xs font-semibold uppercase tracking-wider text-slate-400">
                 <th scope="col" className="px-4 py-4 text-center">
@@ -178,14 +164,12 @@ export default function UserTables({
               </tr>
             </thead>
 
-            {/* Body */}
             <tbody className="divide-y divide-slate-800/80 bg-slate-900/40">
               {users && users.length > 0 ? (
                 users.map((user, index) => {
                   const userId = user.id || index;
                   const isUserActive = user.status === "ACTIVE";
 
-                  // Role Color matching AdminDashboard badges
                   const roleColor =
                     user.role === "ADMIN"
                       ? "bg-purple-500/10 text-purple-400 border border-purple-500/20"
@@ -200,12 +184,10 @@ export default function UserTables({
                       key={userId}
                       className="transition-colors duration-150 ease-in-out hover:bg-slate-800/50"
                     >
-                      {/* SI */}
                       <td className="whitespace-nowrap px-4 py-4 text-center text-xs font-medium text-slate-400">
                         {index + 1}
                       </td>
 
-                      {/* Profile */}
                       <td className="whitespace-nowrap px-4 py-4">
                         {user.profilePhoto ? (
                           <Image
@@ -222,17 +204,13 @@ export default function UserTables({
                         )}
                       </td>
 
-                      {/* Name */}
                       <td className="whitespace-nowrap px-4 py-4 font-semibold text-white">
                         {user.name || "N/A"}
                       </td>
 
-                      {/* Email */}
                       <td className="whitespace-nowrap px-4 py-4 text-slate-300">
                         {user.email || "N/A"}
                       </td>
-
-                      {/* Role */}
 
                       <td className="whitespace-nowrap px-4 py-4">
                         <select
@@ -270,7 +248,6 @@ export default function UserTables({
                         </select>
                       </td>
 
-                      {/* Status */}
                       <td className="whitespace-nowrap px-4 py-4">
                         <span
                           className={`inline-flex items-center gap-1.5 rounded-full px-3 py-1 text-xs font-medium ${
@@ -288,21 +265,18 @@ export default function UserTables({
                         </span>
                       </td>
 
-                      {/* Created At */}
                       <td className="whitespace-nowrap px-4 py-4 text-slate-400">
                         {user.createdAt
                           ? new Date(user.createdAt).toLocaleDateString()
                           : "N/A"}
                       </td>
 
-                      {/* Updated At */}
                       <td className="whitespace-nowrap px-4 py-4 text-slate-400">
                         {user.updatedAt
                           ? new Date(user.updatedAt).toLocaleDateString()
                           : "N/A"}
                       </td>
 
-                      {/* Action */}
                       <td className="whitespace-nowrap px-4 py-4 text-center">
                         <button
                           onClick={() =>
@@ -345,7 +319,6 @@ export default function UserTables({
         </div>
       </div>
 
-      {/* Pagination Controls */}
       <div className="flex flex-col items-center justify-between gap-3 pt-2 sm:flex-row">
         <p className="text-sm text-slate-400">
           Page{" "}

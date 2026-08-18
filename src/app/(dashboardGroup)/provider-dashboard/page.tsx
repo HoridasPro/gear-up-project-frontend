@@ -39,7 +39,6 @@ const ProviderDashboard = async () => {
 
   return (
     <div className="space-y-8 p-4 sm:p-6 lg:p-2 min-h-screen text-gray-100">
-      {/* Header */}
       <div>
         <h1 className="text-2xl sm:text-3xl lg:text-4xl font-extrabold tracking-tight text-white">
           Provider Dashboard
@@ -49,7 +48,6 @@ const ProviderDashboard = async () => {
         </p>
       </div>
 
-      {/* Stats Cards Grid */}
       <div className="grid gap-4 sm:gap-6 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3">
         <StatCard
           icon={<Package className="h-6 w-6 sm:h-7 sm:w-7 text-blue-400" />}
@@ -100,7 +98,6 @@ const ProviderDashboard = async () => {
         />
       </div>
 
-      {/* Chart */}
       <div className="rounded-2xl border border-gray-800/80 bg-[#0b0f19]/90 p-4 sm:p-6 shadow-2xl backdrop-blur-xl">
         <ProviderPieChart
           place={placeOrders}
@@ -109,9 +106,7 @@ const ProviderDashboard = async () => {
         />
       </div>
 
-      {/* Bottom Section */}
       <div className="grid gap-6 lg:grid-cols-2">
-        {/* Order Summary */}
         <div className="rounded-2xl border border-gray-800/80 bg-[#0b0f19]/90 p-5 sm:p-7 shadow-2xl backdrop-blur-xl">
           <h2 className="mb-6 text-lg sm:text-xl font-bold text-white border-b border-gray-800/80 pb-3">
             Order Summary
@@ -134,7 +129,6 @@ const ProviderDashboard = async () => {
           </div>
         </div>
 
-        {/* Inventory Overview */}
         <div className="rounded-2xl border border-gray-800/80 bg-[#0b0f19]/90 p-5 sm:p-7 shadow-2xl backdrop-blur-xl">
           <h2 className="mb-6 text-lg sm:text-xl font-bold text-white border-b border-gray-800/80 pb-3">
             Inventory Overview

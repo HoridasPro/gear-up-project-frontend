@@ -10,15 +10,12 @@ const PaymentsPage = async () => {
   try {
     const result: PaymentsGear = await paymentsHistory();
 
-    console.log("PAYMENTS DATA =", JSON.stringify(result, null, 2));
-
     paymentsList = result?.data || [];
   } catch (error) {
     console.error("Error fetching payment history:", error);
     isError = true;
   }
 
-  // Error
   if (isError) {
     return (
       <div className="flex min-h-[400px] items-center justify-center p-4">
@@ -35,7 +32,6 @@ const PaymentsPage = async () => {
 
   return (
     <div className="overflow-x-hidden space-y-6 sm:space-y-8 text-gray-100 p-4 sm:p-6 lg:p-8">
-      {/* Header */}
       <div>
         <h1 className="text-2xl font-bold tracking-tight text-white sm:text-3xl lg:text-4xl">
           Payment History
@@ -46,7 +42,6 @@ const PaymentsPage = async () => {
         </p>
       </div>
 
-      {/* No Payment */}
       {paymentsList.length === 0 ? (
         <div className="w-full overflow-x-hidden flex h-64 items-center justify-center rounded-2xl border border-dashed border-gray-800 bg-[#0b0f19]/80 p-6 shadow-2xl backdrop-blur-xl">
           <div className="text-center">
@@ -62,7 +57,6 @@ const PaymentsPage = async () => {
       ) : (
         <div className="overflow-x-auto rounded-2xl border border-gray-800/80 bg-[#0b0f19]/80 shadow-2xl backdrop-blur-xl">
           <table className="w-full min-w-[900px] text-left text-xs sm:text-sm">
-            {/* Table Header */}
             <thead className="border-b border-gray-800/80 bg-gray-900/60 text-gray-300">
               <tr>
                 <th className="px-4 py-3 sm:px-6 sm:py-4 font-semibold text-left">
@@ -85,10 +79,6 @@ const PaymentsPage = async () => {
                   Payment ID
                 </th>
 
-                {/* <th className="px-4 py-3 sm:px-6 sm:py-4 font-semibold text-left">
-                  Rental ID
-                </th> */}
-
                 <th className="px-4 py-3 sm:px-6 sm:py-4 font-semibold text-center">
                   Amount
                 </th>
@@ -103,7 +93,6 @@ const PaymentsPage = async () => {
               </tr>
             </thead>
 
-            {/* Table Body */}
             <tbody className="divide-y divide-gray-800/60">
               {paymentsList.map((payment, index) => {
                 const customer = payment.customer;
@@ -114,12 +103,10 @@ const PaymentsPage = async () => {
                     key={payment.id}
                     className="transition hover:bg-gray-800/40"
                   >
-                    {/* SI */}
                     <td className="px-4 py-4 sm:px-6 text-gray-300">
                       {index + 1}
                     </td>
 
-                    {/* Gear Image */}
                     <td className="px-4 py-4 sm:px-6">
                       {gear?.gearItemImage ? (
                         <Image
@@ -136,7 +123,6 @@ const PaymentsPage = async () => {
                       )}
                     </td>
 
-                    {/* Gear Title */}
                     <td className="px-4 py-4 sm:px-6">
                       <p className="font-medium text-white">
                         {gear?.title || "Unknown Gear"}

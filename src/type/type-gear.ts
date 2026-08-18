@@ -145,3 +145,78 @@ export interface ReviewResponse {
   message: string;
   data: Review[];
 }
+
+// Login
+export type ILoginAction = {
+  success: true;
+  statusCode: number;
+  message: string;
+  data: {
+    accessToken: string;
+    refreshToken: string;
+  };
+};
+
+// Register
+export type RegisterAction = {
+  success: boolean;
+  statusCode: number;
+  message: string;
+  data?: {
+    accessToken?: string;
+    refreshToken?: string;
+  } | null;
+};
+
+export type Props = {
+  place: number;
+  pickedup: number;
+  returned: number;
+};
+export interface ReviewButtonProps {
+  rentalOrderId: string;
+  gearItemId: string;
+}
+export type PageProps = {
+  searchParams: Promise<{
+    search?: string;
+    page?: string;
+    limit?: string;
+  }>;
+};
+export interface UserTableProps {
+  users: CustomerIfo[];
+  totalPages: number;
+  currentPage: number;
+  currentSearch: string;
+  limit?: number;
+}
+export interface GearFormModalProps {
+  isOpen: boolean;
+  onClose: () => void;
+  onSubmit: (data: Gear) => Promise<void>;
+  initialData?: Gear | null;
+}
+export type FilterProps = {
+  category?: string;
+  brand?: string;
+  price?: number;
+  search?: string;
+};
+export type SearchProps = {
+  categories: string[];
+  brands: string[];
+  prices: number[];
+};
+export type SearchParamsProps = {
+  searchParams: Promise<{
+    search: string;
+    category?: string;
+    brand?: string;
+    price?: number;
+  }>;
+};
+export interface NavItem {
+  label: string;
+  to: string;
+}

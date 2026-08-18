@@ -25,13 +25,10 @@ export default function ErrorPage({
 
   return (
     <div className="min-h-[100svh] w-full bg-[#0a0d14] flex items-center justify-center p-4 sm:p-6 md:p-8 relative overflow-hidden font-sans">
-      {/* 1. Background Atmosphere & Ambient Light */}
       <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_30%,#0284c725,transparent_60%)] pointer-events-none" />
 
-      {/* 2. Glowing Blue Spheres in Background */}
       <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[350px] sm:w-[550px] h-[350px] sm:h-[550px] bg-sky-500/20 rounded-full blur-[120px] pointer-events-none -z-10" />
 
-      {/* 3. 3D Perspective Grid Floor */}
       <div className="absolute bottom-0 inset-x-0 h-1/2 [perspective:1000px] pointer-events-none overflow-hidden">
         <div
           className="absolute inset-0 bg-[linear-gradient(to_right,#0284c720_1px,transparent_1px),linear-gradient(to_bottom,#0284c720_1px,transparent_1px)] bg-[size:3rem_3rem]"
@@ -40,14 +37,11 @@ export default function ErrorPage({
         <div className="absolute inset-0 bg-gradient-to-t from-transparent via-[#0a0d14]/80 to-[#0a0d14]" />
       </div>
 
-      {/* 4. Main Glassmorphism Card */}
       <div className="relative w-full max-w-[92%] xs:max-w-xs sm:max-w-md md:max-w-lg lg:max-w-xl text-center space-y-6 sm:space-y-8 bg-[#111622]/60 backdrop-blur-xl p-6 xs:p-8 sm:p-12 rounded-3xl border border-sky-500/30 shadow-[0_0_50px_rgba(2,132,199,0.15)] transition-all duration-300 z-10">
-        {/* Floating Light Sparkles */}
         <div className="absolute top-8 left-12 w-1.5 h-1.5 bg-sky-300 rounded-full blur-[1px] animate-pulse" />
         <div className="absolute top-14 right-16 w-2 h-2 bg-sky-400 rounded-full blur-[1px] animate-pulse" />
         <div className="absolute bottom-10 left-20 w-1 h-1 bg-sky-200 rounded-full blur-[0.5px]" />
 
-        {/* Warning Icon Display */}
         <div className="relative py-2 flex justify-center">
           <div className="w-20 h-20 sm:w-24 sm:h-24 rounded-full bg-sky-500/10 border border-sky-500/40 flex items-center justify-center shadow-[0_0_35px_rgba(56,189,248,0.4)]">
             <svg
@@ -66,7 +60,6 @@ export default function ErrorPage({
           </div>
         </div>
 
-        {/* Text Content */}
         <div className="space-y-2 sm:space-y-3">
           <h2 className="text-xl xs:text-2xl sm:text-3xl md:text-4xl font-bold tracking-tight text-white">
             Something <span className="text-sky-400">went wrong!</span>
@@ -81,14 +74,13 @@ export default function ErrorPage({
           </p>
         </div>
 
-        {/* Action Buttons (Try Again & Optional Home Button) */}
         <div className="pt-2 sm:pt-4 flex flex-col sm:flex-row items-center justify-center gap-3">
           <button
             onClick={handleRetry}
             className="group inline-flex items-center justify-center gap-2 w-full sm:w-auto px-8 py-3.5 text-xs xs:text-sm md:text-base font-semibold text-white bg-gradient-to-r from-sky-600 via-sky-500 to-cyan-500 rounded-full hover:brightness-110 focus:outline-none focus:ring-2 focus:ring-sky-400 focus:ring-offset-2 focus:ring-offset-[#0a0d14] transition-all duration-300 shadow-[0_0_25px_rgba(14,165,233,0.5)] hover:shadow-[0_0_35px_rgba(14,165,233,0.8)] active:scale-[0.97] cursor-pointer"
           >
             <span>Try again</span>
-            {/* Refresh Icon */}
+
             <svg
               className="w-4 h-4 transition-transform duration-500 group-hover:rotate-180"
               fill="none"
@@ -108,40 +100,3 @@ export default function ErrorPage({
     </div>
   );
 }
-
-
-
-
-
-
-// import React from "react";
-// import { Loader2 } from "lucide-react";
-
-// const GlobalLoading = () => {
-//   return (
-//     <div className="fixed inset-0 z-50 flex min-h-screen flex-col items-center justify-center bg-[#0b1320]/80 backdrop-blur-md px-4">
-//       <div className="flex flex-col items-center justify-center rounded-3xl border border-slate-800 bg-[#131f33] px-8 py-10 shadow-2xl shadow-black/50 sm:px-12">
-//         <div className="relative flex items-center justify-center">
-//           <div className="absolute h-16 w-16 rounded-full bg-blue-500/20 blur-xl animate-pulse" />
-
-//           <Loader2 className="h-12 w-12 animate-spin text-blue-500" />
-//         </div>
-
-//         <div className="mt-6 text-center">
-//           <h3 className="text-lg font-semibold text-white sm:text-xl">
-//             Loading, please wait...
-//           </h3>
-//           <p className="mt-1 text-xs text-slate-400 sm:text-sm">
-//             Fetching the latest data for you
-//           </p>
-//         </div>
-
-//         <div className="mt-6 h-1.5 w-36 overflow-hidden rounded-full bg-slate-800 sm:w-48">
-//           <div className="h-full w-full origin-left-right animate-[pulse_1.5s_ease-in-out_infinite] rounded-full bg-gradient-to-r from-blue-600 via-indigo-500 to-blue-600" />
-//         </div>
-//       </div>
-//     </div>
-//   );
-// };
-
-// export default GlobalLoading;

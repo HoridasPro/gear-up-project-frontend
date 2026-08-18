@@ -24,11 +24,6 @@ const AdminDashboard = async () => {
     getAdminAllGears(),
   ]);
 
-  // const users = usersResult?.data || [];
-
-  // console.log("Admin Dashboard users:", users);
-  // console.log("Admin Dashboard total users:", usersResult?.total);
-
   const orders = ordersResult?.data || [];
   const gears = gearsResult?.data || [];
 
@@ -68,7 +63,6 @@ const AdminDashboard = async () => {
 
   return (
     <div className="space-y-6 sm:space-y-8 p-2 sm:p-4 md:p-6 text-slate-100">
-      {/* Header Section */}
       <div className="relative overflow-hidden rounded-2xl border border-slate-800/80 bg-gradient-to-r from-slate-900/90 via-slate-900/50 to-slate-900/90 p-6 sm:p-8 backdrop-blur-xl shadow-xl">
         <div className="relative z-10">
           <h1 className="text-2xl sm:text-3xl lg:text-4xl font-extrabold tracking-tight text-white">
@@ -81,9 +75,7 @@ const AdminDashboard = async () => {
         <div className="absolute -right-10 -bottom-10 h-40 w-40 rounded-full bg-blue-500/10 blur-3xl" />
       </div>
 
-      {/* Primary Metrics Grid */}
       <div className="grid gap-4 sm:gap-6 grid-cols-1 sm:grid-cols-2 lg:grid-cols-4">
-        {/* All Users */}
         <div className="group relative overflow-hidden rounded-2xl border border-slate-800/80 bg-slate-900/60 p-5 sm:p-6 shadow-xl backdrop-blur-xl transition-all duration-300 hover:border-blue-500/50 hover:shadow-blue-500/10">
           <div className="flex items-center justify-between">
             <div>
@@ -100,7 +92,6 @@ const AdminDashboard = async () => {
           </div>
         </div>
 
-        {/* All Orders */}
         <div className="group relative overflow-hidden rounded-2xl border border-slate-800/80 bg-slate-900/60 p-5 sm:p-6 shadow-xl backdrop-blur-xl transition-all duration-300 hover:border-purple-500/50 hover:shadow-purple-500/10">
           <div className="flex items-center justify-between">
             <div>
@@ -117,7 +108,6 @@ const AdminDashboard = async () => {
           </div>
         </div>
 
-        {/* All Gears */}
         <div className="group relative overflow-hidden rounded-2xl border border-slate-800/80 bg-slate-900/60 p-5 sm:p-6 shadow-xl backdrop-blur-xl transition-all duration-300 hover:border-emerald-500/50 hover:shadow-emerald-500/10">
           <div className="flex items-center justify-between">
             <div>
@@ -134,7 +124,6 @@ const AdminDashboard = async () => {
           </div>
         </div>
 
-        {/* Active Orders */}
         <div className="group relative overflow-hidden rounded-2xl border border-slate-800/80 bg-slate-900/60 p-5 sm:p-6 shadow-xl backdrop-blur-xl transition-all duration-300 hover:border-amber-500/50 hover:shadow-amber-500/10">
           <div className="flex items-center justify-between">
             <div>
@@ -152,9 +141,7 @@ const AdminDashboard = async () => {
         </div>
       </div>
 
-      {/* Secondary Metrics Grid */}
       <div className="grid gap-4 sm:gap-6 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3">
-        {/* Pending Orders */}
         <div className="group rounded-2xl border border-slate-800/80 bg-slate-900/60 p-5 sm:p-6 shadow-xl backdrop-blur-xl transition-all duration-300 hover:border-yellow-500/40">
           <div className="flex items-center justify-between">
             <div className="rounded-xl bg-yellow-500/10 p-3 text-yellow-400">
@@ -170,7 +157,6 @@ const AdminDashboard = async () => {
           <p className="mt-1 text-xs sm:text-sm text-slate-400">Place Orders</p>
         </div>
 
-        {/* PickedUp Orders */}
         <div className="group rounded-2xl border border-slate-800/80 bg-slate-900/60 p-5 sm:p-6 shadow-xl backdrop-blur-xl transition-all duration-300 hover:border-blue-500/40">
           <div className="flex items-center justify-between">
             <div className="rounded-xl bg-blue-500/10 p-3 text-blue-400">
@@ -188,7 +174,6 @@ const AdminDashboard = async () => {
           </p>
         </div>
 
-        {/* Returned Orders */}
         <div className="group rounded-2xl border border-slate-800/80 bg-slate-900/60 p-5 sm:p-6 shadow-xl backdrop-blur-xl transition-all duration-300 hover:border-emerald-500/40 sm:col-span-2 lg:col-span-1">
           <div className="flex items-center justify-between">
             <div className="rounded-xl bg-emerald-500/10 p-3 text-emerald-400">
@@ -207,7 +192,6 @@ const AdminDashboard = async () => {
         </div>
       </div>
 
-      {/* Revenue Card */}
       <div className="relative overflow-hidden rounded-2xl border border-emerald-500/30 bg-gradient-to-r from-emerald-950/40 via-slate-900/80 to-slate-900/80 p-6 sm:p-8 shadow-2xl backdrop-blur-xl">
         <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
           <div className="flex items-center gap-4 sm:gap-6">
@@ -230,7 +214,6 @@ const AdminDashboard = async () => {
         </div>
       </div>
 
-      {/* Pie Chart Section */}
       <div className="rounded-2xl border border-slate-800/80 bg-slate-900/60 p-4 sm:p-6 shadow-xl backdrop-blur-xl overflow-hidden">
         <CustomerPieChart
           place={placeOrders}
@@ -239,9 +222,7 @@ const AdminDashboard = async () => {
         />
       </div>
 
-      {/* Summaries Section */}
       <div className="grid gap-6 lg:grid-cols-2">
-        {/* Platform Summary */}
         <div className="rounded-2xl border border-slate-800/80 bg-slate-900/60 p-5 sm:p-7 shadow-xl backdrop-blur-xl">
           <h2 className="mb-6 text-lg sm:text-xl font-bold text-white flex items-center gap-2">
             Platform Summary
@@ -286,7 +267,6 @@ const AdminDashboard = async () => {
           </div>
         </div>
 
-        {/* Order Summary */}
         <div className="rounded-2xl border border-slate-800/80 bg-slate-900/60 p-5 sm:p-7 shadow-xl backdrop-blur-xl">
           <h2 className="mb-6 text-lg sm:text-xl font-bold text-white flex items-center gap-2">
             Order Summary

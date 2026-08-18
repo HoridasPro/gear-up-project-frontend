@@ -25,7 +25,6 @@ const CustomerDashboard = async () => {
 
   return (
     <div className="space-y-6 sm:space-y-8 text-gray-100 p-4 sm:p-6 lg:p-8">
-      {/* Header */}
       <div>
         <h1 className="text-2xl font-bold tracking-tight text-white sm:text-3xl lg:text-4xl">
           Customer Dashboard
@@ -35,9 +34,7 @@ const CustomerDashboard = async () => {
         </p>
       </div>
 
-      {/* Stats */}
       <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 sm:gap-6 xl:grid-cols-4">
-        {/* Total Rentals */}
         <div className="rounded-2xl border border-gray-800/80 bg-[#0b0f19]/80 p-5 shadow-2xl backdrop-blur-xl sm:p-6 transition duration-300 hover:border-blue-500/40">
           <Package className="mb-3 h-8 w-8 text-blue-500 sm:mb-4 sm:h-10 sm:w-10" />
           <h2 className="text-2xl font-bold text-white sm:text-3xl">
@@ -46,7 +43,6 @@ const CustomerDashboard = async () => {
           <p className="text-xs text-gray-400 sm:text-sm">Total Rentals</p>
         </div>
 
-        {/* Pending Rentals */}
         <div className="rounded-2xl border border-gray-800/80 bg-[#0b0f19]/80 p-5 shadow-2xl backdrop-blur-xl sm:p-6 transition duration-300 hover:border-yellow-500/40">
           <Clock3 className="mb-3 h-8 w-8 text-yellow-500 sm:mb-4 sm:h-10 sm:w-10" />
           <h2 className="text-2xl font-bold text-white sm:text-3xl">
@@ -55,7 +51,6 @@ const CustomerDashboard = async () => {
           <p className="text-xs text-gray-400 sm:text-sm">Place Rentals</p>
         </div>
 
-        {/* PickedUp Rentals */}
         <div className="rounded-2xl border border-gray-800/80 bg-[#0b0f19]/80 p-5 shadow-2xl backdrop-blur-xl sm:p-6 transition duration-300 hover:border-green-500/40">
           <CheckCircle2 className="mb-3 h-8 w-8 text-green-500 sm:mb-4 sm:h-10 sm:w-10" />
           <h2 className="text-2xl font-bold text-white sm:text-3xl">
@@ -64,7 +59,6 @@ const CustomerDashboard = async () => {
           <p className="text-xs text-gray-400 sm:text-sm">PickedUp Rentals</p>
         </div>
 
-        {/* Returned Rentals */}
         <div className="rounded-2xl border border-gray-800/80 bg-[#0b0f19]/80 p-5 shadow-2xl backdrop-blur-xl sm:p-6 transition duration-300 hover:border-purple-500/40">
           <RotateCcw className="mb-3 h-8 w-8 text-purple-500 sm:mb-4 sm:h-10 sm:w-10" />
           <h2 className="text-2xl font-bold text-white sm:text-3xl">
@@ -74,7 +68,6 @@ const CustomerDashboard = async () => {
         </div>
       </div>
 
-      {/* Rental Status Chart */}
       <div className="overflow-hidden rounded-2xl border border-gray-800/80 bg-[#0b0f19]/80 p-4 shadow-2xl backdrop-blur-xl sm:p-6">
         <CustomerPieChart
           place={placeRentals}
@@ -83,9 +76,7 @@ const CustomerDashboard = async () => {
         />
       </div>
 
-      {/* Dashboard Overview */}
       <div className="grid grid-cols-1 gap-6 lg:grid-cols-2">
-        {/* Rental Summary */}
         <div className="rounded-2xl border border-gray-800/80 bg-[#0b0f19]/80 p-5 shadow-2xl backdrop-blur-xl sm:p-6">
           <h2 className="mb-4 text-lg font-semibold text-white sm:mb-6 sm:text-xl">
             Rental Summary
@@ -118,7 +109,6 @@ const CustomerDashboard = async () => {
           </div>
         </div>
 
-        {/* Account Overview */}
         <div className="rounded-2xl border border-gray-800/80 bg-[#0b0f19]/80 p-5 shadow-2xl backdrop-blur-xl sm:p-6">
           <h2 className="mb-4 text-lg font-semibold text-white sm:mb-6 sm:text-xl">
             Account Overview

@@ -17,9 +17,8 @@ import {
 const AboutPage = () => {
   return (
     <main className="min-h-screen overflow-hidden bg-[#0a0d14] text-white">
-      {/* =====================================================
-          1. ABOUT GEARUP / WHO WE ARE
-      ====================================================== */}
+      {/* 1. ABOUT GEARUP / WHO WE ARE */}
+
       <section className="relative overflow-hidden border-b border-sky-500/10">
         {/* Background Glow */}
         <div className="pointer-events-none absolute -left-32 top-20 h-64 w-64 rounded-full bg-sky-500/5 blur-3xl sm:h-80 sm:w-80" />
@@ -126,9 +125,8 @@ const AboutPage = () => {
         </div>
       </section>
 
-      {/* =====================================================
-          2. OUR MISSION
-      ====================================================== */}
+      {/* 2. OUR MISSION */}
+
       <section className="border-b border-sky-500/10 bg-[#0d111a]">
         <div className="container mx-auto px-4 py-12 sm:px-6 sm:py-16 lg:px-8 lg:py-24">
           <div className="mx-auto max-w-3xl text-center">
@@ -197,9 +195,8 @@ const AboutPage = () => {
         </div>
       </section>
 
-      {/* =====================================================
-          3. OUR VISION
-      ====================================================== */}
+      {/* 3. OUR VISION */}
+
       <section className="border-b border-sky-500/10">
         <div className="container mx-auto px-4 py-12 sm:px-6 sm:py-16 lg:px-8 lg:py-24">
           <div className="grid items-center gap-10 lg:grid-cols-2 lg:gap-14">
@@ -291,9 +288,8 @@ const AboutPage = () => {
         </div>
       </section>
 
-      {/* =====================================================
-          4. WHY CHOOSE GEARUP
-      ====================================================== */}
+      {/* 4. WHY CHOOSE GEARUP */}
+
       <section className="border-b border-sky-500/10 bg-[#0d111a]">
         <div className="container mx-auto px-4 py-12 sm:px-6 sm:py-16 lg:px-8 lg:py-24">
           <div className="mx-auto max-w-3xl text-center">
@@ -377,9 +373,8 @@ const AboutPage = () => {
         </div>
       </section>
 
-      {/* =====================================================
-          5. OUR VALUES
-      ====================================================== */}
+      {/* 5. OUR VALUES */}
+
       <section className="border-b border-sky-500/10">
         <div className="container mx-auto px-4 py-12 sm:px-6 sm:py-16 lg:px-8 lg:py-24">
           <div className="mx-auto max-w-3xl text-center">
@@ -446,9 +441,8 @@ const AboutPage = () => {
         </div>
       </section>
 
-      {/* =====================================================
-          6. EXPLORE GEARS CTA
-      ====================================================== */}
+      {/* 6. EXPLORE GEARS CTA */}
+
       <section>
         <div className="container mx-auto px-4 py-12 sm:px-6 sm:py-16 lg:px-8 lg:py-20">
           <div className="relative overflow-hidden rounded-2xl border border-sky-500/20 bg-[#111622] px-5 py-10 text-center sm:rounded-3xl sm:px-10 sm:py-14">

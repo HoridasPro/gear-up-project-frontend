@@ -7,20 +7,20 @@ const MyRentalsPage = async () => {
   const result: RentalResponse = await getAdminOrdersDashboard();
   const rentals = result?.data || [];
 
-  // Helper function for dynamic status badge colors
   const getStatusBadgeClass = (status: string) => {
     switch (status?.toUpperCase()) {
-      case "PENDING":
+      case "PLACED":
         return "border-amber-500/20 bg-amber-500/10 text-amber-400";
-      case "APPROVED":
       case "PICKEDUP":
-      case "PICKED_UP":
-        return "border-emerald-500/20 bg-emerald-500/10 text-emerald-400"; // Green color for Pickedup & Approved
+        return "border-green-500/20 bg-green-500/10 text-green-400";
       case "RETURNED":
+        return "border-gray-500/20 bg-gray-500/10 text-gray-400";
+      case "PAID":
+        return "border-purple-500/20 bg-purple-500/10 text-purple-400";
+      case "CONFIRMED":
         return "border-blue-500/20 bg-blue-500/10 text-blue-400";
       case "CANCELLED":
-      case "REJECTED":
-        return "border-rose-500/20 bg-rose-500/10 text-rose-400";
+        return "border-red-500/20 bg-red-500/10 text-red-400";
       default:
         return "border-slate-700 bg-slate-800/80 text-slate-300";
     }
@@ -28,7 +28,6 @@ const MyRentalsPage = async () => {
 
   return (
     <div className="w-full space-y-6">
-      {/* Header */}
       <div className="flex flex-col gap-1">
         <h1 className="text-2xl font-bold tracking-tight text-white sm:text-3xl">
           Rental Orders
@@ -39,7 +38,6 @@ const MyRentalsPage = async () => {
       </div>
 
       {rentals.length === 0 ? (
-        /* Empty State */
         <div className="flex h-64 w-full flex-col items-center justify-center rounded-2xl border border-dashed border-slate-800/80 bg-slate-900/40 p-6 text-center backdrop-blur-xl">
           <div className="flex h-12 w-12 items-center justify-center rounded-full bg-slate-800/80 text-slate-400 ring-1 ring-slate-700/50">
             <svg
@@ -64,11 +62,9 @@ const MyRentalsPage = async () => {
           </p>
         </div>
       ) : (
-        /* Table Container - Mobile/Desktop Responsive */
         <div className="w-full overflow-hidden rounded-2xl border border-slate-800/80 bg-slate-900/60 text-slate-100 shadow-xl backdrop-blur-xl">
           <div className="overflow-x-auto">
             <table className="w-full min-w-[1000px] border-collapse text-left text-sm">
-              {/* Table Header */}
               <thead>
                 <tr className="border-b border-slate-800/80 bg-slate-900/90 text-xs font-semibold uppercase tracking-wider text-slate-400">
                   <th scope="col" className="px-4 py-4 text-center">
@@ -101,19 +97,16 @@ const MyRentalsPage = async () => {
                 </tr>
               </thead>
 
-              {/* Table Body */}
               <tbody className="divide-y divide-slate-800/80 bg-slate-900/40">
                 {rentals.map((rental, index) => (
                   <tr
                     key={rental.id}
                     className="transition-colors duration-150 ease-in-out hover:bg-slate-800/50"
                   >
-                    {/* SI */}
                     <td className="whitespace-nowrap px-4 py-4 text-center text-xs font-medium text-slate-400">
                       {index + 1}
                     </td>
 
-                    {/* Gear Image */}
                     <td className="whitespace-nowrap px-4 py-4">
                       {rental.gearItem?.gearItemImage ? (
                         <Image
@@ -130,37 +123,30 @@ const MyRentalsPage = async () => {
                       )}
                     </td>
 
-                    {/* Gear ID */}
                     <td className="whitespace-nowrap px-4 py-4 font-mono text-xs text-slate-300">
                       {rental.gearItemId}
                     </td>
 
-                    {/* Quantity */}
                     <td className="whitespace-nowrap px-4 py-4 text-center font-medium text-slate-200">
                       {rental.quantity}
                     </td>
 
-                    {/* Total Price */}
                     <td className="whitespace-nowrap px-4 py-4 text-center font-semibold text-emerald-400">
                       ৳ {rental.totalPrice}
                     </td>
 
-                    {/* Start Date */}
                     <td className="whitespace-nowrap px-4 py-4 text-center text-slate-400">
                       {new Date(rental.startDate).toLocaleDateString("en-GB")}
                     </td>
 
-                    {/* End Date */}
                     <td className="whitespace-nowrap px-4 py-4 text-center text-slate-400">
                       {new Date(rental.endDate).toLocaleDateString("en-GB")}
                     </td>
 
-                    {/* Updated At */}
                     <td className="whitespace-nowrap px-4 py-4 text-center text-slate-400">
                       {new Date(rental.updatedAt).toLocaleDateString("en-GB")}
                     </td>
 
-                    {/* Status */}
                     <td className="whitespace-nowrap px-4 py-4 text-center">
                       <span
                         className={`inline-flex items-center rounded-full border px-3 py-1 text-xs font-semibold ${getStatusBadgeClass(

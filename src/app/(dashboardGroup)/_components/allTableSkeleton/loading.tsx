@@ -2,18 +2,13 @@ export default function Loading() {
   return (
     <div className="space-y-6 p-4 text-gray-100 sm:space-y-8 sm:p-6 lg:p-8">
       <div className="animate-pulse">
-        {/* ================= HEADER ================= */}
         <div>
-          {/* Title */}
           <div className="h-8 w-48 rounded-lg bg-gray-800 sm:h-9 sm:w-56 lg:h-10 lg:w-64" />
 
-          {/* Description */}
           <div className="mt-3 h-4 w-72 rounded bg-gray-800 sm:w-96" />
         </div>
 
-        {/* ================= TABLE ================= */}
         <div className="mt-8 overflow-hidden rounded-2xl border border-gray-800/80 bg-[#0b0f19]/80 shadow-2xl backdrop-blur-xl">
-          {/* Table Header */}
           <div className="overflow-x-auto">
             <table className="w-full min-w-[1100px] text-left text-xs sm:text-sm">
               <thead className="border-b border-gray-800/80 bg-gray-900/60">
@@ -56,7 +51,6 @@ export default function Loading() {
                 </tr>
               </thead>
 
-              {/* ================= TABLE BODY ================= */}
               <tbody className="divide-y divide-gray-800/60">
                 {Array.from({ length: 6 }).map((_, index) => (
                   <tr key={index}>

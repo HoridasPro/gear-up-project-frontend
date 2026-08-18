@@ -7,7 +7,6 @@ const Footer = () => {
     <footer className="bg-gray-950 text-gray-300">
       <div className="container mx-auto px-5 py-14">
         <div className="grid grid-cols-1 gap-10 md:grid-cols-2 lg:grid-cols-4">
-          {/* Brand */}
           <div>
             <Link href="/" className="text-2xl font-bold text-white">
               Gear<span className="text-blue-500">Up</span>
@@ -18,7 +17,6 @@ const Footer = () => {
               for your next adventure.
             </p>
 
-            {/* Social Icons */}
             <div className="mt-6 flex gap-3">
               <a
                 href="https://www.facebook.com/horidas.sarker.1"
@@ -38,7 +36,6 @@ const Footer = () => {
             </div>
           </div>
 
-          {/* Quick Links */}
           <div>
             <h3 className="mb-5 text-lg font-semibold text-white">
               Quick Links
@@ -74,7 +71,6 @@ const Footer = () => {
             </ul>
           </div>
 
-          {/* Support */}
           <div>
             <h3 className="mb-5 text-lg font-semibold text-white">Support</h3>
 
@@ -111,7 +107,6 @@ const Footer = () => {
             </ul>
           </div>
 
-          {/* Contact */}
           <div>
             <h3 className="mb-5 text-lg font-semibold text-white">
               Get In Touch
@@ -136,7 +131,6 @@ const Footer = () => {
           </div>
         </div>
 
-        {/* Bottom */}
         <div className="mt-12 border-t border-gray-800 pt-6 text-center">
           <p className="text-sm text-gray-500">
             © {new Date().getFullYear()}{" "}

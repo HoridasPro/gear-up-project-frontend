@@ -1,7 +1,6 @@
 "use server";
 
 import { cookies } from "next/headers";
-
 const BACKEND_API_URL = process.env.BACKEND_API_URL;
 
 export async function checkGearAvailability(
@@ -17,13 +16,6 @@ export async function checkGearAvailability(
     if (!accessToken) {
       throw new Error("Unauthorized");
     }
-
-    console.log("Availability request:", {
-      gearItemId,
-      startDate,
-      endDate,
-      quantity,
-    });
 
     const response = await fetch(
       `${BACKEND_API_URL}/api/gear/availability/${gearItemId}`,
@@ -42,12 +34,7 @@ export async function checkGearAvailability(
       },
     );
 
-    console.log("Availability status:", response.status);
-
     const text = await response.text();
-
-    console.log("Backend raw response:", text);
-
     let data;
 
     try {
@@ -64,8 +51,6 @@ export async function checkGearAvailability(
 
     return data;
   } catch (error) {
-    console.error("Check gear availability error:", error);
-
     throw new Error(
       error instanceof Error ? error.message : "Something went wrong",
     );

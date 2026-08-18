@@ -1,14 +1,9 @@
 "use client";
 
+import { SearchProps } from "@/type/type-gear";
 import { useRouter, useSearchParams } from "next/navigation";
 
-type Props = {
-  categories: string[];
-  brands: string[];
-  prices: number[];
-};
-
-export default function SearchBar({ categories, brands, prices }: Props) {
+export default function SearchBar({ categories, brands, prices }: SearchProps) {
   const router = useRouter();
   const searchParams = useSearchParams();
 

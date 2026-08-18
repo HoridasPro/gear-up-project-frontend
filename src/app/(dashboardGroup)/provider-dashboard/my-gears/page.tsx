@@ -17,7 +17,6 @@ export default async function ProviderDashboard() {
 
   return (
     <div className="space-y-6 p-4 sm:p-6 lg:p-2 min-h-screen text-gray-100">
-      {/* Header */}
       <div>
         <h1 className="text-2xl sm:text-3xl lg:text-4xl font-extrabold tracking-tight text-white">
           My Gears
@@ -27,7 +26,6 @@ export default async function ProviderDashboard() {
         </p>
       </div>
 
-      {/* Responsive Table Container */}
       <div className="mt-6 overflow-hidden rounded-2xl border border-gray-800/80 bg-[#0b0f19]/90 shadow-2xl backdrop-blur-xl">
         <div className="overflow-x-auto">
           <table className="w-full text-left border-collapse min-w-[700px] sm:min-w-full">
@@ -67,12 +65,10 @@ export default async function ProviderDashboard() {
                       key={itemKey}
                       className="transition-colors hover:bg-gray-800/40"
                     >
-                      {/* SI */}
                       <td className="px-4 py-4 sm:px-6 font-medium text-gray-400 whitespace-nowrap">
                         {index + 1}
                       </td>
 
-                      {/* Image */}
                       <td className="px-4 py-4 sm:px-6 whitespace-nowrap">
                         <div className="relative h-12 w-12 overflow-hidden rounded-xl border border-gray-800 bg-gray-900/80 shadow-md">
                           {imageUrl ? (
@@ -91,24 +87,20 @@ export default async function ProviderDashboard() {
                         </div>
                       </td>
 
-                      {/* Title */}
                       <td className="px-4 py-4 sm:px-6 font-semibold text-white whitespace-nowrap max-w-[200px] truncate">
                         {gear.title || "N/A"}
                       </td>
 
-                      {/* Category */}
                       <td className="px-4 py-4 sm:px-6 whitespace-nowrap">
                         <span className="inline-flex items-center rounded-lg bg-blue-500/10 border border-blue-500/20 px-2.5 py-1 text-xs font-medium text-blue-400">
                           {gear.category || "N/A"}
                         </span>
                       </td>
 
-                      {/* Price */}
                       <td className="px-4 py-4 sm:px-6 text-center font-bold text-emerald-400 whitespace-nowrap">
                         ৳ {gear.price ?? 0}
                       </td>
 
-                      {/* Quantity */}
                       <td className="px-4 py-4 sm:px-6 text-center whitespace-nowrap">
                         <span
                           className={`inline-flex items-center justify-center min-w-[32px] px-2 py-0.5 rounded-md text-xs font-semibold border ${
@@ -121,19 +113,16 @@ export default async function ProviderDashboard() {
                         </span>
                       </td>
 
-                      {/* Brand */}
                       <td className="px-4 py-4 sm:px-6 text-gray-300 whitespace-nowrap">
                         {gear.brand || "N/A"}
                       </td>
 
-                      {/* CreatedAt */}
                       <td className="px-4 py-4 sm:px-6 text-gray-400 text-xs whitespace-nowrap">
                         {gear.createdAt
                           ? new Date(gear.createdAt).toLocaleDateString()
                           : "N/A"}
                       </td>
 
-                      {/* UpdatedAt */}
                       <td className="px-4 py-4 sm:px-6 text-gray-400 text-xs whitespace-nowrap">
                         {gear.createdAt
                           ? new Date(gear.updatedAt).toLocaleDateString()

@@ -12,7 +12,6 @@ const MyRentalsPage = async () => {
 
   return (
     <div className="space-y-6 sm:space-y-8 text-gray-100 p-4 sm:p-6 lg:p-8 overflow-x-hidden">
-      {/* Header */}
       <div>
         <h1 className="text-2xl font-bold tracking-tight text-white sm:text-3xl lg:text-4xl">
           My Rentals
@@ -44,47 +43,34 @@ const MyRentalsPage = async () => {
                   SI
                 </th>
 
-                {/* Image */}
                 <th className="px-4 py-3 sm:px-6 sm:py-4 font-semibold text-center">
                   Image
                 </th>
 
-                {/* Quantity */}
                 <th className="px-4 py-3 sm:px-6 sm:py-4 font-semibold text-center">
                   Quantity
                 </th>
 
-                {/* Total Price */}
                 <th className="px-4 py-3 sm:px-6 sm:py-4 font-semibold text-center">
                   Total Price
                 </th>
 
-                {/* Start Date */}
                 <th className="px-4 py-3 sm:px-6 sm:py-4 font-semibold text-center whitespace-nowrap">
                   Start Date
                 </th>
 
-                {/* End Date */}
                 <th className="px-4 py-3 sm:px-6 sm:py-4 font-semibold text-center whitespace-nowrap">
                   End Date
                 </th>
 
-                {/* Updated */}
-                {/* <th className="px-4 py-3 sm:px-6 sm:py-4 font-semibold text-center">
-                  Updated
-                </th> */}
-
-                {/* Status */}
                 <th className="px-4 py-3 sm:px-6 sm:py-4 font-semibold text-center">
                   Status
                 </th>
 
-                {/* Payment */}
                 <th className="px-4 py-3 sm:px-6 sm:py-4 font-semibold text-center">
                   Payment
                 </th>
 
-                {/* Review */}
                 <th className="px-4 py-3 sm:px-6 sm:py-4 font-semibold text-center">
                   Review
                 </th>
@@ -97,12 +83,10 @@ const MyRentalsPage = async () => {
             <tbody className="divide-y divide-gray-800/60">
               {rentals.map((rental, index) => (
                 <tr key={rental.id} className="transition hover:bg-gray-800/40">
-                  {/* SI */}
                   <td className="px-4 py-4 sm:px-6 text-gray-300">
                     {index + 1}
                   </td>
 
-                  {/* Gear Image */}
                   <td className="px-4 py-4 sm:px-6">
                     <div className="flex justify-center">
                       {rental.gearItem?.gearItemImage ? (
@@ -121,29 +105,22 @@ const MyRentalsPage = async () => {
                     </div>
                   </td>
 
-                  {/* Quantity */}
                   <td className="px-4 py-4 sm:px-6 text-center text-gray-200">
                     {rental.quantity}
                   </td>
 
-                  {/* Total Price */}
                   <td className="px-4 py-4 sm:px-6 text-center font-semibold text-emerald-400 whitespace-nowrap">
                     ৳ {rental.totalPrice}
                   </td>
 
-                  {/* Start Date */}
                   <td className="px-4 py-4 sm:px-6 text-center text-gray-300 whitespace-nowrap">
                     {new Date(rental.startDate).toLocaleDateString()}
                   </td>
 
-                  {/* End Date */}
                   <td className="px-4 py-4 sm:px-6 text-center text-gray-300 whitespace-nowrap">
                     {new Date(rental.endDate).toLocaleDateString()}
                   </td>
 
-                 
-
-                  {/* Status */}
                   <td className="px-4 py-4 sm:px-6 text-center whitespace-nowrap">
                     <span
                       className={`inline-block rounded-full px-3 py-1 text-xs font-medium border ${
@@ -164,8 +141,6 @@ const MyRentalsPage = async () => {
                     </span>
                   </td>
 
-                  {/* Payment */}
-                  {/* Payment */}
                   <td className="px-4 py-4 sm:px-6 text-center whitespace-nowrap">
                     {rental.payment?.status === "PAID" ? (
                       <span className="text-xs sm:text-sm font-medium text-purple-400">
@@ -180,7 +155,6 @@ const MyRentalsPage = async () => {
                     )}
                   </td>
 
-                  {/* Review */}
                   <td className="px-4 py-4 sm:px-6 text-center whitespace-nowrap">
                     {rental.status === "RETURNED" && !rental.hasReview ? (
                       <ReviewButton

@@ -22,7 +22,7 @@ import {
 } from "@/components/ui/sheet";
 import { toast } from "sonner";
 import { logout } from "@/server/logout";
-import { IUser } from "@/type/type-gear";
+import { IUser, NavItem } from "@/type/type-gear";
 
 import {
   Tooltip,
@@ -32,11 +32,6 @@ import {
 } from "@/components/ui/tooltip";
 import Image from "next/image";
 import logoImg from "../../../public/logo.png";
-
-interface NavItem {
-  label: string;
-  to: string;
-}
 
 const navItems: NavItem[] = [
   { label: "Home", to: "/" },
@@ -76,7 +71,6 @@ export function Navbar({ user }: NavbarProps) {
   return (
     <header className="sticky top-0 z-50 w-full border-b border-sky-500/50 bg-[#0a0d14]/80 backdrop-blur-xl">
       <div className="container mx-auto flex h-20 items-center justify-between px-4 sm:px-6 lg:px-8">
-        {/* Logo */}
         <Link
           href="/"
           className="flex items-center gap-2.5 text-xl font-bold tracking-tight text-white transition-opacity hover:opacity-90"
@@ -92,7 +86,6 @@ export function Navbar({ user }: NavbarProps) {
           </span>
         </Link>
 
-        {/* Desktop Navigation */}
         <nav className="hidden items-center gap-1 md:flex">
           {navItems.map((item) => {
             const isActive =
@@ -116,7 +109,6 @@ export function Navbar({ user }: NavbarProps) {
           })}
         </nav>
 
-        {/* Right Section */}
         <div className="flex items-center gap-2">
           {user?.data ? (
             <>

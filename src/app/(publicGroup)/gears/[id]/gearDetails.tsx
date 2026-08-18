@@ -77,11 +77,8 @@ export const GearDetailsPage = ({ gear }: Props) => {
           <p className="mt-2">Provider ID: {gear.providerId}</p>
         </div>
 
-        
         <RentSection gear={gear} />
       </div>
     </div>
   );
 };
-
- 

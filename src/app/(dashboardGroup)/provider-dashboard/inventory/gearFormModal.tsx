@@ -1,15 +1,8 @@
 "use client";
 
 import { useState } from "react";
-import { Gear } from "@/type/type-gear";
+import { Gear, GearFormModalProps } from "@/type/type-gear";
 import { X } from "lucide-react";
-
-interface GearFormModalProps {
-  isOpen: boolean;
-  onClose: () => void;
-  onSubmit: (data: Gear) => Promise<void>;
-  initialData?: Gear | null;
-}
 
 export default function GearFormModal({
   isOpen,
@@ -60,7 +53,6 @@ export default function GearFormModal({
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/70 p-4 backdrop-blur-md transition-all">
       <div className="relative max-h-[90vh] w-full max-w-2xl overflow-y-auto rounded-2xl border border-gray-800/80 bg-[#0b0f19]/95 p-6 sm:p-8 shadow-2xl text-gray-100 backdrop-blur-xl">
-        {/* Close Button Header */}
         <div className="flex items-center justify-between border-b border-gray-800/80 pb-4 mb-6">
           <h2 className="text-xl sm:text-2xl font-extrabold tracking-tight text-white">
             {initialData ? "Edit Gear" : "Add New Gear"}
@@ -74,7 +66,6 @@ export default function GearFormModal({
         </div>
 
         <form onSubmit={handleSubmit} className="space-y-5">
-          {/* Title */}
           <div>
             <label className="mb-2 block text-xs sm:text-sm font-medium text-gray-300">
               Title
@@ -89,7 +80,6 @@ export default function GearFormModal({
             />
           </div>
 
-          {/* Description */}
           <div>
             <label className="mb-2 block text-xs sm:text-sm font-medium text-gray-300">
               Description
@@ -104,7 +94,6 @@ export default function GearFormModal({
             />
           </div>
 
-          {/* Category & Brand Grid */}
           <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
             <div>
               <label className="mb-2 block text-xs sm:text-sm font-medium text-gray-300">
@@ -135,7 +124,6 @@ export default function GearFormModal({
             </div>
           </div>
 
-          {/* Price & Quantity Grid */}
           <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
             <div>
               <label className="mb-2 block text-xs sm:text-sm font-medium text-gray-300">
@@ -168,7 +156,6 @@ export default function GearFormModal({
             </div>
           </div>
 
-          {/* Image URL */}
           <div>
             <label className="mb-2 block text-xs sm:text-sm font-medium text-gray-300">
               Image URL
@@ -183,7 +170,6 @@ export default function GearFormModal({
             />
           </div>
 
-          {/* Modal Actions */}
           <div className="flex items-center justify-end gap-3 pt-6 border-t border-gray-800/80">
             <button
               type="button"

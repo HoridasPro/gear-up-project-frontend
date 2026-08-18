@@ -1,7 +1,5 @@
 "use server";
-
 import { cookies } from "next/headers";
-
 export const updateAdminRole = async (
   id: string,
   role: "ADMIN" | "PROVIDER" | "CUSTOMER",
@@ -19,9 +17,6 @@ export const updateAdminRole = async (
 
     const url = `${process.env.BACKEND_API_URL}/api/admin/users/${id}/role`;
 
-    console.log("Role Update URL:", url);
-    console.log("Role Update Data:", { id, role });
-
     const res = await fetch(url, {
       method: "PATCH",
       headers: {
@@ -34,12 +29,7 @@ export const updateAdminRole = async (
       cache: "no-store",
     });
 
-    console.log("Role Update Status:", res.status);
-    console.log("Role Update Content-Type:", res.headers.get("content-type"));
-
     const text = await res.text();
-
-    
 
     let data;
 

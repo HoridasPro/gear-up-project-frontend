@@ -25,7 +25,6 @@ export const getReviews = async () => {
     });
 
     const result = await res.json();
-    console.log("get result reviews", result);
 
     if (!res.ok || !result.success) {
       return {

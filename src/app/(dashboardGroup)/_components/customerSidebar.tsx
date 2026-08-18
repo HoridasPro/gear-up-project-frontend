@@ -40,7 +40,7 @@ export default function CustomerSidebar() {
     {
       title: "My Profile",
       href: "/profile",
-      icon: User,  
+      icon: User,
       color: "text-sky-400",
     },
   ];

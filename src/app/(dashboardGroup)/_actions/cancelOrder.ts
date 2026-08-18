@@ -1,5 +1,4 @@
 "use server";
-
 import { cookies } from "next/headers";
 
 export const cancelRentalOrder = async (rentalOrderId: string) => {

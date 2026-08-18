@@ -1,6 +1,5 @@
 import { getSingleGear } from "../../_actions/get-single-gear";
 import { GearDetailsPage } from "./gearDetails";
- 
 
 export default async function SinglePage({
   params,

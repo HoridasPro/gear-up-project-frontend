@@ -32,7 +32,6 @@ export const getAdminUsersSearch = async (
     });
 
     const result = await res.json();
-    console.log("API Response:", result);
 
     if (!res.ok) {
       return {
@@ -59,6 +58,7 @@ export const getAdminUsersSearch = async (
   }
 };
 
+// Admin updated status
 export const updateAdminStatus = async (userId: string, newStatus: string) => {
   try {
     const cookieStore = await cookies();

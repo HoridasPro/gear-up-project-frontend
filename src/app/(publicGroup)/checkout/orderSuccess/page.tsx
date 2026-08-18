@@ -10,7 +10,6 @@ export default function RentalConfirmPage() {
     <div className="min-h-screen flex items-center justify-center px-4 py-10 text-slate-100">
       <div className="w-full max-w-lg">
         <div className="rounded-3xl border border-slate-800 bg-[#0f172a]/90 backdrop-blur-xl p-6 sm:p-10 shadow-2xl text-center">
-          {/* Success Icon */}
           <div className="flex justify-center mb-6">
             <div className="flex h-20 w-20 items-center justify-center rounded-full bg-emerald-500/10 border border-emerald-500/20">
               <CheckCircle2 className="h-12 w-12 text-emerald-400" />
@@ -50,7 +49,6 @@ export default function RentalConfirmPage() {
             </p>
           </div>
 
-          {/* Buttons */}
           <div className="mt-8 space-y-3">
             {/* My Rentals */}
             <button
@@ -61,7 +59,6 @@ export default function RentalConfirmPage() {
               View My Rentals
             </button>
 
-            {/* Home */}
             <button
               onClick={() => router.push("/")}
               className="w-full flex items-center justify-center rounded-xl bg-slate-800/80 hover:bg-slate-700 py-3.5 px-4 font-medium text-slate-300 border border-slate-700 transition-all cursor-pointer"
@@ -71,7 +68,6 @@ export default function RentalConfirmPage() {
             </button>
           </div>
 
-          {/* Footer */}
           <p className="mt-6 text-xs text-slate-500">
             You will be able to make payment after provider confirmation.
           </p>

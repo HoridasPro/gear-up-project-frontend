@@ -1,7 +1,8 @@
 import { IUserInfo } from "@/type/type-gear";
 
-import UserTable from "./userTable";
+ 
 import { getAdminUsers } from "../../_actions/get-admin-users";
+import UserTable from "./userTable";
 
 export default async function UsersPage() {
   const result: IUserInfo = await getAdminUsers();

@@ -49,12 +49,10 @@ export default function InputSearch() {
       className="mb-6 flex flex-col sm:flex-row items-center gap-3 w-full rounded-2xl border border-gray-800 bg-[#0a0d14]/50 p-6 backdrop-blur-sm shadow-xl"
     >
       <div className="relative w-full group">
-        {/* Search Icon */}
         <div className="absolute left-4 top-1/2 -translate-y-1/2 text-gray-400 group-focus-within:text-cyan-400 transition-colors pointer-events-none">
           <Search className="h-5 w-5" />
         </div>
 
-        {/* Input Field */}
         <input
           type="text"
           placeholder="Search gears..."
@@ -63,7 +61,6 @@ export default function InputSearch() {
           className="w-full rounded-xl border border-gray-800 bg-[#0a0d14] py-3.5 pl-11 pr-11 text-gray-100 placeholder-gray-500 shadow-inner outline-none transition-all duration-300 focus:border-cyan-500/60 focus:bg-gray-900/80 focus:ring-4 focus:ring-cyan-500/10 text-sm sm:text-base"
         />
 
-        {/* Clear Button */}
         {search && (
           <button
             type="button"
@@ -76,7 +73,6 @@ export default function InputSearch() {
         )}
       </div>
 
-      {/* Submit Button */}
       <button type="submit" className="btn-cyber whitespace-nowrap">
         <Search className="h-4 w-4 sm:hidden group-hover/btn:rotate-12 transition-transform" />
         <span>Search</span>

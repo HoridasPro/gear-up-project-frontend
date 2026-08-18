@@ -12,7 +12,6 @@ export default function SettingsPage() {
   return (
     <div className="min-h-screen px-4 py-8 text-slate-100 sm:px-6 lg:px-8">
       <div className="mx-auto max-w-4xl">
-        {/* Header */}
         <div className="mb-8">
           <h1 className="text-2xl font-bold text-white sm:text-3xl">
             Settings

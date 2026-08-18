@@ -1,5 +1,6 @@
 "use client";
 
+import { Props } from "@/type/type-gear";
 import {
   PieChart,
   Pie,
@@ -8,12 +9,6 @@ import {
   Legend,
   ResponsiveContainer,
 } from "recharts";
-
-type Props = {
-  place: number;
-  pickedup: number;
-  returned: number;
-};
 
 const COLORS = ["#FACC15", "#22C55E", "#8B5CF6"];
 

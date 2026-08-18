@@ -1,20 +1,13 @@
-import { GearResponse } from "@/type/type-gear";
+import { FilterProps, GearResponse } from "@/type/type-gear";
 import { getGears } from "../_actions/get-gears";
 import GearCard from "./gearCard";
-
-type Props = {
-  category?: string;
-  brand?: string;
-  price?: number;
-  search?: string;
-};
 
 export default async function GearGrid({
   category,
   brand,
   price,
   search,
-}: Props) {
+}: FilterProps) {
   const result: GearResponse = await getGears({
     category,
     brand,

@@ -16,19 +16,18 @@ export default async function ProviderDashboard() {
 
   return (
     <div className="w-full space-y-6">
-      {/* Header */}
+ 
       <div className="flex flex-col gap-1">
         <h1 className="text-2xl font-bold tracking-tight text-white sm:text-3xl">
           All Gears
         </h1>
         <p className="text-sm text-slate-400">Overview of your inventory</p>
       </div>
-
-      {/* Table Container - Mobile/Desktop Responsive */}
+ 
       <div className="w-full overflow-hidden rounded-2xl border border-slate-800/80 bg-slate-900/60 text-slate-100 shadow-xl backdrop-blur-xl">
         <div className="overflow-x-auto">
           <table className="w-full min-w-[1000px] border-collapse text-left text-sm">
-            {/* Table Header */}
+           
             <thead>
               <tr className="border-b border-slate-800/80 bg-slate-900/90 text-xs font-semibold uppercase tracking-wider text-slate-400">
                 <th scope="col" className="px-4 py-4 text-center">
@@ -61,7 +60,7 @@ export default async function ProviderDashboard() {
               </tr>
             </thead>
 
-            {/* Table Body */}
+        
             <tbody className="divide-y divide-slate-800/80 bg-slate-900/40">
               {gears.length > 0 ? (
                 gears.map((gear, index) => {
@@ -80,12 +79,12 @@ export default async function ProviderDashboard() {
                       key={itemKey}
                       className="transition-colors duration-150 ease-in-out hover:bg-slate-800/50"
                     >
-                      {/* SI */}
+                  
                       <td className="whitespace-nowrap px-4 py-4 text-center text-xs font-medium text-slate-400">
                         {index + 1}
                       </td>
 
-                      {/* Image */}
+                  
                       <td className="whitespace-nowrap px-4 py-4">
                         <div className="relative h-11 w-11 overflow-hidden rounded-xl border border-slate-700/80 bg-slate-800 ring-2 ring-slate-700/50">
                           {imageUrl ? (
@@ -104,41 +103,41 @@ export default async function ProviderDashboard() {
                         </div>
                       </td>
 
-                      {/* Title */}
+                   
                       <td className="whitespace-nowrap px-4 py-4 font-semibold text-white">
                         {gear.title || "N/A"}
                       </td>
 
-                      {/* Category */}
+                  
                       <td className="whitespace-nowrap px-4 py-4 text-slate-300">
                         <span className="inline-flex items-center rounded-full border border-blue-500/20 bg-blue-500/10 px-3 py-1 text-xs font-medium text-blue-400">
                           {gear.category || "N/A"}
                         </span>
                       </td>
 
-                      {/* Price */}
+                
                       <td className="whitespace-nowrap px-4 py-4 text-center font-semibold text-emerald-400">
                         ৳ {gear.price ?? 0}
                       </td>
 
-                      {/* Quantity */}
+               
                       <td className="whitespace-nowrap px-4 py-4 text-center font-medium text-slate-200">
                         {gear.quantity ?? 0}
                       </td>
 
-                      {/* Brand */}
+               
                       <td className="whitespace-nowrap px-4 py-4 text-slate-300">
                         {gear.brand || "N/A"}
                       </td>
 
-                      {/* Created At */}
+              
                       <td className="whitespace-nowrap px-4 py-4 text-slate-400">
                         {gear.createdAt
                           ? new Date(gear.createdAt).toLocaleDateString("en-GB")
                           : "N/A"}
                       </td>
 
-                      {/* Updated At */}
+             
                       <td className="whitespace-nowrap px-4 py-4 text-slate-400">
                         {gear.createdAt
                           ? new Date(gear.updatedAt).toLocaleDateString("en-GB")

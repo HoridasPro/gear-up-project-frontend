@@ -8,9 +8,7 @@ type PayNowButtonProps = {
   rentalOrderId: string;
 };
 
-export default function PayNowButton({
-  rentalOrderId,
-}: PayNowButtonProps) {
+export default function PayNowButton({ rentalOrderId }: PayNowButtonProps) {
   const [loading, setLoading] = useState(false);
 
   const handlePayment = async () => {
@@ -34,9 +32,7 @@ export default function PayNowButton({
       const data = await response.json();
 
       if (!response.ok) {
-        throw new Error(
-          data?.message || "Failed to create payment session",
-        );
+        throw new Error(data?.message || "Failed to create payment session");
       }
 
       const checkoutUrl =
@@ -53,16 +49,11 @@ export default function PayNowButton({
         throw new Error("Stripe payment URL not found");
       }
 
-      // Redirect customer to Stripe
       window.location.href = checkoutUrl;
     } catch (error) {
       console.error("Payment error:", error);
 
-      toast.error(
-        error instanceof Error
-          ? error.message
-          : "Payment failed",
-      );
+      toast.error(error instanceof Error ? error.message : "Payment failed");
     } finally {
       setLoading(false);
     }

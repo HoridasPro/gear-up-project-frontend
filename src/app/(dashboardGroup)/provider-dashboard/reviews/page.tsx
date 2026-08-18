@@ -16,7 +16,6 @@ const GetAllReviewsPage = async () => {
   return (
     <div className="w-full">
       <div className="mt-6 sm:mt-2">
-        {/* Header Section */}
         <div className="mb-6">
           <h2 className="text-3xl sm:text-3xl font-extrabold tracking-tight text-white">
             Customer Reviews
@@ -27,7 +26,6 @@ const GetAllReviewsPage = async () => {
           </p>
         </div>
 
-        {/* Table Container - Perfectly responsive without breaks */}
         <div className="w-full overflow-hidden rounded-2xl border border-gray-800/80 bg-[#0b0f19]/90 shadow-2xl backdrop-blur-xl">
           <table className="w-full border-collapse text-left table-fixed">
             <thead className="border-b border-gray-800/80 bg-gray-900/60 text-[10px] sm:text-xs uppercase tracking-wider text-gray-400">
@@ -73,12 +71,10 @@ const GetAllReviewsPage = async () => {
                     key={review.id}
                     className="transition-colors hover:bg-gray-800/40"
                   >
-                    {/* SI */}
                     <td className="p-2 sm:p-3.5 font-medium text-gray-400">
                       {index + 1}
                     </td>
 
-                    {/* Customer Image */}
                     <td className="p-2 sm:p-3.5 hidden sm:table-cell">
                       <div className="relative h-8 w-8 sm:h-10 sm:w-10 overflow-hidden rounded-full border border-gray-800 bg-gray-900/80 shadow-md shrink-0">
                         {review.customer?.profilePhoto ? (
@@ -98,7 +94,6 @@ const GetAllReviewsPage = async () => {
                       </div>
                     </td>
 
-                    {/* Customer Name + Email */}
                     <td className="p-2 sm:p-3.5 truncate">
                       <div>
                         <p className="font-semibold text-white truncate">
@@ -111,7 +106,6 @@ const GetAllReviewsPage = async () => {
                       </div>
                     </td>
 
-                    {/* Gear Image */}
                     <td className="p-2 sm:p-3.5 hidden md:table-cell">
                       <div className="relative h-9 w-9 sm:h-10 sm:w-10 overflow-hidden rounded-lg border border-gray-800 bg-gray-900/80 shadow-md shrink-0">
                         {review.gearItem?.gearItemImage ? (
@@ -130,14 +124,12 @@ const GetAllReviewsPage = async () => {
                       </div>
                     </td>
 
-                    {/* Gear Title */}
                     <td className="p-2 sm:p-3.5 font-medium text-gray-200 truncate">
                       <span className="font-medium truncate block">
                         {review.gearItem?.title || "N/A"}
                       </span>
                     </td>
 
-                    {/* Rating */}
                     <td className="p-2 sm:p-3.5 text-center truncate">
                       <span className="text-amber-400 text-xs sm:text-sm">
                         {"★".repeat(review.rating)}
@@ -148,7 +140,6 @@ const GetAllReviewsPage = async () => {
                       </span>
                     </td>
 
-                    {/* Comment */}
                     <td className="p-2 sm:p-3.5 text-gray-300 truncate">
                       <p
                         className="truncate"
@@ -158,7 +149,6 @@ const GetAllReviewsPage = async () => {
                       </p>
                     </td>
 
-                    {/* Date */}
                     <td className="p-2 sm:p-3.5 text-gray-400 text-[10px] sm:text-xs hidden lg:table-cell truncate">
                       {review.createdAt
                         ? new Date(review.createdAt).toLocaleDateString()

@@ -2,18 +2,10 @@
 import { cookies } from "next/headers";
 import { redirect } from "next/navigation";
 import jwt, { JwtPayload } from "jsonwebtoken";
+import { ILoginAction } from "@/type/type-gear";
 
-type loginAction = {
-  success: true;
-  statusCode: number;
-  message: string;
-  data: {
-    accessToken: string;
-    refreshToken: string;
-  };
-};
 export const loginAction = async (
-  prevState: loginAction,
+  prevState: ILoginAction,
   formData: FormData,
 ) => {
   const email = formData.get("email");

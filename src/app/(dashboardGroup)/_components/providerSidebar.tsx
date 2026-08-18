@@ -48,7 +48,7 @@ export default function ProviderSidebar() {
     {
       title: "Inventory",
       href: "/provider-dashboard/inventory",
-      icon: Boxes, // Contextual icon fix: Boxes for Inventory
+      icon: Boxes,
       color: "text-purple-400",
     },
     {
@@ -60,13 +60,13 @@ export default function ProviderSidebar() {
     {
       title: "Reviews",
       href: "/provider-dashboard/reviews",
-      icon: Star, // Contextual icon fix: Star for Reviews
+      icon: Star,
       color: "text-rose-400",
     },
     {
       title: "My Profile",
       href: "/profile",
-      icon: User, // Contextual icon fix: User for Profile
+      icon: User,
       color: "text-sky-400",
     },
   ];

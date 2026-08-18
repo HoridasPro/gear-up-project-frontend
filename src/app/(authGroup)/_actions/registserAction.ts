@@ -1,15 +1,6 @@
 "use server";
+import { RegisterAction } from "@/type/type-gear";
 import { redirect } from "next/navigation";
-
-type RegisterAction = {
-  success: boolean;
-  statusCode: number;
-  message: string;
-  data?: {
-    accessToken?: string;
-    refreshToken?: string;
-  } | null;
-};
 
 export const registerAction = async (
   prevState: RegisterAction | null,
@@ -23,7 +14,6 @@ export const registerAction = async (
 
   const profilePhoto = formData.get("profilePhoto") as File | null;
 
-  // Image validation
   if (
     !profilePhoto ||
     !(profilePhoto instanceof File) ||

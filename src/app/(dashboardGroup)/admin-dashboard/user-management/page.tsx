@@ -1,13 +1,6 @@
 import { getAdminUsersSearch } from "../../_actions/get-admin-status";
 import UserTables from "./userTable";
-
-interface PageProps {
-  searchParams: Promise<{
-    search?: string;
-    page?: string;
-    limit?: string;
-  }>;
-}
+import { PageProps } from "@/type/type-gear";
 
 export default async function UsersPage({ searchParams }: PageProps) {
   const resolvedSearchParams = await searchParams;
@@ -15,9 +8,6 @@ export default async function UsersPage({ searchParams }: PageProps) {
   const search = resolvedSearchParams?.search ?? "";
   const page = Number(resolvedSearchParams?.page) || 1;
   const limit = Number(resolvedSearchParams?.limit) || 10;
-  console.log("search params", search);
-  console.log("page", page);
-  console.log("limit", limit);
 
   // Fetch users server-side
   const { users, totalPages } = await getAdminUsersSearch(search, page, limit);

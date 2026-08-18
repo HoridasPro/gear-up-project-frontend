@@ -5,11 +5,7 @@ import { createPortal } from "react-dom";
 import { Button } from "@/components/ui/button";
 import { toast } from "sonner";
 import { createReview } from "../_actions/reviews";
-
-interface ReviewButtonProps {
-  rentalOrderId: string;
-  gearItemId: string;
-}
+import { ReviewButtonProps } from "@/type/type-gear";
 
 export default function ReviewButton({
   rentalOrderId,
@@ -141,7 +137,6 @@ export default function ReviewButton({
         Review
       </Button>
 
-      {/* Render Modal into body without useEffect */}
       {open &&
         typeof window !== "undefined" &&
         createPortal(modalContent, document.body)}
