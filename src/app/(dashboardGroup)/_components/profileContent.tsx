@@ -233,7 +233,11 @@ export default function ProfileContent({ user }: ProfileClientProps) {
           </div>
 
           {!isEditing && (
-            <button type="button" onClick={handleEdit} className="btn-cyber cursor-pointer">
+            <button
+              type="button"
+              onClick={handleEdit}
+              className="btn-cyber cursor-pointer"
+            >
               <Edit3 className="mr-2 h-4 w-4" />
               Edit Profile
             </button>

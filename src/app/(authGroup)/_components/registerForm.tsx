@@ -1,7 +1,6 @@
 "use client";
 import React, { useState } from "react";
 import { z } from "zod";
-import { toast, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { Card } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
@@ -17,6 +16,7 @@ import {
 } from "@/components/ui/select";
 import Image from "next/image";
 import { Eye, EyeOff } from "lucide-react";
+import { toast } from "sonner";
 
 const registerSchema = z.object({
   name: z.string().trim().min(1, "Name is required"),
@@ -163,6 +163,7 @@ const RegisterForm = () => {
         window.location.href = "/login";
       }, 1000);
     } catch (error) {
+      console.log("Something is wrong", error);
       toast.error("Something went wrong during registration");
     } finally {
       setLoading(false);
@@ -171,7 +172,6 @@ const RegisterForm = () => {
 
   return (
     <div className="mt-5 items-center justify-center">
-      <ToastContainer position="top-right" autoClose={3000} />
       <form
         onSubmit={handleSubmit}
         encType="multipart/form-data"

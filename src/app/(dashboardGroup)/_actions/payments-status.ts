@@ -1,4 +1,4 @@
-// src/app/(dashboardGroup)/_actions/payments-status.ts
+"use server";
 import { cookies } from "next/headers";
 
 export async function paymentsStatus() {

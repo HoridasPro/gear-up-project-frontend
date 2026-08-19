@@ -13,7 +13,7 @@ export default async function ProviderDashboard() {
     console.error("Failed to fetch provider gears:", error);
   }
 
-  const BACKEND_URL = process.env.NEXT_PUBLIC_API_URL;
+  const BACKEND_URL = process.env.BACKEND_API_URL;
 
   return (
     <div className="space-y-6 p-4 sm:p-6 lg:p-2 min-h-screen text-gray-100">
