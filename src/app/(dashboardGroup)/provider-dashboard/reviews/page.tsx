@@ -1,3 +1,4 @@
+export const dynamic = "force-dynamic";
 import Image from "next/image";
 import { Review, ReviewResponse } from "@/type/type-gear";
 import { getReviews } from "../../_actions/getReviews";
