@@ -1,9 +1,9 @@
 import Image from "next/image";
-import { Gear } from "@/type/type-gear";
+import { Gears } from "@/type/type-gear";
 import { RentSection } from "./rentSection";
 
 type Props = {
-  gear: Gear;
+  gear: Gears;
 };
 
 export const GearDetailsPage = ({ gear }: Props) => {

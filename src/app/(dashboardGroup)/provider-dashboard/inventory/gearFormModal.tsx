@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import { Gear, GearFormModalProps } from "@/type/type-gear";
+import { GearFormModalProps, Gear } from "@/type/type-gear";
 import { X } from "lucide-react";
 
 export default function GearFormModal({

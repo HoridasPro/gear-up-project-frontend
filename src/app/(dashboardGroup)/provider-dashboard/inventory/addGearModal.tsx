@@ -71,7 +71,6 @@ export default function AddGearModal({
         const payload = new FormData();
 
         payload.append("title", formData.get("title") as string);
-        payload.append("description", formData.get("description") as string);
         payload.append("category", formData.get("category") as string);
         payload.append("brand", formData.get("brand") as string);
         payload.append("price", formData.get("price") as string);
@@ -126,7 +125,6 @@ export default function AddGearModal({
           </p>
         </div>
 
-  
         <form onSubmit={handleSubmit} className="space-y-5 sm:space-y-6">
           {/* Title */}
           <div>

@@ -1,4 +1,3 @@
-// dfgsdgs
 export type RentalGear = {
   id: string;
   quantity: number;
@@ -25,8 +24,7 @@ export type RentalResponse = {
   data: RentalGear[];
 };
 
-// xfgsdfgsdfgsdfg
-export type Gear = {
+export type Gears = {
   id: string;
   title: string;
   description: string;
@@ -39,6 +37,19 @@ export type Gear = {
   updatedAt: string;
   providerId: string;
   provider: CustomerIfo;
+};
+export type Gear = {
+  id: string;
+  title: string;
+  description: string;
+  category: string;
+  price: number;
+  quantity: number;
+  brand: string;
+  gearItemImage: string;
+  createdAt: string;
+  updatedAt: string;
+  providerId: string;
 };
 
 export type GearResponse = {
@@ -59,7 +70,6 @@ export type Payments = {
   updatedAt: string;
   customer: customerInformation;
   geraItem: gearItems;
-  // sessionId: string;
 };
 type customerInformation = {
   id: string;
@@ -81,7 +91,6 @@ export type PaymentsGear = {
   data: Payments[];
 };
 
-// fgsdfgs
 export type IUser = {
   success: boolean;
   statusCode: number;
