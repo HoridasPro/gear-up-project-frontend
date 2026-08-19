@@ -15,6 +15,8 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
+import Image from "next/image";
+import { Eye, EyeOff } from "lucide-react";
 
 const registerSchema = z.object({
   name: z.string().trim().min(1, "Name is required"),
@@ -45,6 +47,20 @@ const registerSchema = z.object({
 
 const RegisterForm = () => {
   const [loading, setLoading] = useState(false);
+  const [preview, setPreview] = useState<string | null>(null);
+  const [showPassword, setShowPassword] = useState(false);
+
+  const handleImageChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0];
+
+    if (!file) {
+      setPreview(null);
+      return;
+    }
+
+    const imageUrl = URL.createObjectURL(file);
+    setPreview(imageUrl);
+  };
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -147,8 +163,6 @@ const RegisterForm = () => {
         window.location.href = "/login";
       }, 1000);
     } catch (error) {
-      console.error("Register Error:", error);
-
       toast.error("Something went wrong during registration");
     } finally {
       setLoading(false);
@@ -156,7 +170,7 @@ const RegisterForm = () => {
   };
 
   return (
-    <div className="flex min-h-screen items-center justify-center">
+    <div className="mt-5 items-center justify-center">
       <ToastContainer position="top-right" autoClose={3000} />
       <form
         onSubmit={handleSubmit}
@@ -189,12 +203,28 @@ const RegisterForm = () => {
           <div className="space-y-2">
             <Label htmlFor="password">Password</Label>
 
-            <Input
-              id="password"
-              name="password"
-              type="password"
-              placeholder="Enter your password"
-            />
+            <div className="relative">
+              <Input
+                id="password"
+                name="password"
+                type={showPassword ? "text" : "password"}
+                placeholder="Enter your password"
+                className="pr-10"
+              />
+
+              <button
+                type="button"
+                onClick={() => setShowPassword((prev) => !prev)}
+                className="absolute right-3 top-1/2 -translate-y-1/2 text-muted-foreground hover:text-foreground cursor-pointer"
+                aria-label={showPassword ? "Hide password" : "Show password"}
+              >
+                {showPassword ? (
+                  <EyeOff className="h-5 w-5" />
+                ) : (
+                  <Eye className="h-5 w-5" />
+                )}
+              </button>
+            </div>
           </div>
 
           <div className="space-y-2">
@@ -224,19 +254,29 @@ const RegisterForm = () => {
             </Select>
           </div>
 
-          <div className="space-y-2">
+          <div className="space-y-3 text-xs font-medium text-gray-300 sm:text-sm">
             <Label htmlFor="profilePhoto">Profile Photo</Label>
 
             <Input
               id="profilePhoto"
               name="profilePhoto"
               type="file"
-              accept="image/jpeg,image/png,image/webp"
+              accept="image/*"
+              onChange={handleImageChange}
+              className="w-full cursor-pointer rounded-xl border border-gray-800/80 bg-gray-900/60 text-xs text-gray-400 outline-none transition-all file:mr-4 file:rounded-lg file:border-0 file:bg-cyan-500/10 file:px-4 file:text-xs file:font-semibold file:text-cyan-400 hover:file:bg-cyan-500/20 sm:text-sm"
             />
 
-            <p className="text-xs text-gray-500">
-              JPG, PNG or WEBP — Maximum 10MB
-            </p>
+            {preview && (
+              <div className="mt-3 flex justify-center">
+                <Image
+                  src={preview}
+                  alt="Profile preview"
+                  width={32}
+                  height={32}
+                  className="h-[250px] w-full border-2 object-cover"
+                />
+              </div>
+            )}
           </div>
 
           <Button

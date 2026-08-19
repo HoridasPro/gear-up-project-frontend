@@ -30,7 +30,7 @@ const CancelRentalButton = ({ rentalOrderId }: CancelRentalButtonProps) => {
   return (
     <button
       onClick={handleCancel}
-      className="rounded-md bg-red-500 px-3 py-2 text-xs font-medium text-white hover:bg-red-600"
+      className="rounded-md bg-red-500 px-3 py-2 text-xs font-medium text-white hover:bg-red-600 cursor-pointer"
     >
       Cancel
     </button>

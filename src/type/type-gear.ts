@@ -38,6 +38,7 @@ export type Gear = {
   createdAt: string;
   updatedAt: string;
   providerId: string;
+  provider: CustomerIfo;
 };
 
 export type GearResponse = {
@@ -220,3 +221,9 @@ export interface NavItem {
   label: string;
   to: string;
 }
+
+export type AddGearModalProps = {
+  isOpen: boolean;
+  onClose: () => void;
+  onSuccess: () => void;
+};

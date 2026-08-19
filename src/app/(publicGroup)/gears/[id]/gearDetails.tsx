@@ -73,8 +73,11 @@ export const GearDetailsPage = ({ gear }: Props) => {
         </div>
 
         <div className="rounded-xl border p-5">
-          <h2 className="text-xl font-bold">Provider Information</h2>
-          <p className="mt-2">Provider ID: {gear.providerId}</p>
+          <h2 className="text-xl font-bold underline">Provider Information</h2>
+          <p className="mt-2">Name: {gear?.provider?.name}</p>
+          <p className="mt-2">Email: {gear?.provider?.email}</p>
+          <p className="mt-2">Email: {gear?.provider?.address}</p>
+          <p className="mt-2">Id: {gear?.provider?.id}</p>
         </div>
 
         <RentSection gear={gear} />

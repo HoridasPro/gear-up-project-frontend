@@ -96,7 +96,7 @@ export const RentSection = ({ gear }: RentSectionProps) => {
         return;
       }
 
-      toast.success("Gear is available!");
+      toast.success("Gear is available successfully");
 
       const query = new URLSearchParams({
         startDate,

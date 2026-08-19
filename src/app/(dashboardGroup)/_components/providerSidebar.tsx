@@ -6,7 +6,6 @@ import {
   LayoutDashboard,
   Package,
   ShoppingCart,
-  PlusCircle,
   Boxes,
   Star,
   User,
@@ -39,20 +38,15 @@ export default function ProviderSidebar() {
       icon: Package,
       color: "text-indigo-400",
     },
+
     {
-      title: "Add Gear",
-      href: "/provider-dashboard/gear/new",
-      icon: PlusCircle,
-      color: "text-emerald-400",
-    },
-    {
-      title: "Inventory",
+      title: "Inventory Management",
       href: "/provider-dashboard/inventory",
       icon: Boxes,
       color: "text-purple-400",
     },
     {
-      title: "Orders",
+      title: "Order Management",
       href: "/provider-dashboard/orders",
       icon: ShoppingCart,
       color: "text-amber-400",

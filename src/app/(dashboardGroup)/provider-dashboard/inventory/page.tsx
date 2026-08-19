@@ -1,7 +1,8 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { Edit, Trash2 } from "lucide-react";
+import { Edit, Plus, Trash2 } from "lucide-react";
+import { toast } from "sonner";
 
 import { Gear, GearResponse } from "@/type/type-gear";
 import {
@@ -12,6 +13,7 @@ import {
 } from "../../_actions/get-provider-gear";
 import GearFormModal from "./gearFormModal";
 import Image from "next/image";
+import AddGearModal from "./addGearModal";
 
 export default function InventoryPage() {
   const [gears, setGears] = useState<Gear[]>([]);
@@ -22,6 +24,7 @@ export default function InventoryPage() {
   const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
   const [deleteGearId, setDeleteGearId] = useState<string | null>(null);
   const [isDeleting, setIsDeleting] = useState(false);
+  const [isAddModalOpen, setIsAddModalOpen] = useState(false);
 
   const fetchGears = async () => {
     try {
@@ -49,14 +52,28 @@ export default function InventoryPage() {
   };
 
   const handleSubmit = async (data: Gear) => {
-    if (selectedGear) {
-      await updateGear(selectedGear.id, data);
-    } else {
-      await createGear(data);
-    }
+    try {
+      if (selectedGear) {
+        await updateGear(selectedGear.id, data);
 
-    setIsModalOpen(false);
-    fetchGears();
+        toast.success("Gear updated successfully!");
+      } else {
+        await createGear(data);
+
+        toast.success("Gear added successfully!");
+      }
+
+      setIsModalOpen(false);
+      fetchGears();
+    } catch (error) {
+      console.error(error);
+
+      if (selectedGear) {
+        toast.error("Failed to update gear!");
+      } else {
+        toast.error("Failed to add gear!");
+      }
+    }
   };
 
   const handleDeleteClick = (id: string) => {
@@ -69,10 +86,18 @@ export default function InventoryPage() {
 
     try {
       setIsDeleting(true);
+
       await deleteGear(deleteGearId);
+
+      toast.success("Gear deleted successfully!");
+
       setIsDeleteModalOpen(false);
       setDeleteGearId(null);
       fetchGears();
+    } catch (error) {
+      console.error(error);
+
+      toast.error("Failed to delete gear!");
     } finally {
       setIsDeleting(false);
     }
@@ -83,8 +108,9 @@ export default function InventoryPage() {
       <div className="flex items-center justify-between">
         <div>
           <h1 className="text-2xl sm:text-3xl lg:text-4xl font-extrabold tracking-tight text-white">
-            Inventory
+            Inventory Management
           </h1>
+
           <p className="mt-2 text-sm sm:text-base text-gray-400">
             Manage all my gears.
           </p>
@@ -97,22 +123,31 @@ export default function InventoryPage() {
             <thead className="border-b border-gray-800/80 bg-gray-900/60 text-xs sm:text-sm uppercase tracking-wider text-gray-400">
               <tr>
                 <th className="px-4 py-3.5 sm:px-6 font-semibold">SI</th>
+
                 <th className="px-4 py-3.5 sm:px-6 font-semibold">Image</th>
+
                 <th className="px-4 py-3.5 sm:px-6 font-semibold">Title</th>
+
                 <th className="px-4 py-3.5 sm:px-6 font-semibold">Category</th>
+
                 <th className="px-4 py-3.5 sm:px-6 font-semibold">Brand</th>
+
                 <th className="px-4 py-3.5 sm:px-6 text-center font-semibold">
                   Price
                 </th>
+
                 <th className="px-4 py-3.5 sm:px-6 text-center font-semibold">
-                  Quantity
+                  Qty
                 </th>
+
                 <th className="px-4 py-3.5 sm:px-6 text-center font-semibold">
                   CreatedAt
                 </th>
+
                 <th className="px-4 py-3.5 sm:px-6 text-center font-semibold">
                   UpdatedAt
                 </th>
+
                 <th className="px-4 py-3.5 sm:px-6 text-center font-semibold">
                   Actions
                 </th>
@@ -142,96 +177,126 @@ export default function InventoryPage() {
                   </td>
                 </tr>
               ) : (
-                gears.map((gear, index) => (
-                  <tr
-                    key={gear.id}
-                    className="transition-colors hover:bg-gray-800/40"
-                  >
-                    <td className="px-4 py-4 sm:px-6 font-medium text-gray-400 whitespace-nowrap">
-                      {index + 1}
-                    </td>
+                [...gears]
+                  .sort((a, b) => {
+                    return (
+                      new Date(b.createdAt).getTime() -
+                      new Date(a.createdAt).getTime()
+                    );
+                  })
+                  .map((gear, index) => (
+                    <tr
+                      key={gear.id}
+                      className="transition-colors hover:bg-gray-800/40"
+                    >
+                      <td className="px-4 py-4 sm:px-6 font-medium text-gray-400 whitespace-nowrap">
+                        {index + 1}
+                      </td>
 
-                    <td className="px-4 py-4 sm:px-6 whitespace-nowrap">
-                      <div className="relative h-12 w-12 overflow-hidden rounded-xl border border-gray-800 bg-gray-900/80 shadow-md">
-                        <Image
-                          src={gear.gearItemImage}
-                          alt={gear.title}
-                          fill
-                          unoptimized
-                          className="rounded object-cover transition-transform duration-300 hover:scale-110"
-                        />
-                      </div>
-                    </td>
+                      <td className="px-4 py-4 sm:px-6 whitespace-nowrap">
+                        <div className="relative h-12 w-12 overflow-hidden rounded-xl border border-gray-800 bg-gray-900/80 shadow-md">
+                          <Image
+                            src={gear.gearItemImage}
+                            alt={gear.title}
+                            fill
+                            unoptimized
+                            className="rounded object-cover transition-transform duration-300 hover:scale-110"
+                          />
+                        </div>
+                      </td>
 
-                    <td className="px-4 py-4 sm:px-6 font-semibold text-white whitespace-nowrap max-w-[200px] truncate">
-                      {gear.title}
-                    </td>
+                      <td className="px-4 py-4 sm:px-6 font-semibold text-white whitespace-nowrap max-w-[200px] truncate">
+                        {gear.title}
+                      </td>
 
-                    <td className="px-4 py-4 sm:px-6 whitespace-nowrap">
-                      <span className="inline-flex items-center rounded-lg bg-blue-500/10 border border-blue-500/20 px-2.5 py-1 text-xs font-medium text-blue-400">
-                        {gear.category}
-                      </span>
-                    </td>
+                      <td className="px-4 py-4 sm:px-6 whitespace-nowrap">
+                        <span className="inline-flex items-center rounded-lg bg-blue-500/10 border border-blue-500/20 px-2.5 py-1 text-xs font-medium text-blue-400">
+                          {gear.category}
+                        </span>
+                      </td>
 
-                    <td className="px-4 py-4 sm:px-6 text-gray-300 whitespace-nowrap">
-                      {gear.brand}
-                    </td>
+                      <td className="px-4 py-4 sm:px-6 text-gray-300 whitespace-nowrap">
+                        {gear.brand}
+                      </td>
 
-                    <td className="px-4 py-4 sm:px-6 text-center font-bold text-emerald-400 whitespace-nowrap">
-                      ৳ {gear.price}
-                    </td>
+                      <td className="px-4 py-4 sm:px-6 text-center font-bold text-emerald-400 whitespace-nowrap">
+                        ৳ {gear.price}
+                      </td>
 
-                    <td className="px-4 py-4 sm:px-6 text-center whitespace-nowrap">
-                      <span
-                        className={`inline-flex items-center justify-center min-w-[32px] px-2 py-0.5 rounded-md text-xs font-semibold border ${
-                          gear.quantity > 0
-                            ? "bg-gray-800/80 border-gray-700 text-gray-200"
-                            : "bg-red-500/10 border-red-500/20 text-red-400"
-                        }`}
-                      >
-                        {gear.quantity}
-                      </span>
-                    </td>
-
-                    <td className="px-4 py-4 sm:px-6 text-center text-gray-400 text-xs whitespace-nowrap">
-                      {gear.createdAt
-                        ? new Date(gear.createdAt).toLocaleDateString()
-                        : "N/A"}
-                    </td>
-
-                    <td className="px-4 py-4 sm:px-6 text-center text-gray-400 text-xs whitespace-nowrap">
-                      {gear.createdAt
-                        ? new Date(gear.updatedAt).toLocaleDateString()
-                        : "N/A"}
-                    </td>
-
-                    <td className="px-4 py-4 sm:px-6 text-center whitespace-nowrap">
-                      <div className="flex items-center justify-center gap-2">
-                        <button
-                          onClick={() => handleEdit(gear)}
-                          className="rounded-lg border border-gray-800 bg-gray-900/60 p-2 text-gray-300 transition-all hover:border-emerald-500/50 hover:bg-emerald-500/10 hover:text-emerald-400 active:scale-95"
-                          title="Edit Gear"
+                      <td className="px-4 py-4 sm:px-6 text-center whitespace-nowrap">
+                        <span
+                          className={`inline-flex items-center justify-center min-w-[32px] px-2 py-0.5 rounded-md text-xs font-semibold border ${
+                            gear.quantity > 0
+                              ? "bg-gray-800/80 border-gray-700 text-gray-200"
+                              : "bg-red-500/10 border-red-500/20 text-red-400"
+                          }`}
                         >
-                          <Edit className="h-4 w-4" />
-                        </button>
+                          {gear.quantity}
+                        </span>
+                      </td>
 
-                        <button
-                          onClick={() => handleDeleteClick(gear.id)}
-                          className="rounded-lg border border-gray-800 bg-gray-900/60 p-2 text-red-400 transition-all hover:border-red-500/50 hover:bg-red-500/10 hover:text-red-300 active:scale-95"
-                          title="Delete Gear"
-                        >
-                          <Trash2 className="h-4 w-4" />
-                        </button>
-                      </div>
-                    </td>
-                  </tr>
-                ))
+                      <td className="px-4 py-4 sm:px-6 text-center text-gray-400 text-xs whitespace-nowrap">
+                        {gear.createdAt
+                          ? new Date(gear.createdAt).toLocaleDateString()
+                          : "N/A"}
+                      </td>
+
+                      <td className="px-4 py-4 sm:px-6 text-center text-gray-400 text-xs whitespace-nowrap">
+                        {gear.createdAt
+                          ? new Date(gear.updatedAt).toLocaleDateString()
+                          : "N/A"}
+                      </td>
+
+                      <td className="px-4 py-4 sm:px-6 text-center whitespace-nowrap">
+                        <div className="flex items-center justify-center gap-2">
+                          {/* Add */}
+                          <button
+                            type="button"
+                            onClick={() => setIsAddModalOpen(true)}
+                            className="rounded-lg border border-gray-800 bg-gray-900/60 p-2 text-gray-300 transition-all hover:border-cyan-500/50 hover:bg-cyan-500/10 hover:text-cyan-400 active:scale-95 cursor-pointer"
+                            title="Add Gear"
+                          >
+                            <Plus className="h-4 w-4" />
+                          </button>
+
+                          {/* Edit */}
+                          <button
+                            onClick={() => handleEdit(gear)}
+                            className="rounded-lg border border-gray-800 bg-gray-900/60 p-2 text-gray-300 transition-all hover:border-emerald-500/50 hover:bg-emerald-500/10 hover:text-emerald-400 active:scale-95 cursor-pointer"
+                            title="Edit Gear"
+                          >
+                            <Edit className="h-4 w-4" />
+                          </button>
+
+                          {/* Delete */}
+                          <button
+                            onClick={() => handleDeleteClick(gear.id)}
+                            className="rounded-lg border border-gray-800 bg-gray-900/60 p-2 text-red-400 transition-all hover:border-red-500/50 hover:bg-red-500/10 hover:text-red-300 active:scale-95 cursor-pointer"
+                            title="Delete Gear"
+                          >
+                            <Trash2 className="h-4 w-4" />
+                          </button>
+                        </div>
+                      </td>
+                    </tr>
+                  ))
               )}
             </tbody>
           </table>
         </div>
       </div>
 
+      {/* Add Gear Modal */}
+      <AddGearModal
+        isOpen={isAddModalOpen}
+        onClose={() => setIsAddModalOpen(false)}
+        onSuccess={() => {
+          setIsAddModalOpen(false);
+          fetchGears();
+        }}
+      />
+
+      {/* Edit Gear Modal */}
       <GearFormModal
         key={selectedGear?.id}
         isOpen={isModalOpen}
@@ -240,10 +305,12 @@ export default function InventoryPage() {
         initialData={selectedGear}
       />
 
+      {/* Delete Confirmation Modal */}
       {isDeleteModalOpen && (
         <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/70 p-4 backdrop-blur-sm">
           <div className="w-full max-w-md transform overflow-hidden rounded-2xl border border-gray-800 bg-[#0b0f19] p-6 text-left shadow-2xl transition-all">
             <h3 className="text-xl font-bold text-white">Delete Gear</h3>
+
             <p className="mt-2 text-sm text-gray-400">
               Are you sure you want to delete this gear? This action cannot be
               undone.

@@ -233,7 +233,7 @@ export default function ProfileContent({ user }: ProfileClientProps) {
           </div>
 
           {!isEditing && (
-            <button type="button" onClick={handleEdit} className="btn-cyber">
+            <button type="button" onClick={handleEdit} className="btn-cyber cursor-pointer">
               <Edit3 className="mr-2 h-4 w-4" />
               Edit Profile
             </button>
@@ -244,7 +244,7 @@ export default function ProfileContent({ user }: ProfileClientProps) {
               type="button"
               onClick={handleCancel}
               disabled={loading}
-              className="inline-flex items-center justify-center gap-2 rounded-xl bg-slate-800 px-4 py-2.5 text-sm font-medium text-slate-300 transition hover:bg-slate-700 disabled:opacity-50"
+              className="inline-flex items-center justify-center gap-2 rounded-xl bg-slate-800 px-4 py-2.5 text-sm font-medium text-slate-300 transition hover:bg-slate-700 disabled:opacity-50 cursor-pointer"
             >
               <X className="h-4 w-4" />
               Cancel
@@ -430,7 +430,7 @@ export default function ProfileContent({ user }: ProfileClientProps) {
                     type="button"
                     onClick={handleCancel}
                     disabled={loading}
-                    className="rounded-xl border border-slate-700 bg-slate-800 px-5 py-2.5 text-sm font-medium text-slate-300 transition hover:bg-slate-700 disabled:opacity-50"
+                    className="rounded-xl border border-slate-700 bg-slate-800 px-5 py-2.5 text-sm font-medium text-slate-300 transition hover:bg-slate-700 disabled:opacity-50 cursor-pointer"
                   >
                     Cancel
                   </button>
@@ -438,7 +438,7 @@ export default function ProfileContent({ user }: ProfileClientProps) {
                   <button
                     type="submit"
                     disabled={loading}
-                    className="btn-cyber"
+                    className="btn-cyber cursor-pointer"
                   >
                     {loading ? (
                       <>

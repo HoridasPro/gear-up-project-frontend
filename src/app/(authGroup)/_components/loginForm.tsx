@@ -1,5 +1,5 @@
 "use client";
-import React, { useActionState, useEffect } from "react";
+import React, { useActionState, useEffect, useState } from "react";
 import { z } from "zod";
 import { Card } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
@@ -7,6 +7,7 @@ import { Button } from "@/components/ui/button";
 import { Label } from "@/components/ui/label";
 import { loginAction } from "../_actions/authAction";
 import { toast } from "sonner";
+import { Eye, EyeOff } from "lucide-react";
 
 const loginSchema = z.object({
   email: z
@@ -24,6 +25,7 @@ const loginSchema = z.object({
 
 const LoginForm = () => {
   const [state, action, pending] = useActionState(loginAction, false);
+  const [showPassword, setShowPassword] = useState(false);
 
   useEffect(() => {
     if (!state) return;
@@ -42,6 +44,9 @@ const LoginForm = () => {
       email: formData.get("email"),
       password: formData.get("password"),
     });
+    if (result.success) {
+      toast.success("User login successfully");
+    }
 
     if (!result.success) {
       const errors = result.error.flatten().fieldErrors;
@@ -73,11 +78,26 @@ const LoginForm = () => {
           <div className="space-y-2">
             <Label htmlFor="password">Password</Label>
 
-            <Input
-              name="password"
-              type="password"
-              placeholder="Inter your password"
-            />
+            <div className="relative">
+              <Input
+                name="password"
+                type={showPassword ? "text" : "password"}
+                placeholder="Enter your password"
+                className="pr-10"
+              />
+
+              <button
+                type="button"
+                onClick={() => setShowPassword(!showPassword)}
+                className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-500 hover:text-gray-700"
+              >
+                {showPassword ? (
+                  <EyeOff className="h-5 w-5" />
+                ) : (
+                  <Eye className="h-5 w-5" />
+                )}
+              </button>
+            </div>
           </div>
 
           <Button type="submit" className="cursor-pointer">

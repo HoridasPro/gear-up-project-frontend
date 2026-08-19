@@ -132,7 +132,7 @@ export default function ReviewButton({
       <Button
         size="sm"
         onClick={() => setOpen(true)}
-        className="min-h-min bg-emerald-500 text-black hover:bg-emerald-400 font-semibold px-4 py-2 transition-all duration-200 shadow-lg shadow-emerald-500/20 active:scale-95"
+        className="min-h-min bg-emerald-500 text-black hover:bg-emerald-400 font-semibold px-4 py-2 transition-all duration-200 shadow-lg shadow-emerald-500/20 active:scale-95 cursor-pointer"
       >
         Review
       </Button>
