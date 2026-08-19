@@ -1,3 +1,4 @@
+"use client";
 import {
   Bell,
   ChevronRight,
@@ -8,7 +9,33 @@ import {
 } from "lucide-react";
 import Link from "next/link";
 
+import { useState, useTransition } from "react";
+import { useRouter } from "next/navigation";
+import { toast } from "sonner";
+import { deleteMyAccount } from "../_actions/deleteMyAccount";
+
 export default function SettingsPage() {
+  const [showDeleteModal, setShowDeleteModal] = useState(false);
+  const [isPending, startTransition] = useTransition();
+
+  const router = useRouter();
+
+  const handleDeleteAccount = () => {
+    startTransition(async () => {
+      const result = await deleteMyAccount();
+
+      if (result.success) {
+        toast.success(result.message);
+
+        setShowDeleteModal(false);
+
+        router.push("/login");
+        router.refresh();
+      } else {
+        toast.error(result.message);
+      }
+    });
+  };
   return (
     <div className="min-h-screen px-4 py-8 text-slate-100 sm:px-6 lg:px-8">
       <div className="mx-auto max-w-4xl">
@@ -34,7 +61,7 @@ export default function SettingsPage() {
 
             <div className="divide-y divide-slate-800/60">
               <Link
-                href="/"
+                href="/profile"
                 className="flex items-center justify-between px-5 py-4 transition hover:bg-slate-800/40 sm:px-6"
               >
                 <div className="flex items-center gap-4">
@@ -191,18 +218,56 @@ export default function SettingsPage() {
                 </p>
               </div>
 
-              <Link
-                href="/"
+              <button
                 type="button"
-                className="inline-flex items-center justify-center gap-2 rounded-xl border border-red-500/30 bg-red-500/10 px-4 py-2.5 text-sm font-medium text-red-400 transition hover:bg-red-500/20 active:scale-95"
+                onClick={() => setShowDeleteModal(true)}
+                className="inline-flex items-center justify-center gap-2 rounded-xl border border-red-500/30 bg-red-500/10 px-4 py-2.5 text-sm font-medium text-red-400 transition hover:bg-red-500/20 active:scale-95 cursor-pointer"
               >
                 <Trash2 className="h-4 w-4" />
                 Delete Account
-              </Link>
+              </button>
             </div>
           </section>
         </div>
       </div>
+      {showDeleteModal && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/70 px-4 backdrop-blur-sm">
+          <div className="w-full max-w-md rounded-2xl border border-red-500/20 bg-[#131f33] p-6 shadow-2xl">
+            <div className="flex h-12 w-12 items-center justify-center rounded-xl border border-red-500/20 bg-red-500/10">
+              <Trash2 className="h-6 w-6 text-red-400" />
+            </div>
+
+            <h2 className="mt-4 text-xl font-bold text-white">
+              Delete Account?
+            </h2>
+
+            <p className="mt-2 text-sm leading-6 text-slate-400">
+              Are you sure you want to permanently delete your account? This
+              action cannot be undone.
+            </p>
+
+            <div className="mt-6 flex justify-end gap-3">
+              <button
+                type="button"
+                onClick={() => setShowDeleteModal(false)}
+                disabled={isPending}
+                className="rounded-xl border border-slate-700 bg-slate-800 px-4 py-2.5 text-sm text-slate-300 hover:bg-slate-700 disabled:opacity-50 cursor-pointer"
+              >
+                Cancel
+              </button>
+
+              <button
+                type="button"
+                onClick={handleDeleteAccount}
+                disabled={isPending}
+                className="rounded-xl border border-red-500/30 bg-red-500/10 px-4 py-2.5 text-sm font-semibold text-red-400 hover:bg-red-500/20 disabled:cursor-not-allowed disabled:opacity-50 cursor-pointer"
+              >
+                {isPending ? "Deleting..." : "Confirm Delete"}
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
 }

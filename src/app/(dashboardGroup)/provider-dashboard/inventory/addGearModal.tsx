@@ -126,7 +126,7 @@ export default function AddGearModal({
           </p>
         </div>
 
-        {/* Form */}
+  
         <form onSubmit={handleSubmit} className="space-y-5 sm:space-y-6">
           {/* Title */}
           <div>
@@ -142,21 +142,6 @@ export default function AddGearModal({
               className="w-full rounded-xl border border-gray-800/80 bg-gray-900/60 p-3 text-xs text-gray-100 outline-none transition-all placeholder:text-gray-500 focus:border-emerald-500/60 focus:ring-1 focus:ring-emerald-500/60 sm:text-sm"
             />
           </div>
-
-          {/* Description */}
-          {/* <div>
-            <label className="mb-2 block text-xs font-medium text-gray-300 sm:text-sm">
-              Description
-            </label>
-
-            <textarea
-              name="description"
-              rows={4}
-              required
-              placeholder="Provide a detailed description of the gear..."
-              className="w-full resize-none rounded-xl border border-gray-800/80 bg-gray-900/60 p-3 text-xs text-gray-100 outline-none transition-all placeholder:text-gray-500 focus:border-emerald-500/60 focus:ring-1 focus:ring-emerald-500/60 sm:text-sm"
-            />
-          </div> */}
 
           {/* Category + Brand */}
           <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
