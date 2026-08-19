@@ -1,3 +1,4 @@
+export const dynamic = "force-dynamic";
 import { myProfile } from "../_actions/getProfile";
 import ProfileContent from "../_components/profileContent";
 const ProfilePage = async () => {

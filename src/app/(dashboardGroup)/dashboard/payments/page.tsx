@@ -1,4 +1,5 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
+export const dynamic = "force-dynamic";
 import Image from "next/image";
 import { PaymentsGear } from "@/type/type-gear";
 import { paymentsHistory } from "../../_actions/paymnetsHitory";

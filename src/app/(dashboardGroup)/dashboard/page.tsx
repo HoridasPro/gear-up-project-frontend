@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-
+export const dynamic = "force-dynamic";
 import { Package, Clock3, CheckCircle2, RotateCcw } from "lucide-react";
 import { getCustomerDashboard } from "../_actions/get-rentals";
 import CustomerPieChart from "../_components/customerPaichart";
