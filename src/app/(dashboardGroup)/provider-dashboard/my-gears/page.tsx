@@ -1,4 +1,5 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
+export const dynamic = "force-dynamic";
 import { Gear, GearResponse } from "@/type/type-gear";
 import { getProviderGears } from "../../_actions/get-provider-gear";
 import Image from "next/image";
