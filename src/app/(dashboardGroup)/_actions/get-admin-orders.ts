@@ -12,6 +12,9 @@ export const getAdminOrdersDashboard = async () => {
   });
 
   if (!res.ok) {
+    const errorText = await res.text();
+    console.log("ADMIN RENTALS STATUS:", res.status);
+    console.log("ADMIN RENTALS RESPONSE:", errorText);
     throw new Error("Failed to fetch dashboard");
   }
 
