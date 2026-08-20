@@ -1,6 +1,8 @@
+import Image from "next/image";
 import Link from "next/link";
 import { FaFacebookF, FaInstagram } from "react-icons/fa";
 import { MdEmail, MdLocationOn, MdPhone } from "react-icons/md";
+import logoImg from "../../../../../public/logo.png";
 
 const Footer = () => {
   return (
@@ -8,8 +10,19 @@ const Footer = () => {
       <div className="container mx-auto px-5 py-14">
         <div className="grid grid-cols-1 gap-10 md:grid-cols-2 lg:grid-cols-4">
           <div>
-            <Link href="/" className="text-2xl font-bold text-white">
-              Gear<span className="text-blue-500">Up</span>
+            <Link
+              href="/"
+              className="flex items-center gap-2.5 text-xl font-bold tracking-tight text-white transition-opacity hover:opacity-90"
+            >
+              <span className="flex h-12 w-12 items-center justify-center overflow-hidden rounded-lg bg-sky-500/10 border border-sky-500/40 shadow-[0_0_15px_rgba(56,189,248,0.4)]">
+                <Image
+                  src={logoImg}
+                  alt="GearUp Logo"
+                  width={80}
+                  height={80}
+                  className="h-full w-full object-contain"
+                />
+              </span>
             </Link>
 
             <p className="mt-4 max-w-xs text-sm leading-6 text-gray-400">

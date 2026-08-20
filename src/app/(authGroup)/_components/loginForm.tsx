@@ -31,11 +31,11 @@ const LoginForm = () => {
     if (!state) return;
 
     if (state.success) {
-      toast.success(state.message || "Login successful");
+      toast.success(state.message);
     }
 
     if (!state.success) {
-      toast.error(state.message || "Login failed");
+      toast.error(state.message);
     }
   }, [state]);
 
