@@ -1,4 +1,4 @@
-"use server"
+"use server";
 import { cookies } from "next/headers";
 
 export const getAdminOrdersDashboard = async () => {
@@ -11,7 +11,6 @@ export const getAdminOrdersDashboard = async () => {
     },
     cache: "no-store",
   });
-  
 
   if (!res.ok) {
     throw new Error("Failed to fetch dashboard");

@@ -72,6 +72,7 @@ export default function AddGearModal({
 
         payload.append("title", formData.get("title") as string);
         payload.append("category", formData.get("category") as string);
+        payload.append("description", formData.get("description") as string);
         payload.append("brand", formData.get("brand") as string);
         payload.append("price", formData.get("price") as string);
         payload.append("quantity", formData.get("quantity") as string);
@@ -135,6 +136,20 @@ export default function AddGearModal({
             <input
               type="text"
               name="title"
+              required
+              placeholder="e.g. Sony Alpha A7 III Camera"
+              className="w-full rounded-xl border border-gray-800/80 bg-gray-900/60 p-3 text-xs text-gray-100 outline-none transition-all placeholder:text-gray-500 focus:border-emerald-500/60 focus:ring-1 focus:ring-emerald-500/60 sm:text-sm"
+            />
+          </div>
+          {/* description */}
+          <div>
+            <label className="mb-2 block text-xs font-medium text-gray-300 sm:text-sm">
+              Description
+            </label>
+
+            <input
+              type="text"
+              name="description"
               required
               placeholder="e.g. Sony Alpha A7 III Camera"
               className="w-full rounded-xl border border-gray-800/80 bg-gray-900/60 p-3 text-xs text-gray-100 outline-none transition-all placeholder:text-gray-500 focus:border-emerald-500/60 focus:ring-1 focus:ring-emerald-500/60 sm:text-sm"
