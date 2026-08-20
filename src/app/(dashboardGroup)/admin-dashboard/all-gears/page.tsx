@@ -1,4 +1,5 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
+export const dynamic = "force-dynamic";
 import { Gear, GearResponse } from "@/type/type-gear";
 import Image from "next/image";
 import { getAdminAllGears } from "../../_actions/get-admin-gears";
@@ -12,7 +13,7 @@ export default async function ProviderDashboard() {
     console.error("Failed to fetch provider gears:", error);
   }
 
-  const BACKEND_URL = process.env.NEXT_PUBLIC_BACKEND_API_URL;
+  const BACKEND_URL = process.env.BACKEND_API_URL;
 
   return (
     <div className="w-full space-y-6">

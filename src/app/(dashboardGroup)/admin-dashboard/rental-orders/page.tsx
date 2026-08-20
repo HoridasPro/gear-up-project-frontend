@@ -1,3 +1,4 @@
+export const dynamic = "force-dynamic";
 import React from "react";
 import Image from "next/image";
 import { RentalResponse } from "@/type/type-gear";

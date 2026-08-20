@@ -1,3 +1,4 @@
+export const dynamic = "force-dynamic";
 import { getAdminUsersSearch } from "../../_actions/get-admin-status";
 import UserTables from "./userTable";
 import { PageProps } from "@/type/type-gear";
