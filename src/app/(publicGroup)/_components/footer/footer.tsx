@@ -55,10 +55,7 @@ const Footer = () => {
               </li>
 
               <li>
-                <Link
-                  href="/categories"
-                  className="transition hover:text-blue-500"
-                >
+                <Link href="/" className="transition hover:text-blue-500">
                   Categories
                 </Link>
               </li>
@@ -85,22 +82,19 @@ const Footer = () => {
               </li>
 
               <li>
-                <Link href="/faq" className="transition hover:text-blue-500">
+                <Link href="/" className="transition hover:text-blue-500">
                   FAQ
                 </Link>
               </li>
 
               <li>
-                <Link
-                  href="/privacy"
-                  className="transition hover:text-blue-500"
-                >
+                <Link href="/" className="transition hover:text-blue-500">
                   Privacy Policy
                 </Link>
               </li>
 
               <li>
-                <Link href="/terms" className="transition hover:text-blue-500">
+                <Link href="/" className="transition hover:text-blue-500">
                   Terms & Conditions
                 </Link>
               </li>
