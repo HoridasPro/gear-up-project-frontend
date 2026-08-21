@@ -15,12 +15,12 @@
 |                                |                                       |  `POST /api/reviews`              |
 | `/dashboard/my-rentals`        | Create Stripe payment session         | `POST /api/payments/create`       |
 | `/dashboard/payments`          | Customer payment history              | `GET /api/payments`               |
-| `/payment/success`             | Payment success handling              | Stripe session confirmation       |
-| `/payment/cancel`              | Payment cancellation handling         | URL query parameters              |
+| `/payment/success`             | Payment success handling              | `Stripe session confirmation`      |
+| `/payment/cancel`              | Payment cancellation handling         | `URL query parameters`              |
 | `/provider-dashboard`          | Provider overview                     | `GET /api/provider/gear`          |
 | `/provider-dashboard/Inventory`| Add new gear, edit and delete         | `POST /api/provider/gear`,        |
-|                                |                                       |  `PUT /api/provider/gear/:id      |
-|                                |                                       | `DELETE /api/provider/gear/:id    |
+|                                |                                       |  `PUT /api/provider/gear/:id`      |
+|                                |                                       | `DELETE /api/provider/gear/:id`    |
 | `/provider-dashboard/orders`   | View provider rental orders           | `GET /api/provider/orders`        |
 | `/provider-dashboard/my-gears` | View provider my-gears                | `GET /api/provider/gear`          |
 | `/provider-dashboard/orders`   | Update rental order status            | `PATCH /api/provider/orders/:id`  |
@@ -47,7 +47,7 @@
 
 ### Frontend
 
-`/auth/register`
+`/register`
 
 ### Purpose
 
@@ -63,7 +63,7 @@ Creates a new customer or provider account.
 
 ### Frontend
 
-`/auth/login`
+`/login`
 
 ### Purpose
 
@@ -159,6 +159,7 @@ Checkout page.
 Checks whether the requested gear quantity is available for the selected rental period.
 
 ### Request Data
+### Example
 
 ```json
 {
