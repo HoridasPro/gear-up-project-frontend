@@ -3,6 +3,7 @@
 import { useState } from "react";
 import { CreditCard, Loader2 } from "lucide-react";
 import { toast } from "sonner";
+import { createPaymentAction } from "../../_actions/createPaymentAction";
 
 type PayNowButtonProps = {
   rentalOrderId: string;
@@ -12,38 +13,29 @@ export default function PayNowButton({ rentalOrderId }: PayNowButtonProps) {
   const [loading, setLoading] = useState(false);
 
   const handlePayment = async () => {
+    if (!rentalOrderId) {
+      toast.error("Rental order ID not found.");
+      return;
+    }
+
     try {
       setLoading(true);
 
-      const response = await fetch(
-        `${process.env.NEXT_PUBLIC_BACKEND_API_URL}/api/payments/create`,
-        {
-          method: "POST",
-          credentials: "include",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify({
-            rentalOrderId,
-          }),
-        },
-      );
+      const result = await createPaymentAction(rentalOrderId);
 
-      const data = await response.json();
-
-      if (!response.ok) {
-        throw new Error(data?.message || "Failed to create payment session");
+      if (!result?.success) {
+        throw new Error(result?.message || "Failed to create payment session");
       }
 
       const checkoutUrl =
-        data?.data?.url ||
-        data?.url ||
-        data?.data?.paymentUrl ||
-        data?.paymentUrl ||
-        data?.data?.checkoutUrl ||
-        data?.checkoutUrl ||
-        data?.data?.sessionUrl ||
-        (typeof data?.data === "string" ? data.data : null);
+        result?.data?.url ||
+        result?.url ||
+        result?.data?.paymentUrl ||
+        result?.paymentUrl ||
+        result?.data?.checkoutUrl ||
+        result?.checkoutUrl ||
+        result?.data?.sessionUrl ||
+        (typeof result?.data === "string" ? result.data : null);
 
       if (!checkoutUrl) {
         throw new Error("Stripe payment URL not found");
@@ -63,7 +55,7 @@ export default function PayNowButton({ rentalOrderId }: PayNowButtonProps) {
     <button
       onClick={handlePayment}
       disabled={loading}
-      className="inline-flex items-center justify-center rounded-lg bg-cyan-400 hover:bg-cyan-500 px-3 py-2 text-xs font-semibold text-black transition-all disabled:opacity-50 disabled:cursor-not-allowed cursor-pointer"
+      className="inline-flex cursor-pointer items-center justify-center rounded-lg bg-cyan-400 px-3 py-2 text-xs font-semibold text-black transition-all hover:bg-cyan-500 disabled:cursor-not-allowed disabled:opacity-50"
     >
       {loading ? (
         <>
