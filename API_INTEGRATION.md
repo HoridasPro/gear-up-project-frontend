@@ -11,29 +11,31 @@
 | `/checkout/[id]`               | Create rental request                 | `POST /api/rentals`               |
 | `/checkout/[id]`               | Check gear availability               | `POST /api/gear/availability/:id` |
 | `/dashboard`                   | Customer dashboard overview           | `GET /api/rentals`                |
-| `/dashboard/my-rentals`        | customer rental cancel, create reviews| `GET /api/rentals`,
-                                                                           `POST /api/reviews`               |
+| `/dashboard/my-rentals`        | customer rental cancel, create reviews| `GET /api/rentals`,               |
+|                                |                                       |  `POST /api/reviews`              |
 | `/dashboard/my-rentals`        | Create Stripe payment session         | `POST /api/payments/create`       |
 | `/dashboard/payments`          | Customer payment history              | `GET /api/payments`               |
 | `/payment/success`             | Payment success handling              | Stripe session confirmation       |
 | `/payment/cancel`              | Payment cancellation handling         | URL query parameters              |
 | `/provider-dashboard`          | Provider overview                     | `GET /api/provider/gear`          |
 | `/provider-dashboard/Inventory`| Add new gear, edit and delete         | `POST /api/provider/gear`,        |
-                                                                         |  `PUT /api/provider/gear/:id 
-                                                                         | `DELETE /api/provider/gear/:id   |
+|                                |                                       |  `PUT /api/provider/gear/:id      |
+|                                |                                       | `DELETE /api/provider/gear/:id    |
 | `/provider-dashboard/orders`   | View provider rental orders           | `GET /api/provider/orders`        |
 | `/provider-dashboard/my-gears` | View provider my-gears                | `GET /api/provider/gear`          |
 | `/provider-dashboard/orders`   | Update rental order status            | `PATCH /api/provider/orders/:id`  |
 | `/provider-dashboard/reviews`  | views reviews provider                | `GET /api/reviews`                |
 | `/profile`                     | all users update profile              | `POST /api/auth/me`               |
-| `/admin-dashboard`             | Overview Admin                        | `GET `/api/auth/me`,
-                                                                         | `GET /api/gear`,`GET /api/rentals`|
+| `/admin-dashboard`             | Overview Admin                        | `GET `/api/auth/me`,              |
+|                                |                                       | `GET /api/gear`,`GET /api/rentals`|
 | `/admin-dashboard/users`       | Admin views users                     | `GET /api/admin/users`            |
-| `/admin-dashboard/
-   user management`              | Update status/role                    | `PATCH /api/admin/users/:id/role`,
-                                                                         | `PATCH /api/admin/users/:id`      | 
-|`/admin-dashboard/rental-orders`| Admin views all orders                | `GET /api/rentals`      |
+| `/admin-dashboard/             |                                       |                                   |
+|  user management`              | Update status/role                    | `PATCH /api/admin/users/:id/role`,|
+|                                |                                       | `PATCH /api/admin/users/:id`      | 
+|`/admin-dashboard/rental-orders`| Admin views all orders                | `GET /api/rentals`                |   
 | `/admin-dashboard/all-gears`   | Admin views all gears                 | `GET /api/admin/gear`             |
+
+---
 
 # Authentication APIs
 
